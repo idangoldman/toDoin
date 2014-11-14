@@ -1,0 +1,45 @@
+!*.gitkeep
+
+*.swo
+*.swp
+tags
+
+# Linux
+#
+*~
+*.sw[a-p]
+
+# OSX
+#
+.DS_Store?
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Vi
+#
+*.swp
+*.swo
+
+# Vim
+#
+.*.sw[a-z]
+*.un~
+
+# Windows
+#
+thumb.db
+
+# Sublime
+#
+*.sublime-project
+*.sublime-workspace
+
+node_modules
+dist
+.sass-cache
+bower_components
+css
+www

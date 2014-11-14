@@ -1,0 +1,39 @@
+{
+    "assets": {
+        "stylesheet": {
+            "bower": [
+                "./bower_components/normalize-css/normalize.css"
+            ],
+            "layout": [
+                "/css/vendors/normalize.css"
+            ]
+        },
+        "javascript": {
+            "bower": [
+                "./bower_components/requirejs/require.js",
+                "./bower_components/text/text.js",
+                "./bower_components/jquery/dist/jquery.js",
+                "./bower_components/underscore/underscore.js",
+                "./bower_components/backbone/backbone.js"
+            ],
+            "require": {
+                "path": "/js/vendors/require.js",
+                "files": {
+                    "text": "/js/vendors/text",
+                    "jquery": "/js/vendors/jquery",
+                    "underscore": "/js/vendors/underscore",
+                    "backbone": "/js/vendors/backbone"
+                }
+            },
+            "main": "/js/script.js"
+        }
+    },
+    "compass": {
+        "config_file": "./config.rb",
+        "css": "./css",
+        "sass": "./app/"
+    },
+    "layout": {
+        "title": "ToDoin"
+    }
+}
