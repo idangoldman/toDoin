@@ -1,17 +1,15 @@
 {
-  "name": "todoin",
-  "devDependencies": {
-    "bower": "^1.3.7",
-    "extend": "^1.3.0",
-    "gulp": "^3.8.6",
-    "gulp-compass": "^1.1.9",
-    "gulp-concat": "^2.3.4",
-    "gulp-connect": "^2.0.6",
-    "gulp-jasmine": "^1.0.1",
-    "gulp-jshint": "^1.8.4",
-    "gulp-rename": "^1.2.0",
-    "gulp-swig": "^0.7.0",
-    "gulp-uglifyjs": "^0.4.2",
-    "requirejs": "^2.1.15"
-  }
+    "name": "todoin",
+    "dependencies": {
+        "bower": "^1.3.12",
+        "extend": "^2.0.0",
+        "gulp": "^3.8.10",
+        "gulp-compass": "^2.0.1",
+        "gulp-concat": "^2.4.1",
+        "gulp-jasmine": "^1.0.1",
+        "gulp-jshint": "^1.9.0",
+        "gulp-rename": "^1.2.0",
+        "gulp-swig": "^0.7.4",
+        "requirejs": "^2.1.15"
+    }
 }
