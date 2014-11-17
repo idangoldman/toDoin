@@ -1,7 +1,7 @@
 <!doctype html><html><head>
 
     <meta charset="utf-8">
-    <title>{ layout.title }}</title>
+    <title>{{ layout.title }}</title>
 
     {% for link in assets.stylesheet.layout  %}
       <link rel="stylesheet" href="{{ link }}">
@@ -10,9 +10,69 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head><body id="todoin">
+</head><body>
 
-    <script src="{{ assets.javascript.require.path }}"></script>
+    <div id="ToDoin">
+
+        <section class="header">
+            <span class="logo">{{ layout.title }}</span>
+            <span class="stats">
+                <em class="remain">5</em>
+                <em class="complete">7</em>
+                <em class="all">12</em>
+            </span>
+            <a href="#" class="toggle" disabled>Toggle</a>
+        </section>
+
+        <section class="list" background-text="What's Next?">
+            <ul>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-01">
+                    <label class="field" for="complete-01">Lorem ipsum dolor sit amet.</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-02">
+                    <label class="field" for="complete-02">Iusto, qui necessitatibus voluptatem hic?</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="1" checked id="complete-03">
+                    <label class="field" for="complete-03">Ipsa ipsum eaque veniam? Molestiae!</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-04">
+                    <label class="field" for="complete-04">Tempore quasi ratione pariatur animi.</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="1" checked id="complete-05">
+                    <label class="field" for="complete-05">Magni ea minima sequi non!</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-06">
+                    <label class="field" for="complete-06">Maxime sapiente impedit, esse suscipit!</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="1" checked id="complete-07">
+                    <label class="field" for="complete-07">Accusamus, praesentium eveniet repudiandae possimus.</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-08">
+                    <label class="field" for="complete-08">Consequatur, quisquam illo vero odio?</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="complete" value="0" id="complete-09">
+                    <label class="field" for="complete-09">Unde aliquid earum, voluptas obcaecati.</label>
+                </li>
+            </ul>
+        </section>
+
+        <section class="footer">
+            <input type="text" class="text-input" placeholder="Have something to write?">
+        </section>
+
+    </div>
+
+
+    <!--script src="{{ assets.javascript.require.path }}"></script>
     <script>
         requirejs.config({
             paths: {
@@ -26,6 +86,6 @@
             new Application;
         });
     </script>
-    <script src="{{ assets.javascript.main }}"></script>
+    <script src="{{ assets.javascript.main }}"></script -->
 
 </body></html>

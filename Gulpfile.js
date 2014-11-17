@@ -4,21 +4,46 @@ var gulp = require('gulp'),
     swig = require('gulp-swig'),
     rename = require("gulp-rename"),
     jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglifyjs'),
     jasmine = require('gulp-jasmine'),
+    clean = require('gulp-clean'),
+    args = require('yargs').argv,
+    connect = require('gulp-connect'),
+
+    isChrome = args.chrome || false,
+    isWeb = args.web || false,
+
+    env = args.isWeb ? 'web' : args.isChrome ? 'chrome' : 'web',
+    envPath = '',
+    envChromePath = '',
 
     data = require('./db/settings.json');
 
+    // Settings per environment
+    switch(env) {
+        case 'chrome':
+            envChromePath = './chrome_extention';
+            envPath = envChromePath + '/src/browser_action';
+        break;
+        case 'web':
+        default:
+            envPath = './www';
+        break;
+    }
+
 gulp.task('vendors', function() {
 
-    gulp.src('./chrome/**/*')
-        .pipe(gulp.dest('./dist'));
+    if (isChrome) {
+        gulp.src('./chrome/**/*', {
+            read: false
+        })
+            .pipe(gulp.dest(envChromePath));
+    }
 
     gulp.src(data.assets.stylesheet.bower)
-        .pipe(gulp.dest('./dist/src/browser_action/vendors/css'));
+        .pipe(gulp.dest(envPath + '/vendors/css'));
 
     gulp.src(data.assets.javascript.bower)
-        .pipe(gulp.dest('./dist/src/browser_action/vendors/js'));
+        .pipe(gulp.dest(envPath + '/vendors/js'));
 });
 
 gulp.task('javascript', function() {
@@ -28,17 +53,20 @@ gulp.task('javascript', function() {
             verbose: true
         }))
     .pipe(concat('script.js'))
-        .pipe(gulp.dest('./dist/src/browser_action'));
+        .pipe(gulp.dest(envPath))
+        .pipe(connect.reload());
 });
 
 gulp.task('stylesheet', function() {
     gulp.src('./app/style.scss')
         .pipe(compass(data.compass))
-        .pipe(gulp.dest('./dist/src/browser_action'));
+        .pipe(gulp.dest(envPath))
+        .pipe(connect.reload());
 });
 
-
 gulp.task('swag', function() {
+    var fileName = isChrome ? 'browser_action' : 'index';
+
     gulp.src('./app/layout.html')
         .pipe(swig({
             defaults: {
@@ -48,14 +76,32 @@ gulp.task('swag', function() {
             }
         }))
         .pipe(rename(function(path) {
-            path.basename = 'browser_action';
+            path.basename = fileName;
         }))
-        .pipe(gulp.dest('./dist/src/browser_action/'));
+        .pipe(gulp.dest(envPath))
+        .pipe(connect.reload());
 });
 
-gulp.task('tests', function () {
-    return gulp.src('tests/**/*.js')
-        .pipe(jasmine());
+// gulp.task('tests', function () {
+//     return gulp.src('tests/**/*.js')
+//         .pipe(jasmine());
+// });
+
+gulp.task('clean-dist', function() {
+    var folderToClean = isChrome ? envChromePath : envPath;
+
+    return gulp.src(folderToClean, {
+            read: false
+        })
+        .pipe(clean());
+});
+
+gulp.task('connect', function() {
+    connect.server({
+        root: envPath,
+        port: 8000,
+        livereload: true
+    });
 });
 
 gulp.task('watch', function() {
@@ -64,4 +110,10 @@ gulp.task('watch', function() {
     gulp.watch(['./app/**/*.scss'], ['stylesheet']);
 });
 
-gulp.task('default', ['vendors', 'swag', 'javascript', 'stylesheet', 'watch'], function() {});
+gulp.task('default', ['clean-dist', 'watch'], function() {
+    if (isWeb) {
+        gulp.start('connect');
+    }
+
+    gulp.start('vendors', 'swag', 'javascript', 'stylesheet');
+});

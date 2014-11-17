@@ -1,0 +1,24 @@
+// Simple Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    border: none;
+}
+
+a {
+    outline: none;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
