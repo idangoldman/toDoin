@@ -1,0 +1,58 @@
+.list {
+    @extend %no-select;
+
+    bottom: $same-height;
+    left: 0;
+    overflow: hidden;
+    top: $same-height;
+
+    &:before {
+        color: rgba(#999, 0.5);
+        content: attr(background-text);
+        display: block;
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 300;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top:  80%;
+        width: 100%;
+        z-index: 1;
+    }
+
+    ul {
+        height: 100%;
+        list-style-type: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        width: 100%;
+        z-index: 2;
+
+        li {
+            @include clearfix;
+
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            padding: 6px 10px;
+
+            .complete, .field {
+                cursor: pointer;
+                display: inline-block;
+                float: left;
+            }
+
+            .complete {
+                margin-top: 5px;
+                max-width: 14px;
+                width: 5%;
+            }
+
+            .field {
+                margin-left: 3%;
+                width: 92%;
+            }
+        }
+    }
+}

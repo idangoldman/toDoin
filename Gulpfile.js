@@ -64,6 +64,15 @@ gulp.task('stylesheet', function() {
         .pipe(connect.reload());
 });
 
+gulp.task('templates', function() {
+    gulp.src('./app/**/template.html')
+        .pipe(rename(function(path) {
+            path.basename = path.dirname.replace("/", "-");
+            path.dirname = '.';
+        }))
+        .pipe(gulp.dest(envPath + '/templates/'));
+});
+
 gulp.task('swag', function() {
     var fileName = isChrome ? 'browser_action' : 'index';
 
@@ -115,5 +124,5 @@ gulp.task('default', ['clean-dist', 'watch'], function() {
         gulp.start('connect');
     }
 
-    gulp.start('vendors', 'swag', 'javascript', 'stylesheet');
+    gulp.start('vendors', 'swag', 'javascript', 'stylesheet', 'templates');
 });

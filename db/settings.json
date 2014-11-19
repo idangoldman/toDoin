@@ -5,7 +5,8 @@
                 "./bower_components/normalize-css/normalize.css"
             ],
             "layout": [
-                "vendors/css/normalize.css"
+                "vendors/css/normalize.css",
+                "style.css"
             ]
         },
         "javascript": {
@@ -17,15 +18,15 @@
                 "./bower_components/backbone/backbone.js"
             ],
             "require": {
-                "path": "/js/vendors/require.js",
+                "path": "vendors/js/require.js",
                 "files": {
-                    "text": "/js/vendors/text",
-                    "jquery": "/js/vendors/jquery",
-                    "underscore": "/js/vendors/underscore",
-                    "backbone": "/js/vendors/backbone"
+                    "text": "vendors/js/text",
+                    "jquery": "vendors/js/jquery",
+                    "underscore": "vendors/js/underscore",
+                    "backbone": "vendors/js/backbone"
                 }
             },
-            "main": "/js/script.js"
+            "main": "script.js"
         }
     },
     "compass": {

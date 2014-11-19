@@ -1,0 +1,16 @@
+.add {
+    background-color: #f1f1f1;
+    bottom: 0;
+    height: $same-height;
+    left: 0;
+
+    .field {
+        background-color: transparent;
+        border: none;
+        font-weight: 300;
+        height: $same-height;
+        outline: none;
+        padding: 10px;
+        width: 100%;
+    }
+}
