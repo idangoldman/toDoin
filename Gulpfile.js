@@ -70,7 +70,8 @@ gulp.task('templates', function() {
             path.basename = path.dirname.replace("/", "-");
             path.dirname = '.';
         }))
-        .pipe(gulp.dest(envPath + '/templates/'));
+        .pipe(gulp.dest(envPath + '/templates/'))
+        .pipe(connect.reload());
 });
 
 gulp.task('swag', function() {
@@ -114,7 +115,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['./app/**/*.html'], ['swag']);
+    gulp.watch(['./app/**/*.html'], ['swag', 'templates']);
     gulp.watch(['./app/**/*.js'], ['javascript']);
     gulp.watch(['./app/**/*.scss'], ['stylesheet']);
 });
