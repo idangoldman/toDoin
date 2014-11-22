@@ -1,10 +1,10 @@
 <span class="logo">ToDoin</span>
 
-<% if (all) {%>
     <span class="stats">
-        <em class="remain"><%= remain %></em>
-        <em class="all"><%= all %></em>
+        <% if (all) {%>
+            <em class="remain"><%= remain %></em>
+            <em class="all"><%= all %></em>
+        <% }%>
     </span>
-<% }%>
 
-<a href="#" class="mode" <% if (!complete) {%>disabled<% }%>>Mode</a>
+<a href="#" class="mode" <% if (!complete) {%>disabled="disabled"<% }%>>Mode</a>
