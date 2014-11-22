@@ -1,7 +1,5 @@
-define('ListModel', ['underscore', 'backbone'], function(_, Backbone) {
+define('ListItemModel', ['backbone'], function(Backbone) {
     return Backbone.Model.extend({
-        initialize: function() {
-        },
         defaults: {
             'order': null,
             'title': '',
@@ -9,7 +7,7 @@ define('ListModel', ['underscore', 'backbone'], function(_, Backbone) {
         },
         toggle: function () {
             this.save({
-                completed: !this.get('complete')
+                complete: !this.get('complete')
             });
         }
     });

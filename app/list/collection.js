@@ -1,10 +1,10 @@
-define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListModel'], function(Backbone, Storage, ListModel) {
+define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], function(Backbone, Storage, ListItemModel) {
     var Collection = Backbone.Collection.extend({
         initialize: function() {
             this.bind('add', this.onModelAdd);
         },
         localStorage: new Store('todos-simple'),
-        model: ListModel,
+        model: ListItemModel,
         setTaskOrder: function() {
             return this.length ? this.last().get('order') + 1 : 1;
         },

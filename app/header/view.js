@@ -6,8 +6,9 @@ define('HeaderView', ['backbone', 'text!templates/header.html'], function(Backbo
                 remain: 0,
                 all: 0
             };
-
             this.render();
+
+            this.collection.bind('change', this.render, this);
         },
         template: _.template(Template),
         tagName: 'header',
