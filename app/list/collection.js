@@ -11,6 +11,13 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListModel'], func
         onModelAdd: function(model) {
             model.set('order', this.setTaskOrder());
         },
+        complete: function () {
+            return this.where({complete: true});
+        },
+
+        remain: function () {
+            return this.where({complete: false});
+        },
     });
 
     return new Collection();

@@ -1,7 +1,10 @@
 <span class="logo">ToDoin</span>
-<span class="stats">
-    <em class="remain">5</em>
-    <em class="complete">7</em>
-    <em class="all">12</em>
-</span>
-<a href="#" class="toggle" disabled>Toggle</a>
+
+<% if (all) {%>
+    <span class="stats">
+        <em class="remain"><%= remain %></em>
+        <em class="all"><%= all %></em>
+    </span>
+<% }%>
+
+<a href="#" class="mode" <% if (!complete) {%>disabled<% }%>>Mode</a>
