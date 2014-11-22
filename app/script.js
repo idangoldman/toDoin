@@ -1,5 +1,5 @@
-define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
-    function($, _, Backbone, ListCollection, HeaderView, ListView, AddView) {
+define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
+    function($, _, Backbone, Router, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             initialize: function() {
                 $('body').prepend(this.render().el);
@@ -11,12 +11,13 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderV
             },
             render: function() {
                 var elements = [],
-                    that = this,
-                    newListCollection = new ListCollection();
+                    that = this;
 
-                    elements.push(new HeaderView());
-                    elements.push(new ListView({collection: newListCollection}));
-                    elements.push(new AddView({collection: newListCollection}));
+                ListCollection.fetch({reset:true});
+
+                elements.push(new HeaderView());
+                elements.push(new ListView({collection: ListCollection}));
+                elements.push(new AddView({collection: ListCollection}));
 
                 that.$el.empty();
 

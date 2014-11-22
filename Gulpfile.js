@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     envPath = '',
     envChromePath = '',
 
-    data = require('./db/settings.json');
+    data = require('./settings.json');
 
     // Settings per environment
     switch(env) {

@@ -1,4 +1,4 @@
 <li>
-    <input type="checkbox" class="complete" value="0" id="complete-01">
-    <label class="field" for="complete-01">Lorem ipsum dolor sit amet.</label>
+    <input type="checkbox" class="complete" value="<%= complete ? 1 : 0 %>" <% if (complete) {%>checked="checked"<% } %> id="complete-<%= order %>">
+    <label class="field" for="complete-<%= order %>"><%= title %></label>
 </li>
