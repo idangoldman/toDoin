@@ -1,14 +1,13 @@
 define('HeaderView', ['backbone', 'text!templates/header.html'], function(Backbone, Template) {
     return Backbone.View.extend({
         initialize: function() {
-            this.template = _.template(Template);
-            // this.model = window.firstData.layout;
-
-            this.render(this.template, this.model);
+            this.render();
         },
-        render: function(template, model) {
+        template: _.template(Template),
+        tagName: 'header',
+        render: function() {
             this.$el.empty();
-            this.$el.html(template(model));
+            this.$el.html(this.template);
 
             return this;
         }

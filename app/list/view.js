@@ -1,14 +1,18 @@
-define('ListView', ['backbone', 'text!templates/list.html'], function(Backbone, Template) {
+define('ListView', ['backbone', 'text!templates/list.html', 'text!templates/list-item.html'], function(Backbone, Template) {
     return Backbone.View.extend({
         initialize: function() {
-            this.template = _.template(Template);
-            // this.model = window.firstData.layout;
-
-            this.render(this.template, this.model);
+            this.render();
         },
-        render: function(template, model) {
+        template: _.template(Template),
+        tagName: 'ul',
+        attributes: function() {
+            return {
+                'class': 'list'
+            };
+        },
+        render: function() {
             this.$el.empty();
-            this.$el.html(template(model));
+            // this.$el.html(this.template());
 
             return this;
         }
