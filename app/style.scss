@@ -15,11 +15,14 @@
 $same-height: 40px;
 
 // Application
+body, #ToDoin {
+    height: 600px;
+    width: 300px;
+}
+
 #ToDoin {
     background-color: #f9f9f9;
     position: relative;
-    height: 600px;
-    width: 300px;
 
     & > * {
         position: absolute;

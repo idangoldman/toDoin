@@ -11,19 +11,7 @@
 
 </head><body>
     <script src="{{ assets.javascript.require.path }}"></script>
-    <script>
-        requirejs.config({
-            paths: {
-                {% for file in assets.javascript.require.files %}
-                    "{{ loop.key }}": "{{ file }}"{% if !loop.last %},{% endif %}
-                {% endfor %}
-            }
-        });
-
-        require(['ToDoin'], function(ToDoin) {
-            new ToDoin;
-        });
-    </script>
-    <script src="{{ assets.javascript.main }}"></script -->
+    <script src="{{ assets.javascript.require.run }}"></script>
+    <script src="{{ assets.javascript.main }}"></script>
 
 </body></html>
