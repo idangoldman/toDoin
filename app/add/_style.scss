@@ -11,6 +11,27 @@
         height: $same-height;
         outline: none;
         padding: 10px;
+        position: relative;
         width: 100%;
+        z-index: 1;
+    }
+
+    .priority {
+        background-color: transparent;
+        border: 0;
+        bottom: 0;
+        cursor: pointer;
+        display: block;
+        height: $same-height;
+        line-height: $same-height;
+        outline: none;
+        position: absolute;
+        right: 0;
+        width: $same-height;
+        z-index: 2;
+
+        &:hover, &:focus {
+            background-color: #fff;
+        }
     }
 }
