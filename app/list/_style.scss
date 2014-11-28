@@ -1,20 +1,49 @@
-.list {
+.tasks {
     @extend %no-select;
 
     bottom: $same-height;
     left: 0;
     overflow: hidden;
     top: $same-height;
+    z-index: 1;
 
-    ul {
+    .list {
         height: 100%;
         list-style-type: none;
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
         width: 100%;
-        z-index: 2;
+        z-index: 1;
 
         @import 'item/style'
+    }
+
+    .clean-list {
+        bottom: $same-height;
+        display: block;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+
+        button {
+            background-color: rgba(#000, 0.2);
+            border-radius: 5px;
+            border: none;
+            color: #f9f9f9;
+            font-weight: 600;
+            display: block;
+            margin: 0 auto;
+            outline: none;
+            text-align: center;
+            padding: 10px 20px;
+
+            &:focus, &:hover {
+                background-color: rgba(#000, 0.5);
+                color: #ff;
+            }
+        }
+
     }
 }

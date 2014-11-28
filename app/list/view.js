@@ -1,4 +1,4 @@
-define('ListView', ['underscore', 'backbone', 'ListItemView'], function(_, Backbone, ListItemView) {
+define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/list.html'], function(_, Backbone, ListItemView, Template) {
     return Backbone.View.extend({
         initialize: function() {
             var that = this;
@@ -12,16 +12,17 @@ define('ListView', ['underscore', 'backbone', 'ListItemView'], function(_, Backb
             });
         },
         tagName: 'section',
+        template: _.template(Template),
         attributes: function() {
             return {
-                'class': 'list'
+                'class': 'tasks'
             };
         },
         render: function() {
             var elements = [],
                 that = this;
 
-            this.$el.empty().append('<ul>');
+            this.$el.empty().append(this.template);
             this.collection.each(function(model) {
                 if (that.collection.modeFilter === 'remain' && !model.get('complete')) {
                     that.$el.find('ul').append(new ListItemView({'model': model}).$el);

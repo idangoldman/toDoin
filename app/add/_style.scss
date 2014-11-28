@@ -3,6 +3,7 @@
     bottom: 0;
     height: $same-height;
     left: 0;
+    z-index: 3;
 
     .new-task {
         background-color: transparent;
@@ -32,6 +33,35 @@
 
         &:hover, &:focus {
             background-color: #fff;
+        }
+    }
+
+    .priority-list {
+        @extend %no-select;
+
+        background-color: #fff;
+        bottom: $same-height;
+        // display: block;
+        display: none;
+        position: absolute;
+        right: 0;
+
+
+        label {
+            cursor: pointer;
+            display: block;
+            padding: 4px 10px;
+            line-height: 26px;
+            font-style: italic;
+
+            &:hover {
+                background-color: #f9f9f9;
+            }
+
+
+            i {
+                text-decoration: line-through;
+            }
         }
     }
 }

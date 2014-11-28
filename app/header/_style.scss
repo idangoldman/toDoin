@@ -7,6 +7,7 @@ header {
     left: 0;
     padding: 10px;
     top: 0;
+    z-index: 2;
 
     & > * {
         @extend %no-select;
