@@ -9,61 +9,59 @@ var gulp = require('gulp'),
     args = require('yargs').argv,
     connect = require('gulp-connect'),
 
-    env = '',
+    env = args.chrome ? 'chrome' : 'web',
     envPath = './www',
     envBrowserAction = envPath + '/src/browser_action',
     chromePath = './chrome',
     isChrome = false,
+    getEnvPath = function() {
+        return isChrome ? envBrowserAction : envPath;
+    },
 
     data = require('./settings.json');
 
-gulp.task('vendors', function() {
-    var _envPath = isChrome ? envBrowserAction : envPath;
-
+gulp.task('vendors', ['clean'], function() {
     gulp.src(data.assets.stylesheet.bower)
-        .pipe(gulp.dest(_envPath + '/vendors/css'));
+        .pipe(gulp.dest(getEnvPath() + '/vendors/css'));
 
     return gulp.src(data.assets.javascript.bower)
-        .pipe(gulp.dest(_envPath + '/vendors/js'));
+        .pipe(gulp.dest(getEnvPath() + '/vendors/js'));
 });
 
-gulp.task('javascript', function() {
-    var _envPath = isChrome ? envBrowserAction : envPath;
-
+gulp.task('jshint', function() {
     return gulp.src(['./app/**/*.js', '!./app/require.run.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
-        }))
+        }));
+});
+
+gulp.task('javascript', ['jshint'], function() {
+    return gulp.src(['./app/**/*.js', '!./app/require.run.js'])
         .pipe(concat('script.js'))
-        .pipe(gulp.dest(_envPath))
+        .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
 });
 
 gulp.task('stylesheet', function() {
-    var _envPath = isChrome ? envBrowserAction : envPath;
-
     return gulp.src('./app/style.scss')
         .pipe(compass(data.compass))
-        .pipe(gulp.dest(_envPath))
+        .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
 });
 
-gulp.task('templates', function() {
-    var _envPath = isChrome ? envBrowserAction : envPath;
-
+gulp.task('templates', ['swag'], function() {
     return gulp.src('./app/**/template.html')
         .pipe(rename(function(path) {
             path.basename = path.dirname.replace("/", "-");
             path.dirname = '.';
         }))
-        .pipe(gulp.dest(_envPath + '/templates/'))
+        .pipe(gulp.dest(getEnvPath() + '/templates/'))
         .pipe(connect.reload());
 });
 
 gulp.task('swag', function() {
-    var indexFileName = isChrome ? 'browser_action' : 'index',
-        _envPath = isChrome ? envBrowserAction : envPath;
+    var fileName = isChrome ? 'browser_action' : 'index';
 
     return gulp.src(['./app/layout.html', './app/require.run.js'])
         .pipe(swig({
@@ -76,14 +74,14 @@ gulp.task('swag', function() {
         .pipe(rename(function(path) {
             switch (path.basename) {
                 case 'layout':
-                    path.basename = indexFileName;
+                    path.basename = fileName;
                 break;
                 case 'require.run':
                     path.extname = '.js';
                 break;
             }
         }))
-        .pipe(gulp.dest(_envPath))
+        .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
 });
 
@@ -108,7 +106,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('watcher', function() {
-    gulp.watch(['./app/**/*.html'], ['swag', 'templates']);
+    gulp.watch(['./app/**/*.html'], ['templates']);
     gulp.watch(['./app/**/*.js'], ['javascript']);
     gulp.watch(['./app/**/*.scss'], ['stylesheet']);
 });
@@ -118,8 +116,8 @@ gulp.task('chrome-copy', ['clean'], function() {
         .pipe(gulp.dest(envPath));
 });
 
-gulp.task('build', ['clean'], function() {
-    return gulp.start('vendors', 'swag', 'javascript', 'stylesheet', 'templates');
+gulp.task('build', ['clean', 'vendors'], function() {
+    return gulp.start('javascript', 'stylesheet', 'templates');
 });
 
 gulp.task('web', ['build'], function() {
@@ -131,8 +129,6 @@ gulp.task('chrome', ['build', 'chrome-copy'], function() {
 });
 
 gulp.task('default', function() {
-    env = args.chrome ? 'chrome' : 'web';
-
     switch(env) {
         case 'chrome':
             isChrome = true;

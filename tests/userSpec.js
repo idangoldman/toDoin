@@ -11,10 +11,6 @@ describe("User actions", function() {
 
     });
 
-    it("Should be able complete a task", function() {
-
-    });
-
     it("Should be able see completed tasks", function() {
 
     });
