@@ -7,5 +7,7 @@ requirejs.config({
 });
 
 require(['ToDoin'], function(ToDoin) {
-    new ToDoin;
+    new ToDoin({
+        template: $('body')
+    });
 });

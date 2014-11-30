@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     args = require('yargs').argv,
     connect = require('gulp-connect'),
 
+    env = '',
     envPath = './www',
     envBrowserAction = envPath + '/src/browser_action',
     chromePath = './chrome',
@@ -22,14 +23,14 @@ gulp.task('vendors', function() {
     gulp.src(data.assets.stylesheet.bower)
         .pipe(gulp.dest(_envPath + '/vendors/css'));
 
-    gulp.src(data.assets.javascript.bower)
+    return gulp.src(data.assets.javascript.bower)
         .pipe(gulp.dest(_envPath + '/vendors/js'));
 });
 
 gulp.task('javascript', function() {
     var _envPath = isChrome ? envBrowserAction : envPath;
 
-    gulp.src(['./app/**/*.js', '!./app/require.run.js'])
+    return gulp.src(['./app/**/*.js', '!./app/require.run.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -42,7 +43,7 @@ gulp.task('javascript', function() {
 gulp.task('stylesheet', function() {
     var _envPath = isChrome ? envBrowserAction : envPath;
 
-    gulp.src('./app/style.scss')
+    return gulp.src('./app/style.scss')
         .pipe(compass(data.compass))
         .pipe(gulp.dest(_envPath))
         .pipe(connect.reload());
@@ -51,7 +52,7 @@ gulp.task('stylesheet', function() {
 gulp.task('templates', function() {
     var _envPath = isChrome ? envBrowserAction : envPath;
 
-    gulp.src('./app/**/template.html')
+    return gulp.src('./app/**/template.html')
         .pipe(rename(function(path) {
             path.basename = path.dirname.replace("/", "-");
             path.dirname = '.';
@@ -64,7 +65,7 @@ gulp.task('swag', function() {
     var indexFileName = isChrome ? 'browser_action' : 'index',
         _envPath = isChrome ? envBrowserAction : envPath;
 
-    gulp.src(['./app/layout.html', './app/require.run.js'])
+    return gulp.src(['./app/layout.html', './app/require.run.js'])
         .pipe(swig({
             defaults: {
                 autoescape: false,
@@ -112,21 +113,34 @@ gulp.task('watcher', function() {
     gulp.watch(['./app/**/*.scss'], ['stylesheet']);
 });
 
-gulp.task('chrome-copy', function() {
+gulp.task('chrome-copy', ['clean'], function() {
     return gulp.src(chromePath + '/**/*')
         .pipe(gulp.dest(envPath));
 });
 
-gulp.task('web', ['clean'], function() {
-    gulp.start('vendors', 'swag', 'javascript', 'stylesheet', 'templates');
-
-    gulp.start('connect', 'watcher');
+gulp.task('build', ['clean'], function() {
+    return gulp.start('vendors', 'swag', 'javascript', 'stylesheet', 'templates');
 });
 
-gulp.task('chrome', ['clean'], function() {
-    isChrome = true;
-
-    gulp.start('chrome-copy', 'vendors', 'swag', 'javascript', 'stylesheet', 'templates', 'watcher');
+gulp.task('web', ['build'], function() {
+    return gulp.start('connect', 'watcher');
 });
 
-gulp.task('default');
+gulp.task('chrome', ['build', 'chrome-copy'], function() {
+    return gulp.start('watcher');
+});
+
+gulp.task('default', function() {
+    env = args.chrome ? 'chrome' : 'web';
+
+    switch(env) {
+        case 'chrome':
+            isChrome = true;
+            gulp.start('chrome');
+        break;
+        case 'web':
+        default:
+            gulp.start('web');
+        break;
+    }
+});

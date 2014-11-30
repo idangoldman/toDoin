@@ -4,7 +4,7 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
             this.bind('add', this.onModelAdd);
             this.modeFilter = 'remain';
         },
-        localStorage: new Store('todos-simple'),
+        localStorage: new Store('ToDoin'),
         model: ListItemModel,
         setTaskOrder: function() {
             return this.length ? this.last().get('order') + 1 : 1;

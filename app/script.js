@@ -2,7 +2,7 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderV
     function($, _, Backbone, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             initialize: function() {
-                $('body').prepend(this.render().el);
+                (this.template || $('body')).prepend(this.render().el);
             },
             attributes: function() {
                 return {
