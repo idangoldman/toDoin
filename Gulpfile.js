@@ -29,7 +29,7 @@ gulp.task('vendors', ['clean'], function() {
 });
 
 gulp.task('jshint', function() {
-    return gulp.src(['./app/**/*.js', '!./app/require.run.js'])
+    return gulp.src(['./app/**/*.js', '!./app/require-config.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -37,7 +37,7 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('javascript', ['jshint'], function() {
-    return gulp.src(['./app/**/*.js', '!./app/require.run.js'])
+    return gulp.src(['./app/**/*.js', '!./app/require-config.js'])
         .pipe(concat('script.js'))
         .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
@@ -63,7 +63,7 @@ gulp.task('templates', ['swag'], function() {
 gulp.task('swag', function() {
     var fileName = isChrome ? 'browser_action' : 'index';
 
-    return gulp.src(['./app/layout.html', './app/require.run.js'])
+    return gulp.src(['./app/layout.html', './app/require-config.js'])
         .pipe(swig({
             defaults: {
                 autoescape: false,
@@ -76,7 +76,7 @@ gulp.task('swag', function() {
                 case 'layout':
                     path.basename = fileName;
                 break;
-                case 'require.run':
+                case 'require-config':
                     path.extname = '.js';
                 break;
             }
@@ -84,11 +84,6 @@ gulp.task('swag', function() {
         .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
 });
-
-// gulp.task('tests', function () {
-//     return gulp.src('tests/**/*.js')
-//         .pipe(jasmine());
-// });
 
 gulp.task('clean', function() {
     return gulp.src(envPath, {

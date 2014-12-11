@@ -25,3 +25,7 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderV
         });
     }
 );
+
+require(['ToDoin'], function(ToDoin) {
+    new ToDoin();
+});

@@ -5,9 +5,3 @@ requirejs.config({
         {% endfor %}
     }
 });
-
-require(['ToDoin'], function(ToDoin) {
-    new ToDoin({
-        template: $('body')
-    });
-});
