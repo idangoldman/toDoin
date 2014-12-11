@@ -1,8 +1,10 @@
-define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
-    function($, _, Backbone, ListCollection, HeaderView, ListView, AddView) {
+define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
+    function($, _, Backbone, Router, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             initialize: function() {
-                (this.template || $('body')).prepend(this.render().el);
+                $('body').prepend(this.render().el);
+
+                var router = new Router();
             },
             attributes: function() {
                 return {
@@ -27,5 +29,5 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderV
 );
 
 require(['ToDoin'], function(ToDoin) {
-    new ToDoin();
+    window.todoin = new ToDoin();
 });
