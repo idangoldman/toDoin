@@ -2,9 +2,35 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection'
     function($, _, Backbone, Router, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             initialize: function() {
-                $('body').prepend(this.render().el);
+                var that = this;
 
-                var router = new Router();
+                ListCollection.fetch({reset:true});
+
+                this.HeaderView = new HeaderView({collection: ListCollection});
+                this.ListView = new ListView({collection: ListCollection});
+                this.AddView = new AddView({collection: ListCollection});
+
+                Router.on('route', function(action) {
+                    var collection = [];
+
+                    switch(action) {
+                        case 'complete':
+                            collection = ListCollection.complete();
+                        break;
+                        case 'remain':
+                            collection = ListCollection.remain();
+                        break;
+                        case 'home':
+                            collection = ListCollection.all();
+                        break;
+                    }
+
+                    that.ListView.render(collection);
+                });
+
+                Backbone.history.start({pushState: true, hashChange: false});
+
+                $('body').prepend(this.render().el);
             },
             attributes: function() {
                 return {
@@ -12,14 +38,12 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection'
                 };
             },
             render: function() {
-                var elements = [HeaderView, ListView, AddView],
+                var elements = ['HeaderView', 'ListView', 'AddView'],
                     that = this;
-
-                ListCollection.fetch({reset:true});
 
                 that.$el.empty();
                 _.each(elements, function(element) {
-                    that.$el.append((new element({collection: ListCollection})).$el);
+                    that.$el.append(that[element].$el);
                 });
 
                 return that;

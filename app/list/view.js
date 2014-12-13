@@ -2,14 +2,13 @@ define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/li
     return Backbone.View.extend({
         initialize: function() {
             var that = this;
-            this.render();
 
-            this.collection.bind('change', this.render, this);
+            // this.collection.bind('change', this.render, this);
 
-            this.collection.on('modeSwitch', function(data) {
-                that.collection.modeFilter = data;
-                that.render();
-            });
+            // this.collection.on('switchView', function(data) {
+            //     that.collection.modeFilter = data;
+            //     that.render();
+            // });
         },
         tagName: 'section',
         template: _.template(Template),
@@ -18,17 +17,13 @@ define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/li
                 'class': 'tasks'
             };
         },
-        render: function() {
-            var elements = [],
-                that = this;
+        render: function(collection) {
+            var that = this;
 
             this.$el.empty().append(this.template);
-            this.collection.each(function(model) {
-                if (that.collection.modeFilter === 'remain' && !model.get('complete')) {
-                    that.$el.find('ul').append(new ListItemView({'model': model}).$el);
-                } else if (that.collection.modeFilter === 'complete' && model.get('complete')) {
-                    that.$el.find('ul').append(new ListItemView({'model': model}).$el);
-                }
+
+            _.each(collection, function(model) {
+                that.$el.find('ul').append(new ListItemView({'model': model}).$el);
             });
 
             return this;

@@ -18,6 +18,9 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
         },
         remain: function () {
             return this.where({complete: false});
+        },
+        all: function () {
+            return this.models;
         }
     });
 

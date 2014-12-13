@@ -39,7 +39,7 @@ define('Router', ['jquery', 'backbone', 'ApplicationView', 'ListCollection'], fu
         defaultAction: function(action) {
             console.log('#404 - No route:', action);
             this.navigate('/', {trigger: true});
-        },
+        }
     });
 
     return new Router();
