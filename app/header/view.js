@@ -8,7 +8,7 @@ define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], f
             };
             this.render();
 
-            this.collection.bind('change', this.render, this);
+            this.collection.on('change', this.render, this);
         },
         template: _.template(Template),
         tagName: 'header',
@@ -18,29 +18,25 @@ define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], f
         switchView: function(event) {
             var modeDate = null;
             if (_.isNull(event.currentTarget.getAttribute('disabled'))) {
-                this.$el.find('.list-view').toggleClass('complete');
-                modelData = this.$el.find('.list-view').is('.complete') ? 'complete' : 'remain';
-
+                modelData = this.$('.list-view').toggleClass('complete').is('.complete') ? 'complete' : 'remain';
                 this.collection.trigger('switchView', modelData);
             }
-
             event.preventDefault();
         },
         render: function() {
+            var modeFilter = this.collection.getModeFilter();
+
             if (this.collection.length) {
                 this.model.complete = this.collection.complete().length;
                 this.model.remain = this.collection.remain().length;
                 this.model.all = this.collection.length;
             }
 
-            this.$el.empty();
-            this.$el.html(this.template(this.model));
+            this.$el.empty().append(this.template(this.model));
 
-            if (this.collection.modeFilter === 'complete' && this.model.complete) {
-                this.$el.find('.list-view').addClass('complete');
-            } else if (this.collection.modeFilter === 'remain' && this.model.remain) {
-                this.$el.find('.list-view').addClass('remain');
-            }
+            this.$('.list-view')
+                .toggleClass('remain', modeFilter === 'remain' && this.model.remain)
+                .toggleClass('complete', modeFilter === 'complete' && this.model.complete);
 
             return this;
         }

@@ -1,52 +1,44 @@
 define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
     function($, _, Backbone, Router, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
+            'id': 'ToDoin',
             initialize: function() {
-                var that = this;
+                var elements = {
+                    HeaderView : HeaderView,
+                    ListView   : ListView,
+                    AddView    : AddView
+                };
 
                 ListCollection.fetch({reset:true});
 
-                this.HeaderView = new HeaderView({collection: ListCollection});
-                this.ListView = new ListView({collection: ListCollection});
-                this.AddView = new AddView({collection: ListCollection});
+                this.renderLayout(_.map(elements, function(element, elementName) {
+                    return (this[elementName] = new element({collection: ListCollection})).el;
+                }, this));
 
-                Router.on('route', function(action) {
-                    var collection = [];
-
-                    switch(action) {
-                        case 'complete':
-                            collection = ListCollection.complete();
-                        break;
-                        case 'remain':
-                            collection = ListCollection.remain();
-                        break;
-                        case 'home':
-                            collection = ListCollection.all();
-                        break;
-                    }
-
-                    that.ListView.render(collection);
-                });
+                Router.on('route', this.render, this);
 
                 Backbone.history.start({pushState: true, hashChange: false});
-
-                $('body').prepend(this.render().el);
             },
-            attributes: function() {
-                return {
-                    'id': 'ToDoin'
-                };
+            render: function(action) {
+                var collection = [];
+
+                switch(action) {
+                    case 'complete':
+                        collection = ListCollection.complete();
+                        break;
+                    case 'remain':
+                        collection = ListCollection.remain();
+                        break;
+                    case 'home':
+                        collection = ListCollection.all();
+                        break;
+                }
+
+                this.ListView.render(collection);
             },
-            render: function() {
-                var elements = ['HeaderView', 'ListView', 'AddView'],
-                    that = this;
-
-                that.$el.empty();
-                _.each(elements, function(element) {
-                    that.$el.append(that[element].$el);
-                });
-
-                return that;
+            renderLayout: function(elements) {
+                this.$el.empty().append(elements).appendTo('body');
+                return this;
             }
         });
     }

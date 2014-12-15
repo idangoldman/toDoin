@@ -1,14 +1,12 @@
 define('ListItemModel', ['backbone'], function(Backbone) {
     return Backbone.Model.extend({
         defaults: {
-            'order': null,
-            'title': '',
-            'complete': false
+            title    : '',
+            order    : null,
+            complete : false
         },
         toggle: function () {
-            this.save({
-                complete: !this.get('complete')
-            });
+            return this.save('complete', !this.get('complete'));
         }
     });
 });

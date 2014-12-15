@@ -12,8 +12,7 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
             this.model.toggle();
         },
         render: function() {
-            this.$el.empty();
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.empty().append(this.template(this.model.toJSON()));
 
             return this;
         }

@@ -1,17 +1,26 @@
 define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], function(Backbone, Storage, ListItemModel) {
     var Collection = Backbone.Collection.extend({
         initialize: function() {
-            this.bind('add', this.onModelAdd);
-            this.modeFilter = 'remain';
+            this.on('add', this.onModelAdd);
+            this._modeFilter = 'remain';
         },
         localStorage: new Store('ToDoin'),
         model: ListItemModel,
-        setTaskOrder: function() {
+        getModeFilter: function() {
+            return this._modeFilter;
+        },
+        setModeFilter: function(modeFilter) {
+            if (modeFilter === 'complete' || modeFilter === 'remain') {
+                this._modeFilter = modeFilter;
+            }
+            return this;
+        },
+        getTaskOrder: function() {
             return this.length ? this.last().get('order') + 1 : 1;
         },
         onModelAdd: function(model) {
-            this.modeFilter = 'remain';
-            model.set('order', this.setTaskOrder());
+            this.setModeFilter('remain');
+            model.set('order', this.getTaskOrder());
         },
         complete: function () {
             return this.where({complete: true});
@@ -20,7 +29,7 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
             return this.where({complete: false});
         },
         all: function () {
-            return this.models;
+            return this.toJSON();
         }
     });
 
