@@ -13,20 +13,20 @@ define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], f
         template: _.template(Template),
         tagName: 'header',
         events: {
-            'click .mode': 'modeSwitch'
+            'click .list-view': 'switchView'
         },
-        modeSwitch: function(event) {
+        switchView: function(event) {
             var modeDate = null;
             if (_.isNull(event.currentTarget.getAttribute('disabled'))) {
-                this.$el.find('.mode').toggleClass('complete');
-                modeData = this.$el.find('.mode').is('.complete') ? 'complete' : 'remain';
+                this.$el.find('.list-view').toggleClass('complete');
+                modelData = this.$el.find('.list-view').is('.complete') ? 'complete' : 'remain';
 
-                this.collection.trigger('modeSwitch', modeData);
+                this.collection.trigger('switchView', modelData);
             }
+
             event.preventDefault();
         },
         render: function() {
-
             if (this.collection.length) {
                 this.model.complete = this.collection.complete().length;
                 this.model.remain = this.collection.remain().length;
@@ -36,8 +36,10 @@ define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], f
             this.$el.empty();
             this.$el.html(this.template(this.model));
 
-            if (this.collection.modeFilter === 'complete' && !this.$el.find('.mode').hasClass('complete')) {
-                this.$el.find('.mode').addClass('complete');
+            if (this.collection.modeFilter === 'complete' && this.model.complete) {
+                this.$el.find('.list-view').addClass('complete');
+            } else if (this.collection.modeFilter === 'remain' && this.model.remain) {
+                this.$el.find('.list-view').addClass('remain');
             }
 
             return this;

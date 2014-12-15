@@ -24,7 +24,7 @@ header {
         }
     }
 
-    .mode {
+    .list-view {
         cursor: pointer;
         display: inline-block;
         height: 16px;
@@ -36,7 +36,7 @@ header {
         width: 16px;
 
         &:before, &:after {
-            background-color: #777;
+            background-color: #d6d6d6;
             content: '';
             display: block;
             position: absolute;
@@ -59,9 +59,11 @@ header {
 
         &[disabled] {
             cursor: default;
+        }
 
+        &.remain {
             &:before, &:after {
-                background-color: #d6d6d6;
+                background-color: #777;
             }
         }
 
