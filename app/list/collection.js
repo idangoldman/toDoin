@@ -29,7 +29,7 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
             return this.where({complete: false});
         },
         all: function () {
-            return this.toJSON();
+            return this.models;
         }
     });
 

@@ -42,5 +42,5 @@ define('Router', ['jquery', 'backbone', 'ApplicationView', 'ListCollection'], fu
         }
     });
 
-    return new Router;
+    return new Router();
 });

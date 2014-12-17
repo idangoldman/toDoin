@@ -1,5 +1,5 @@
-define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
-    function($, _, Backbone, Router, ListCollection, HeaderView, ListView, AddView) {
+define('ApplicationView', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
+    function($, _, Backbone, ListCollection, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             'id': 'ToDoin',
             initialize: function() {
@@ -15,9 +15,7 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection'
                     return (this[elementName] = new element({collection: ListCollection})).el;
                 }, this));
 
-                Router.on('route', this.render, this);
-
-                Backbone.history.start({pushState: true, hashChange: false});
+                // Router.on('route', this.render, this);
             },
             render: function(action) {
                 var collection = [];
@@ -44,6 +42,4 @@ define('ToDoin', ['jquery', 'underscore', 'backbone', 'Router', 'ListCollection'
     }
 );
 
-require(['ToDoin'], function(ToDoin) {
-    window.todoin = new ToDoin();
-});
+require(['Router']);
