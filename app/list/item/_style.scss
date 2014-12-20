@@ -6,12 +6,12 @@ li {
     // min-height: $same-height;
     padding: 6px 10px;
 
-    .complete, .field {
+    .checkbox, .field {
         display: inline-block;
         float: left;
     }
 
-    .complete {
+    .checkbox {
         cursor: pointer;
         margin-top: 5px;
         max-width: 14px;
@@ -21,5 +21,9 @@ li {
     .field {
         margin-left: 3%;
         width: 92%;
+    }
+
+    &.complete .field {
+         text-decoration: line-through;
     }
 }
