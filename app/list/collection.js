@@ -25,6 +25,15 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
                 Backbone.history.loadUrl(Backbone.history.fragment);
             }
         },
+        cleanCompleted: function() {
+            _.invoke(this.complete(), 'destroy');
+
+            if (Backbone.history.location.pathname === '/complete') {
+                Backbone.history.navigate('/', {trigger: true});
+            } else {
+                Backbone.history.loadUrl(Backbone.history.fragment);
+            }
+        },
         complete: function () {
             return this.where({complete: true});
         },
