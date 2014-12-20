@@ -6,14 +6,16 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
         template: _.template(Template),
         tagName: 'li',
         events: {
-            'click .complete': 'toggleComplete'
+            'click .checkbox': 'toggleComplete'
         },
         toggleComplete: function () {
             this.model.toggle();
         },
         render: function() {
-            this.$el.empty();
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el
+                .empty()
+                .append(this.template(this.model.toJSON()))
+                .toggleClass('complete', this.model.get('complete'));
 
             return this;
         }

@@ -8,12 +8,10 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
         },
         template: _.template(Template),
         tagName: 'form',
-        attributes: function() {
-            return {
-                'class': 'add',
-                'action': 'blah.js',
-                'method': 'post'
-            };
+        className: 'add',
+        attributes: {
+            'action': 'blah.js',
+            'method': 'post'
         },
         render: function(template, model) {
             this.$el.empty();
@@ -25,7 +23,7 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             var value = this.$('.new-task').val().trim();
 
             if (value.length) {
-                this.collection.create({'title': value});
+                this.collection.create({title: value});
                 this.$('.new-task').val('');
             }
 

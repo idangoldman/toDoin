@@ -1,4 +1,4 @@
-define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], function(_, Backbone, Template) {
+define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header.html'], function(_, Backbone, Router, Template) {
     return Backbone.View.extend({
         initialize: function() {
             this.model = {
@@ -6,39 +6,45 @@ define('HeaderView', ['underscore', 'backbone', 'text!templates/header.html'], f
                 remain: 0,
                 all: 0
             };
-            this.render();
-
-            this.collection.bind('change', this.render, this);
         },
         template: _.template(Template),
         tagName: 'header',
         events: {
-            'click .mode': 'modeSwitch'
+            'click .switch-view': 'switchView'
         },
-        modeSwitch: function(event) {
-            var modeDate = null;
-            if (_.isNull(event.currentTarget.getAttribute('disabled'))) {
-                this.$el.find('.mode').toggleClass('complete');
-                modeData = this.$el.find('.mode').is('.complete') ? 'complete' : 'remain';
-
-                this.collection.trigger('modeSwitch', modeData);
+        switchView: function(event) {
+            if (!$(event.target).attr('disabled')) {
+                switch(Backbone.history.location.pathname) {
+                    case '/complete':
+                        Backbone.history.navigate("/", {trigger: true});
+                        break;
+                    case '/remain':
+                        Backbone.history.navigate("/complete", {trigger: true});
+                        break;
+                    case '/':
+                        Backbone.history.navigate("/remain", {trigger: true});
+                        break;
+                }
             }
+
             event.preventDefault();
         },
-        render: function() {
+        updateStats: function() {
+            this.model.complete = this.collection.complete().length;
+            this.model.remain = this.collection.remain().length;
+            this.model.all = this.collection.all().length;
+            this.model.disabled = !(this.model.remain && this.model.complete);
+        },
+        render: function(filter) {
+            this.updateStats();
 
-            if (this.collection.length) {
-                this.model.complete = this.collection.complete().length;
-                this.model.remain = this.collection.remain().length;
-                this.model.all = this.collection.length;
-            }
+            this.$el
+                .empty()
+                .append(this.template(this.model));
 
-            this.$el.empty();
-            this.$el.html(this.template(this.model));
-
-            if (this.collection.modeFilter === 'complete' && !this.$el.find('.mode').hasClass('complete')) {
-                this.$el.find('.mode').addClass('complete');
-            }
+            this.$('.switch-view')
+                .toggleClass('remain', filter === 'remain' && this.model.remain)
+                .toggleClass('complete', filter === 'complete' && this.model.complete);
 
             return this;
         }

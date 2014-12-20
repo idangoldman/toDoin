@@ -19,7 +19,7 @@
                 "./bower_components/backbone.localStorage/backbone.localStorage.js"
             ],
             "require": {
-                "run": "require.run.js",
+                "config": "require-config.js",
                 "path": "vendors/js/require.js",
                 "files": {
                     "text": "vendors/js/text",

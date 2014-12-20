@@ -3,11 +3,14 @@ requirejs.config({
         {% for file in assets.javascript.require.files %}
             "{{ loop.key }}": "{{ file }}"{% if !loop.last %},{% endif %}
         {% endfor %}
+    },
+    shim: {
+        'underscore': {
+            exports: '_'
+        },
+        'backbone': {
+            deps: ['underscore', 'jquery'],
+            exports: 'Backbone'
+        }
     }
-});
-
-require(['ToDoin'], function(ToDoin) {
-    new ToDoin({
-        template: $('body')
-    });
 });

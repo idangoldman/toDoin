@@ -3,6 +3,7 @@
     bottom: 0;
     height: $same-height;
     left: 0;
+    z-index: 3;
 
     .new-task {
         background-color: transparent;
@@ -11,6 +12,56 @@
         height: $same-height;
         outline: none;
         padding: 10px;
+        position: relative;
         width: 100%;
+        z-index: 1;
+    }
+
+    .priority {
+        background-color: transparent;
+        border: 0;
+        bottom: 0;
+        cursor: pointer;
+        display: none;
+        height: $same-height;
+        line-height: $same-height;
+        outline: none;
+        position: absolute;
+        right: 0;
+        width: $same-height;
+        z-index: 2;
+
+        &:hover, &:focus {
+            background-color: #fff;
+        }
+    }
+
+    .priority-list {
+        @extend %no-select;
+
+        background-color: #fff;
+        bottom: $same-height;
+        // display: block;
+        display: none;
+        position: absolute;
+        right: 0;
+
+
+        label {
+            cursor: pointer;
+            display: block;
+            padding: 4px 10px;
+            line-height: 26px;
+            font-style: italic;
+
+            &:hover {
+                background-color: #f9f9f9;
+            }
+
+
+            i {
+                text-decoration: line-through;
+            }
+        }
     }
 }
