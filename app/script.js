@@ -1,5 +1,5 @@
-define('ApplicationView', ['jquery', 'underscore', 'backbone', 'ListCollection', 'HeaderView', 'ListView', 'AddView'],
-    function($, _, Backbone, ListCollection, HeaderView, ListView, AddView) {
+define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'ListView', 'AddView'],
+    function($, _, Backbone, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             'id': 'ToDoin',
             initialize: function() {
@@ -9,33 +9,13 @@ define('ApplicationView', ['jquery', 'underscore', 'backbone', 'ListCollection',
                     AddView    : AddView
                 };
 
-                ListCollection.fetch({reset:true});
-
-                this.renderLayout(_.map(elements, function(element, elementName) {
-                    return (this[elementName] = new element({collection: ListCollection})).el;
+                this.render(_.map(elements, function(element, elementName) {
+                    return ( this[elementName] = new element({collection: this.collection}) ).el;
                 }, this));
-
-                // Router.on('route', this.render, this);
             },
-            render: function(action) {
-                var collection = [];
-
-                switch(action) {
-                    case 'complete':
-                        collection = ListCollection.complete();
-                        break;
-                    case 'remain':
-                        collection = ListCollection.remain();
-                        break;
-                    case 'home':
-                        collection = ListCollection.all();
-                        break;
-                }
-
-                this.ListView.render(collection);
-            },
-            renderLayout: function(elements) {
+            render: function(elements) {
                 this.$el.empty().append(elements).appendTo('body');
+
                 return this;
             }
         });
