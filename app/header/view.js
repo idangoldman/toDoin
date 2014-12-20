@@ -30,11 +30,10 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
             event.preventDefault();
         },
         updateStats: function() {
-            if (this.collection.length) {
-                this.model.complete = this.collection.complete().length;
-                this.model.remain = this.collection.remain().length;
-                this.model.all = this.collection.all().length;
-            }
+            this.model.complete = this.collection.complete().length;
+            this.model.remain = this.collection.remain().length;
+            this.model.all = this.collection.all().length;
+            this.model.disabled = !(this.model.remain && this.model.complete);
         },
         render: function(filter) {
             this.updateStats();

@@ -21,6 +21,8 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
         onModelChange: function () {
             if (Backbone.history.location.pathname === '/complete' && !this.complete().length) {
                 Backbone.history.navigate('/', {trigger: true});
+            } else {
+                Backbone.history.loadUrl(Backbone.history.fragment);
             }
         },
         complete: function () {
