@@ -17,7 +17,9 @@ define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/li
         render: function(collection) {
             var completeModel = false;
 
-            this.$el.empty().append(this.template);
+            this.$el
+                .empty()
+                .append(this.template({completeCount: this.collection.complete().length}));
 
             this.$('ul').append(_.map(collection, function(model) {
                 if (model.get('complete')) {
