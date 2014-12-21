@@ -1,4 +1,4 @@
-define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'ListView', 'AddView'],
+define('AppView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'ListView', 'AddView'],
     function($, _, Backbone, HeaderView, ListView, AddView) {
         return Backbone.View.extend({
             'id': 'ToDoin',

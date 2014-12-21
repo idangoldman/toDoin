@@ -1,9 +1,9 @@
-define('Router', ['jquery', 'backbone', 'ApplicationView', 'ListCollection'], function($, Backbone, ApplicationView, ListCollection) {
+define('Router', ['jquery', 'backbone', 'AppView', 'ListCollection'], function($, Backbone, AppView, ListCollection) {
     var Router = Backbone.Router.extend({
         initialize: function() {
             ListCollection.fetch({reset:true});
 
-            this.application = new ApplicationView({collection: ListCollection});
+            this.application = new AppView({collection: ListCollection});
 
             Backbone.history.start({
                 pushState: true,
