@@ -13,8 +13,17 @@ define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'Li
                     return ( this[elementName] = new element({collection: this.collection}) ).el;
                 }, this));
             },
+            isMobile: function() {
+                return !!(navigator.userAgent.toLocaleLowerCase().match(/(android|webos|iphone|ipad|ipod|blackberry|windows phone)/));
+            },
             render: function(elements) {
-                this.$el.empty().append(elements).appendTo('body');
+                //  Mobile hack for now
+                $('body').toggleClass('mobile', this.isMobile());
+
+                this.$el
+                    .empty()
+                    .append(elements).appendTo('body');
+
 
                 return this;
             }

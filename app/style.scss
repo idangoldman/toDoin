@@ -22,6 +22,12 @@ body, #ToDoin {
     width: 300px;
 }
 
+//  Mobile hack for now
+body.mobile, body.mobile #ToDoin {
+    height: 100%;
+    width: 100%;
+}
+
 #ToDoin {
     background-color: #f9f9f9;
     position: relative;
