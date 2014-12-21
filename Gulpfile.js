@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     compass = require('gulp-compass'),
+    autoprefixer = require('gulp-autoprefixer'),
     swig = require('gulp-swig'),
     rename = require("gulp-rename"),
     jshint = require('gulp-jshint'),
@@ -46,6 +47,7 @@ gulp.task('javascript', ['jshint'], function() {
 gulp.task('stylesheet', function() {
     return gulp.src('./app/style.scss')
         .pipe(compass(data.compass))
+        .pipe(autoprefixer())
         .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
 });
