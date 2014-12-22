@@ -1,4 +1,4 @@
-define('Router', ['jquery', 'backbone', 'AppView', 'ListCollection'], function($, Backbone, AppView, ListCollection) {
+define('Router', ['backbone', 'AppView', 'ListCollection'], function(Backbone, AppView, ListCollection) {
     var Router = Backbone.Router.extend({
         initialize: function() {
             ListCollection.fetch({reset:true});

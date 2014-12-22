@@ -1,7 +1,9 @@
 define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Template) {
     return Backbone.View.extend({
         initialize: function() {
-            this.render(this.template, this.model);
+            this.render(this.model);
+
+            Backbone.pubSub.on('task:edit', this.editTask, this);
         },
         events: {
             'submit': 'createTask'
@@ -13,9 +15,14 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             'action': 'blah.js',
             'method': 'post'
         },
-        render: function(template, model) {
-            this.$el.empty();
-            this.$el.html(template(model));
+        render: function(model) {
+            model = model && model.toJSON() || {id: '', order: '', title: ''};
+
+            this.$el
+                .empty()
+                .append(this.template(model))
+                .find('.title')
+                    .focus();
 
             return this;
         },
@@ -28,6 +35,9 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             }
 
             event.preventDefault();
+        },
+        editTask: function(taskId) {
+            this.render(this.collection.get(taskId));
         }
     });
 });

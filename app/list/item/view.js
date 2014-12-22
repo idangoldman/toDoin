@@ -10,7 +10,7 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
         template: _.template(Template),
         tagName: 'li',
         events: {
-            'click .check-box': 'toggleComplete'
+            'click .check-box': 'toggleComplete',
             'dblclick .field': 'editField'
         },
         toggleComplete: function() {
@@ -33,9 +33,9 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
                     }
                 break;
             }
+        },
         editField: function () {
-            // debugger;
-            // this.vent.trigger('task:edit', this.model.get('id'));
+            Backbone.pubSub.trigger('task:edit', this.model.get('id'));
         },
         render: function() {
             this.$el
