@@ -6,6 +6,8 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
                 remain: 0,
                 all: 0
             };
+
+            this.listenTo(this.collection, 'remove', this.render);
         },
         template: _.template(Template),
         tagName: 'header',

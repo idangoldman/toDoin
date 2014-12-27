@@ -2,6 +2,9 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
     return Backbone.View.extend({
         initialize: function() {
             this.render();
+
+            // this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'destroy', this.remove);
         },
         template: _.template(Template),
         tagName: 'li',
@@ -12,6 +15,7 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
             this.model.toggle();
         },
         render: function() {
+            // console.log('change!');
             this.$el
                 .empty()
                 .append(this.template(this.model.toJSON()))

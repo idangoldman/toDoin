@@ -2,7 +2,6 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
     var Collection = Backbone.Collection.extend({
         initialize: function() {
             this.on('add', this.onModelAdd);
-            this.on('change', this.onModelChange);
         },
         localStorage: new Store('ToDoin'),
         model: ListItemModel,
@@ -26,13 +25,7 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
             }
         },
         cleanCompleted: function() {
-            _.invoke(this.complete(), 'destroy');
-
-            if (Backbone.history.location.pathname === '/complete') {
-                Backbone.history.navigate('/', {trigger: true});
-            } else {
-                Backbone.history.loadUrl(Backbone.history.fragment);
-            }
+            return _.invoke(this.complete(), 'destroy');
         },
         complete: function () {
             return this.where({complete: true});

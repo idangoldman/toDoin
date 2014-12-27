@@ -12,6 +12,12 @@ define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/li
         cleanCompleteModels: function(event) {
             this.collection.cleanCompleted();
 
+            if (Backbone.history.location.pathname === '/complete') {
+                Backbone.history.navigate('/', {trigger: true});
+            } else {
+                this.showCleanListBotton(false);
+            }
+
             event.preventDefault();
         },
         render: function(collection) {
