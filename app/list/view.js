@@ -1,31 +1,27 @@
-define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/list.html'], function(_, Backbone, ListItemView, Template) {
+define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView', 'text!templates/list.html'], function(_, Backbone, CleanButtonView, ListItemView, Template) {
     return Backbone.View.extend({
         tagName: 'section',
         className: 'tasks',
         template: _.template(Template),
-        events: {
-            'click .clean-list button': 'cleanCompleteModels'
+        initialize: function() {
+            this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
         },
-        showCleanListBotton: function(bool) {
-            this.$el.toggleClass('show-clean-list-button', bool);
-        },
-        cleanCompleteModels: function(event) {
-            this.collection.cleanCompleted();
+        toggleCleanButton: function() {
+            var completeTasksCount = this.collection.complete().length;
 
-            if (Backbone.history.location.pathname === '/complete') {
-                Backbone.history.navigate('/', {trigger: true});
-            } else {
-                this.showCleanListBotton(false);
+            if (completeTasksCount && !this.$el.has('.clean-button').length) {
+                this.$el
+                    .append(new CleanButtonView({collection: this.collection}).el);
             }
 
-            event.preventDefault();
+            this.$el.addClass('show-clean-button', completeTasksCount);
         },
         render: function(collection) {
             var completeModel = false;
 
             this.$el
                 .empty()
-                .append(this.template({completeCount: this.collection.complete().length}));
+                .append(this.template());
 
             this.$('ul').append(_.map(collection, function(model) {
                 if (model.get('complete')) {
@@ -35,7 +31,11 @@ define('ListView', ['underscore', 'backbone', 'ListItemView', 'text!templates/li
                 return new ListItemView({model: model}).el;
             }));
 
-            this.showCleanListBotton(completeModel);
+            if (completeModel) {
+                this.$el
+                    .addClass('show-clean-button')
+                    .append(new CleanButtonView({collection: this.collection}).el);
+            }
 
             return this;
         }

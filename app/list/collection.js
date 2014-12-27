@@ -2,6 +2,7 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
     var Collection = Backbone.Collection.extend({
         initialize: function() {
             this.on('add', this.onModelAdd);
+            this.on('change', this.onModelChange);
         },
         localStorage: new Store('ToDoin'),
         model: ListItemModel,

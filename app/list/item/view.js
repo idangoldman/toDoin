@@ -3,7 +3,7 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
         initialize: function() {
             this.render();
 
-            // this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'destroy', this.remove);
         },
         template: _.template(Template),
