@@ -13,7 +13,7 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
         template: _.template(Template),
         tagName: 'header',
         events: {
-            'click .switch-view': 'switchView'
+            'click .check-box': 'switchView'
         },
         switchView: function(event) {
             if (!$(event.target).attr('disabled')) {
@@ -45,7 +45,7 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
                 .empty()
                 .append(this.template(this.model));
 
-            this.$('.switch-view')
+            this.$('.check-box')
                 .toggleClass('remain', filter === 'remain' && this.model.remain)
                 .toggleClass('complete', filter === 'complete' && this.model.complete);
 

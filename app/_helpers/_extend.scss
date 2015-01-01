@@ -6,3 +6,30 @@
     -webkit-user-select: none;
     cursor: default;
 }
+
+%check-box {
+    // background-color: green;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #777;
+    cursor: pointer;
+    display: block;
+    font-size: 18px;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 5px;
+    text-align: center;
+    width: 26px;
+
+    &[disabled] {
+        cursor: default;
+    }
+
+    &.remain {
+        color: #000;
+    }
+
+    &.complete {
+        color: #419a45;
+    }
+}
