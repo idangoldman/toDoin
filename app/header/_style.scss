@@ -5,7 +5,7 @@ header {
     display: flex;
     height: $same-height;
     left: 0;
-    padding: 10px;
+    padding: 10px 40px 10px 10px;
     top: 0;
     z-index: 2;
 
@@ -24,6 +24,8 @@ header {
     }
 
     .check-box {
-        margin-left: 5px;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 }
