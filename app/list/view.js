@@ -17,7 +17,8 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
             this.$el.addClass('show-clean-button', completeTasksCount);
         },
         render: function(collection) {
-            var completeModel = false;
+            var completeModel = false,
+                that = this;
 
             this.$el
                 .empty()
@@ -28,7 +29,7 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
                     completeModel = true;
                 }
 
-                return new ListItemView({model: model}).el;
+                return new ListItemView({model: model, collection: that.collection}).el;
             }));
 
             if (completeModel) {
