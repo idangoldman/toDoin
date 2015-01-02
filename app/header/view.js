@@ -9,6 +9,7 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
 
             this.listenTo(this.collection, 'remove', this.render);
             this.listenTo(this.collection, 'change', this.render);
+            this.listenTo(this.collection, 'add', this.render);
         },
         template: _.template(Template),
         tagName: 'header',
@@ -38,7 +39,7 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
             this.model.all = this.collection.all().length;
             this.model.disabled = !(this.model.remain && this.model.complete);
         },
-        render: function(filter) {
+        render: function() {
             this.updateStats();
 
             this.$el
@@ -46,8 +47,8 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
                 .append(this.template(this.model));
 
             this.$('.check-box')
-                .toggleClass('remain', filter === 'remain' && this.model.remain)
-                .toggleClass('complete', filter === 'complete' && this.model.complete);
+                .toggleClass('remain', Backbone.history.location.pathname === '/remain')
+                .toggleClass('complete', Backbone.history.location.pathname === '/complete');
 
             return this;
         }
