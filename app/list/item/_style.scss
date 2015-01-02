@@ -1,26 +1,20 @@
 li {
     @include clearfix;
 
+    // min-height: $same-height;
+    align-items: flex-start;
     background-color: #f9f9f9;
     border-bottom: 1px solid #eee;
-    // min-height: $same-height;
-    padding: 6px 10px;
+    display: flex;
+    padding: 6px;
 
-    .checkbox, .field {
-        display: inline-block;
-        float: left;
-    }
-
-    .checkbox {
-        cursor: pointer;
-        margin-top: 5px;
-        max-width: 14px;
-        width: 5%;
+    .check-box {
+        flex-shrink: 0;
     }
 
     .field {
-        margin-left: 3%;
-        width: 92%;
+        display: inline-block;
+        margin-left: 6px;
     }
 
     &.complete .field {

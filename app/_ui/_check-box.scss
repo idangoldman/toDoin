@@ -1,0 +1,27 @@
+%check-box {
+    // background-color: green;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #777;
+    cursor: pointer !important;
+    display: inline-block;
+    font-size: 18px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    width: 26px;
+
+    &[disabled] {
+        cursor: default !important;
+    }
+
+    &.remain {
+        color: #000;
+    }
+
+    &.complete {
+        color: #419a45;
+    }
+}
+
+.check-box { @extend %check-box; }

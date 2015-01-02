@@ -9,7 +9,7 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
         template: _.template(Template),
         tagName: 'li',
         events: {
-            'click .checkbox': 'toggleComplete'
+            'click .check-box': 'toggleComplete'
         },
         toggleComplete: function () {
             this.model.toggle();

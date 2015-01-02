@@ -1,9 +1,4 @@
-<input
-    type="checkbox"
-    class="checkbox"
-    value="<%= complete ? 1 : 0 %>"
-    <% if (complete) {%>checked="checked"<% } %>
-    >
+<i class="fa fa-check check-box <% if ( complete ) {%>complete<% } else { %>remain<% } %>"></i>
 <label class="field">
     <%= title %>
 </label>
