@@ -4,6 +4,7 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
         className: 'tasks',
         template: _.template(Template),
         initialize: function() {
+            this.listenTo(this.collection, 'add', this.addTask);
             this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
         },
         toggleCleanButton: function() {
@@ -15,6 +16,13 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
             }
 
             this.$el.addClass('show-clean-button', completeTasksCount);
+        },
+        addTask: function (model) {
+            if (Backbone.history.location.pathname === '/complete') {
+                Backbone.history.navigate('/remain', {trigger: true});
+            } else {
+                this.$('ul').append(new ListItemView({model: model, collection: this.collection}).el);
+            }
         },
         render: function(collection) {
             var completeModel = false,

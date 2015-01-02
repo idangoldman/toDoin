@@ -10,12 +10,6 @@ define('ListCollection', ['backbone', 'backboneLocalstorage', 'ListItemModel'], 
         },
         onModelAdd: function(model) {
             model.set('order', this.getTaskOrder());
-
-            if (Backbone.history.location.pathname === '/complete') {
-                Backbone.history.navigate('/remain', {trigger: true});
-            } else {
-                Backbone.history.loadUrl(Backbone.history.fragment);
-            }
         },
         cleanCompleted: function() {
             return _.invoke(this.complete(), 'destroy');
