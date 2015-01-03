@@ -4,6 +4,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             this.render(this.model);
 
             Backbone.pubSub.on('task:edit', this.editTask, this);
+            Backbone.pubSub.on('task:esc', this.escTask, this);
         },
         events: {
             'submit': 'createTask',
@@ -28,7 +29,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             return this;
         },
         escTask: function(event) {
-            if(event.keyCode === 27 && this.model.id) {
+            if ((typeof event === 'string' && event === this.model.id) || (event.keyCode === 27 && this.model.id)) {
                 this.render();
             }
         },

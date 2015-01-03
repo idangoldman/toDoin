@@ -15,6 +15,10 @@ define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Back
         },
         toggleComplete: function() {
             this.model.toggle();
+
+            if (this.model.get('complete')) {
+                Backbone.pubSub.trigger('task:esc', this.model.id);
+            }
         },
         onComplete: function() {
             switch(Backbone.history.location.pathname) {
