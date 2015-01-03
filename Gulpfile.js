@@ -5,9 +5,11 @@ var gulp = require('gulp'),
     swig = require('gulp-swig'),
     rename = require("gulp-rename"),
     jshint = require('gulp-jshint'),
+    gutil = require('gulp-util'),
     clean = require('gulp-clean'),
     args = require('yargs').argv,
     connect = require('gulp-connect'),
+    ftp = require('gulp-ftp'),
     modRewrite = require('connect-modrewrite'),
 
     env = args.chrome ? 'chrome' : 'web',
@@ -19,6 +21,7 @@ var gulp = require('gulp'),
         return isChrome ? envBrowserAction : envPath;
     },
 
+    auth = require('./auth.json'),
     data = require('./settings.json');
 
 gulp.task('vendors', ['clean'], function() {
@@ -27,6 +30,17 @@ gulp.task('vendors', ['clean'], function() {
 
     return gulp.src(data.assets.javascript.bower)
         .pipe(gulp.dest(getEnvPath() + '/vendors/js'));
+});
+
+gulp.task('ftp-deploy', function () {
+    return gulp.src('./www/**/*')
+        .pipe(ftp({
+            host: auth.ftp.host,
+            user: auth.ftp.user,
+            pass: auth.ftp.pass,
+            remotePath: auth.ftp.path
+        }))
+        .pipe(gutil.noop());
 });
 
 gulp.task('jshint', function() {

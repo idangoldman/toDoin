@@ -1,0 +1,8 @@
+{
+    "ftp": {
+        "host": "example.com",
+        "user": "user",
+        "pass": "password",
+        "path": "/"
+    }
+}
