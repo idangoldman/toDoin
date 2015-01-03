@@ -5,7 +5,7 @@ header {
     display: flex;
     height: $same-height;
     left: 0;
-    padding: 10px;
+    padding: 10px 40px 10px 10px;
     top: 0;
     z-index: 2;
 
@@ -14,7 +14,6 @@ header {
     }
 
     .stats {
-
         font-size: 13px;
         margin-left: auto;
 
@@ -24,53 +23,9 @@ header {
         }
     }
 
-    .switch-view {
-        cursor: pointer;
-        display: inline-block;
-        height: 16px;
-        margin-bottom: 4px;
-        margin-left: 10px;
-        overflow: hidden;
-        position: relative;
-        text-indent: -99em;
-        width: 16px;
-
-        &:before, &:after {
-            background-color: #d6d6d6;
-            content: '';
-            display: block;
-            position: absolute;
-            width: 4px;
-        }
-
-        &:before {
-            bottom: 0;
-            height: 8px;
-            right: 10px;
-            transform: rotate(-45deg);
-        }
-
-        &:after {
-            bottom: 0;
-            height: 12px;
-            right: 5px;
-            transform: rotate(45deg);
-        }
-
-        &[disabled] {
-            cursor: default;
-        }
-
-        &.remain {
-            &:before, &:after {
-                background-color: #777;
-            }
-        }
-
-        &.complete {
-            &:before, &:after {
-                background-color: #419a45;
-            }
-        }
+    .check-box {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 }

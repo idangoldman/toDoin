@@ -6,3 +6,5 @@
     -webkit-user-select: none;
     cursor: default;
 }
+
+.no-select { @extend %no-select; }

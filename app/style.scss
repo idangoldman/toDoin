@@ -4,21 +4,23 @@
 @import "compass/utilities/general/clearfix";
 
 // Google Fonts
-@import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subweset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext");
+@import url("//fonts.googleapis.com/earlyaccess/opensanshebrew.css");
+@import url("//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subweset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext");
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
 
 // Simple reset, colors and extends
 @import "_helpers/reset";
 @import "_helpers/colors";
 @import "_helpers/extend";
 @import "_helpers/function";
+@import "_ui/_check-box.scss";
 
 // Variables
 $same-height: 40px;
 
 // Application
 body, #ToDoin {
-    height: 500px;
+    height: 430px;
     width: 300px;
 }
 

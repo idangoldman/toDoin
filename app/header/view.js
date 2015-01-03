@@ -6,11 +6,15 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
                 remain: 0,
                 all: 0
             };
+
+            this.listenTo(this.collection, 'remove', this.render);
+            this.listenTo(this.collection, 'change', this.render);
+            this.listenTo(this.collection, 'add', this.render);
         },
         template: _.template(Template),
         tagName: 'header',
         events: {
-            'click .switch-view': 'switchView'
+            'click .check-box': 'switchView'
         },
         switchView: function(event) {
             if (!$(event.target).attr('disabled')) {
@@ -35,16 +39,16 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
             this.model.all = this.collection.all().length;
             this.model.disabled = !(this.model.remain && this.model.complete);
         },
-        render: function(filter) {
+        render: function() {
             this.updateStats();
 
             this.$el
                 .empty()
                 .append(this.template(this.model));
 
-            this.$('.switch-view')
-                .toggleClass('remain', filter === 'remain' && this.model.remain)
-                .toggleClass('complete', filter === 'complete' && this.model.complete);
+            this.$('.check-box')
+                .toggleClass('remain', Backbone.history.location.pathname === '/remain')
+                .toggleClass('complete', Backbone.history.location.pathname === '/complete');
 
             return this;
         }

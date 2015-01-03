@@ -20,11 +20,11 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             return this;
         },
         createTask: function(event) {
-            var value = this.$('.new-task').val().trim();
+            var value = this.$('.title').val().trim();
 
             if (value.length) {
                 this.collection.create({title: value});
-                this.$('.new-task').val('');
+                this.$('.title').val('');
             }
 
             event.preventDefault();

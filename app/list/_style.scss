@@ -16,44 +16,16 @@
         width: 100%;
         z-index: 1;
 
-        @import 'item/style'
+        @import 'item/style';
     }
 
-    .clean-list {
-        bottom: 10px;
-        display: none;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 2;
+    @import 'clean-button/style';
 
-        button {
-            background-color: rgba(#000, 0.2);
-            border-radius: 5px;
-            border: none;
-            color: #f9f9f9;
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            height: 40px;
-            line-height: 40px;
-            margin: 0 auto;
-            outline: none;
-            padding: 0 20px;
-            text-align: center;
-
-            &:focus, &:hover {
-                background-color: rgba(#000, 0.5);
-                color: #ff;
-            }
-        }
-    }
-
-    &.show-clean-list-button {
+    &.show-clean-button {
         .list {
             padding-bottom: 60px;
         }
-        .clean-list {
+        .clean-button {
             display: block;
         }
     }

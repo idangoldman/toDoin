@@ -24,7 +24,6 @@ define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'Li
                     .empty()
                     .append(elements).appendTo('body');
 
-
                 return this;
             }
         });
