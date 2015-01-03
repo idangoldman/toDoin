@@ -35,7 +35,9 @@ define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Back
             }
         },
         editField: function () {
-            Backbone.pubSub.trigger('task:edit', this.model.get('id'));
+            if (!this.model.get('complete')) {
+                Backbone.pubSub.trigger('task:edit', this.model.get('id'));
+            }
         },
         render: function() {
             this.$el

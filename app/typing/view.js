@@ -1,4 +1,4 @@
-define('AddView', ['backbone', 'TaskModel', 'text!templates/add.html'], function(Backbone, TaskModel, Template) {
+define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], function(Backbone, TaskModel, Template) {
     return Backbone.View.extend({
         initialize: function() {
             this.render(this.model);
@@ -11,7 +11,7 @@ define('AddView', ['backbone', 'TaskModel', 'text!templates/add.html'], function
         },
         template: _.template(Template),
         tagName: 'form',
-        className: 'add',
+        className: 'typing',
         attributes: {
             'action': 'blah.js',
             'method': 'post'

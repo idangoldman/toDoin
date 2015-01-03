@@ -1,12 +1,12 @@
-define('AppView', ['underscore', 'backbone', 'HeaderView', 'TasksView', 'AddView'],
-    function( _, Backbone, HeaderView, TasksView, AddView) {
+define('AppView', ['underscore', 'backbone', 'HeaderView', 'TasksView', 'TypingView'],
+    function( _, Backbone, HeaderView, TasksView, TypingView) {
         return Backbone.View.extend({
             'id': 'ToDoin',
             initialize: function() {
                 var elements = {
                     HeaderView : HeaderView,
                     TasksView : TasksView,
-                    AddView : AddView
+                    TypingView : TypingView
                 };
 
                 this.render(_.map(elements, function(element, elementName) {
