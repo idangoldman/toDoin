@@ -1,4 +1,4 @@
-define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(Backbone, Template) {
+define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Backbone, Template) {
     return Backbone.View.extend({
         initialize: function() {
             this.render();
@@ -10,10 +10,15 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
         template: _.template(Template),
         tagName: 'li',
         events: {
-            'click .check-box': 'toggleComplete'
+            'click .check-box': 'toggleComplete',
+            'dblclick .field': 'editField'
         },
         toggleComplete: function() {
             this.model.toggle();
+
+            if (this.model.get('complete')) {
+                Backbone.pubSub.trigger('task:esc', this.model.id);
+            }
         },
         onComplete: function() {
             switch(Backbone.history.location.pathname) {
@@ -31,6 +36,11 @@ define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(B
                         this.remove();
                     }
                 break;
+            }
+        },
+        editField: function () {
+            if (!this.model.get('complete')) {
+                Backbone.pubSub.trigger('task:edit', this.model.get('id'));
             }
         },
         render: function() {

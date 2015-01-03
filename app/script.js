@@ -1,12 +1,12 @@
-define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'ListView', 'AddView'],
-    function($, _, Backbone, HeaderView, ListView, AddView) {
+define('AppView', ['underscore', 'backbone', 'HeaderView', 'TasksView', 'TypingView'],
+    function( _, Backbone, HeaderView, TasksView, TypingView) {
         return Backbone.View.extend({
             'id': 'ToDoin',
             initialize: function() {
                 var elements = {
                     HeaderView : HeaderView,
-                    ListView   : ListView,
-                    AddView    : AddView
+                    TasksView : TasksView,
+                    TypingView : TypingView
                 };
 
                 this.render(_.map(elements, function(element, elementName) {
@@ -17,12 +17,12 @@ define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'Li
                 return !!(navigator.userAgent.toLocaleLowerCase().match(/(android|webos|iphone|ipad|ipod|blackberry|windows phone)/));
             },
             render: function(elements) {
-                //  Mobile hack for now
-                $('body').toggleClass('mobile', this.isMobile());
-
                 this.$el
-                    .empty()
-                    .append(elements).appendTo('body');
+                    .append(elements)
+                        .appendTo('body')
+                    .end()
+                    .parent('body')
+                        .toggleClass('mobile', this.isMobile());
 
                 return this;
             }
@@ -30,4 +30,4 @@ define('ApplicationView', ['jquery', 'underscore', 'backbone', 'HeaderView', 'Li
     }
 );
 
-require(['Router']);
+require(['PubSub', 'Router']);
