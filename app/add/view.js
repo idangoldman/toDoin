@@ -16,8 +16,7 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             'method': 'post'
         },
         render: function(model) {
-            model = model && model.toJSON() || {id: '', order: '', title: ''};
-
+            model = model && model.toJSON() || {id: '', title: ''};
             this.$el
                 .empty()
                 .append(this.template(model))
@@ -29,6 +28,7 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
         createTask: function(event) {
             var value = this.$('.title').val().trim();
 
+// debugger;
             if (value.length) {
                 this.collection.create({title: value});
                 this.$('.title').val('');

@@ -1,4 +1,4 @@
-define('ListItemView', ['backbone', 'text!templates/list-item.html'], function(Backbone, Template) {
+define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Backbone, Template) {
     return Backbone.View.extend({
         initialize: function() {
             this.render();

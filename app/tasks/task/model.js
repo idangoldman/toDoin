@@ -1,4 +1,4 @@
-define('ListItemModel', ['backbone'], function(Backbone) {
+define('TaskModel', ['backbone'], function(Backbone) {
     return Backbone.Model.extend({
         defaults: {
             title    : '',

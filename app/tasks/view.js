@@ -1,4 +1,4 @@
-define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView', 'text!templates/list.html'], function(_, Backbone, CleanButtonView, ListItemView, Template) {
+define('TasksView', ['underscore', 'backbone', 'CleanButtonView', 'TaskView', 'text!templates/tasks.html'], function(_, Backbone, CleanButtonView, TaskView, Template) {
     return Backbone.View.extend({
         tagName: 'section',
         className: 'tasks',
@@ -24,7 +24,7 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
             if (Backbone.history.location.pathname === '/complete') {
                 Backbone.history.navigate('/remain', {trigger: true});
             } else {
-                this.$('ul').append(new ListItemView({model: model, collection: this.collection}).el);
+                this.$('ul').append(new TaskView({model: model, collection: this.collection}).el);
             }
         },
         render: function(collection) {
@@ -40,7 +40,7 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
                     completeModel = true;
                 }
 
-                return new ListItemView({model: model, collection: that.collection}).el;
+                return new TaskView({model: model, collection: that.collection}).el;
             }));
 
             if (completeModel && Backbone.history.location.pathname !== '/remain') {
