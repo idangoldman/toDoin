@@ -6,7 +6,8 @@ define('AddView', ['backbone', 'TaskModel', 'text!templates/add.html'], function
             Backbone.pubSub.on('task:edit', this.editTask, this);
         },
         events: {
-            'submit': 'createTask'
+            'submit': 'createTask',
+            'keyup': 'escTask'
         },
         template: _.template(Template),
         tagName: 'form',
@@ -25,6 +26,11 @@ define('AddView', ['backbone', 'TaskModel', 'text!templates/add.html'], function
                     .focus();
 
             return this;
+        },
+        escTask: function(event) {
+            if(event.keyCode === 27 && this.model.id) {
+                this.render();
+            }
         },
         createTask: function(event) {
             var value = this.$('.title').val().trim();
