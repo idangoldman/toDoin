@@ -10,13 +10,10 @@ define('TasksView', ['underscore', 'backbone', 'CleanButtonView', 'TaskView', 't
         toggleCleanButton: function() {
             var completeTasksCount = this.collection.complete().length;
 
-            if (completeTasksCount && !this.$el.has('.clean-button').length) {
+            if (completeTasksCount && Backbone.history.location.pathname !== '/remain') {
                 this.$el
+                    .addClass('show-clean-button', completeTasksCount)
                     .append(new CleanButtonView({collection: this.collection}).el);
-            }
-
-            if (completeTasksCount) {
-                this.$el.addClass('show-clean-button', completeTasksCount);
             }
 
         },
