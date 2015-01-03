@@ -13,6 +13,14 @@ define('CleanButtonView', ['backbone'], function(Backbone) {
         events: {
             'click': 'cleanCompleteModels'
         },
+        eatText: [{
+            one: 'Cookie',
+            many: 'Cookies'
+        },
+        {
+            one: 'Vegetable',
+            many: 'Vegetables'
+        }],
         cleanCompleteModels: function(event) {
             this.collection.cleanCompleted();
 
@@ -26,13 +34,14 @@ define('CleanButtonView', ['backbone'], function(Backbone) {
         },
         render: function() {
             var completeTasksCount = this.collection.complete().length,
-                buttonText = null;
+                buttonText = null,
+                eatText = _.sample(this.eatText);
 
             if (completeTasksCount) {
                 if (completeTasksCount > 1) {
-                    buttonText = ['Eat', completeTasksCount, 'Cookies.'].join(' ');
+                    buttonText = ['Eat', completeTasksCount,  eatText.many + '.'].join(' ');
                 } else  {
-                    buttonText = 'Eat a Cookie.';
+                    buttonText = ['Eat a', eatText.one + '.'].join(' ');
                 }
 
                 this.$el
