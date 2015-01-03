@@ -18,8 +18,24 @@ define('CleanButtonView', ['backbone'], function(Backbone) {
             many: 'Cookies'
         },
         {
-            one: 'Vegetable',
-            many: 'Vegetables'
+            one: 'Walnut',
+            many: 'Walnuts'
+        },
+        {
+            one: 'Apple',
+            many: 'Apples'
+        },
+        {
+            one: 'Cucumber',
+            many: 'Cucumbers'
+        },
+        {
+            one: 'Banana',
+            many: 'Bananas'
+        },
+        {
+            one: 'Tomato',
+            many: 'Tomatoes'
         }],
         cleanCompleteModels: function(event) {
             this.collection.cleanCompleted();
