@@ -15,7 +15,10 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
                     .append(new CleanButtonView({collection: this.collection}).el);
             }
 
-            this.$el.addClass('show-clean-button', completeTasksCount);
+            if (completeTasksCount) {
+                this.$el.addClass('show-clean-button', completeTasksCount);
+            }
+
         },
         addTask: function (model) {
             if (Backbone.history.location.pathname === '/complete') {
@@ -40,10 +43,12 @@ define('ListView', ['underscore', 'backbone', 'CleanButtonView', 'ListItemView',
                 return new ListItemView({model: model, collection: that.collection}).el;
             }));
 
-            if (completeModel) {
+            if (completeModel && Backbone.history.location.pathname !== '/remain') {
                 this.$el
                     .addClass('show-clean-button')
                     .append(new CleanButtonView({collection: this.collection}).el);
+            } else {
+                this.$el.removeClass('show-clean-button');
             }
 
             return this;
