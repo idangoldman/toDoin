@@ -1,4 +1,4 @@
-define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Template) {
+define('AddView', ['backbone', 'TaskModel', 'text!templates/add.html'], function(Backbone, TaskModel, Template) {
     return Backbone.View.extend({
         initialize: function() {
             this.render(this.model);
@@ -16,10 +16,11 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
             'method': 'post'
         },
         render: function(model) {
-            model = model && model.toJSON() || {id: '', title: ''};
+            this.model = model || new TaskModel();
+
             this.$el
                 .empty()
-                .append(this.template(model))
+                .append(this.template(this.model.toJSON()))
                 .find('.title')
                     .focus();
 
@@ -28,10 +29,14 @@ define('AddView', ['backbone', 'text!templates/add.html'], function(Backbone, Te
         createTask: function(event) {
             var value = this.$('.title').val().trim();
 
-// debugger;
             if (value.length) {
-                this.collection.create({title: value});
-                this.$('.title').val('');
+                if (this.model.id) {
+                    this.model.update('title', value);
+                } else {
+                    this.collection.create({title: value});
+                }
+
+                this.render();
             }
 
             event.preventDefault();
