@@ -24,6 +24,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 .empty()
                 .append(this.template(this.model.toJSON()))
                 .find('.title')
+                    .prop('selectionStart', this.model.get('title').length)
                     .focus();
 
             return this;
