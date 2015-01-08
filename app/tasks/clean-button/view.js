@@ -43,6 +43,8 @@ define('CleanButtonView', ['backbone'], function(Backbone) {
             if (Backbone.history.location.pathname === '/complete') {
                 Backbone.history.navigate('/', {trigger: true});
             } else {
+                this.$el
+                    .parent().removeClass('show-clean-button');
                 this.remove();
             }
 
