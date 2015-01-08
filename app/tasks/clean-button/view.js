@@ -49,7 +49,7 @@ define('CleanButtonView', ['backbone'], function(Backbone) {
             event.preventDefault();
         },
         render: function() {
-            var completeTasksCount = this.collection.complete().length,
+            var completeTasksCount = this.collection.completeCount,
                 buttonText = null,
                 eatText = _.sample(this.eatText);
 

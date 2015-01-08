@@ -1,7 +1,8 @@
 define('Router', ['backbone', 'AppView', 'TasksCollection'], function(Backbone, AppView, TasksCollection) {
     var Router = Backbone.Router.extend({
         initialize: function() {
-            TasksCollection.fetch({reset:true});
+            TasksCollection.fetch({reset:true, async:false});
+            TasksCollection.updateCount();
 
             this.application = new AppView({collection: TasksCollection});
 

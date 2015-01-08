@@ -23,14 +23,14 @@ define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Back
         onComplete: function() {
             switch(Backbone.history.location.pathname) {
                 case '/complete':
-                    if (!this.collection.complete().length) {
+                    if (!this.collection.completeCount) {
                         Backbone.history.navigate('/', {trigger: true});
                     } else if (!this.model.get('complete')) {
                         this.remove();
                     }
                 break;
                 case '/remain':
-                    if (!this.collection.remain().length) {
+                    if (!this.collection.remainCount) {
                         Backbone.history.navigate('/', {trigger: true});
                     } else if (this.model.get('complete')) {
                         this.remove();

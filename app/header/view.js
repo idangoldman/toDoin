@@ -3,8 +3,7 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
         initialize: function() {
             this.model = {
                 complete: 0,
-                remain: 0,
-                all: 0
+                remain: 0
             };
 
             this.listenTo(this.collection, 'remove', this.render);
@@ -34,9 +33,8 @@ define('HeaderView', ['underscore', 'backbone', 'Router', 'text!templates/header
             event.preventDefault();
         },
         updateStats: function() {
-            this.model.complete = this.collection.complete().length;
-            this.model.remain = this.collection.remain().length;
-            this.model.all = this.collection.all().length;
+            this.model.complete = this.collection.completeCount;
+            this.model.remain = this.collection.remainCount;
             this.model.disabled = !(this.model.remain && this.model.complete);
         },
         render: function() {

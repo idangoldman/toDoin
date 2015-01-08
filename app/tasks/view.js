@@ -8,7 +8,7 @@ define('TasksView', ['underscore', 'backbone', 'CleanButtonView', 'TaskView', 't
             this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
         },
         toggleCleanButton: function() {
-            var completeTasksCount = this.collection.complete().length;
+            var completeTasksCount = this.collection.completeCount;
 
             if (Backbone.history.location.pathname !== '/remain') {
                 if (!this.$el.find('.clean-button').length && completeTasksCount) {
