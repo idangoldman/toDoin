@@ -4,10 +4,21 @@ define('TaskModel', ['backbone'], function(Backbone) {
             id: null,
             title: '',
             order: null,
-            complete: false
+            complete: false,
+            created_at: Date.now(),
+            completed_at: null
         },
         toggle: function () {
-            return this.save('complete', !this.get('complete'));
+            var saveParams = {
+                'complete': !this.get('complete'),
+                'completed_at': null
+            };
+
+            if (saveParams.complete) {
+                saveParams.completed_at = Date.now();
+            }
+
+            return this.save(saveParams);
         },
         update: function (field, value) {
             return this.save(field, value);
