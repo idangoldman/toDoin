@@ -5,18 +5,12 @@ header {
     display: flex;
     height: $same-height;
     left: 0;
-    padding: 10px 12px 10px 40px;
+    padding: 10px 12px;
     top: 0;
     z-index: 2;
 
     & > * {
         @extend %no-select;
-    }
-
-    .check-box {
-        position: absolute;
-        left: 0;
-        top: 0;
     }
 
     .stats {
