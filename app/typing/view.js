@@ -1,4 +1,20 @@
 define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], function(Backbone, TaskModel, Template) {
+
+    function isKey(keyName, code) {
+        var result = null;
+
+        switch(code) {
+            case 27:
+                result = 'esc';
+            break;
+            case 13:
+                result = 'enter';
+            break;
+        }
+
+        return keyName === result || false;
+    }
+
     return Backbone.View.extend({
         tagName: 'form',
         template: _.template(Template),
@@ -9,8 +25,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
-            'focus .title': 'focusOnTitle',
-            'focusout .title': 'focusOnTitle',
+            'keydown': 'pressEnter',
             'keyup': 'escTask'
         },
         initialize: function() {
@@ -21,6 +36,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         render: function(model) {
             this.model = model || new TaskModel();
+            this.model.set('paraphrase', '');
 
             this.$el
                 .empty()
@@ -31,14 +47,14 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
 
             return this;
         },
-        focusOnTitle: function(event) {
-            // debugger;
-            // this.render();
-            var bool = event.type === 'focusin' || false;
-            this.$el.find('.title').attr('contentEditable', bool);
+        pressEnter: function(event) {
+            if (isKey('enter', event.keyCode)) {
+                this.$el.submit();
+                return false;
+            }
         },
         escTask: function(event) {
-            if ((typeof event === 'string' && event === this.model.id) || (event.keyCode === 27 && this.model.id)) {
+            if ((typeof event === 'string' && event === this.model.id) || (isKey('esc', event.keyCode) && this.model.id)) {
                 this.render();
             }
         },

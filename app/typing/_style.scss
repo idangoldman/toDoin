@@ -2,8 +2,9 @@
     background-color: #f1f1f1;
     bottom: 0;
     left: 0;
-    max-height: $typing-twoline-height;
-    min-height: $typing-oneline-height;
+    // max-height: $typing-twoline-height;
+    // min-height: $typing-oneline-height;
+    height: $typing-oneline-height;
     overflow-y: auto;
     z-index: 3;
 
