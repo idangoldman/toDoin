@@ -1,21 +1,21 @@
 define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], function(Backbone, TaskModel, Template) {
     return Backbone.View.extend({
-        initialize: function() {
-            this.render(this.model);
-
-            Backbone.pubSub.on('task:edit', this.editTask, this);
-            Backbone.pubSub.on('task:esc', this.escTask, this);
+        tagName: 'form',
+        template: _.template(Template),
+        className: 'typing',
+        attributes: {
+            'action': 'blah.js',
+            'method': 'post'
         },
         events: {
             'submit': 'createTask',
             'keyup': 'escTask'
         },
-        template: _.template(Template),
-        tagName: 'form',
-        className: 'typing',
-        attributes: {
-            'action': 'blah.js',
-            'method': 'post'
+        initialize: function() {
+            this.render(this.model);
+
+            Backbone.pubSub.on('task:edit', this.editTask, this);
+            Backbone.pubSub.on('task:esc', this.escTask, this);
         },
         render: function(model) {
             this.model = model || new TaskModel();
@@ -47,7 +47,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 this.render();
             }
 
-            event.preventDefault();
+            return event && event.preventDefault();
         },
         editTask: function(taskId) {
             this.render(this.collection.get(taskId));
