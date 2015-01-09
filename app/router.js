@@ -13,29 +13,11 @@ define('Router', ['backbone', 'AppView', 'TasksCollection'], function(Backbone, 
         },
         routes: {
             '': 'home',
-            'remain': 'remain',
-            'complete': 'complete',
             '*action': 'defaultAction'
         },
         home: function() {
             this.application.HeaderView.render();
             this.application.TasksView.render(TasksCollection.all());
-        },
-        remain: function() {
-            if (!TasksCollection.remain().length) {
-                this.navigate('/', {trigger: true});
-            } else {
-                this.application.HeaderView.render('remain');
-                this.application.TasksView.render(TasksCollection.remain());
-            }
-        },
-        complete: function() {
-            if (!TasksCollection.complete().length) {
-                this.navigate('/', {trigger: true});
-            } else {
-                this.application.HeaderView.render('complete');
-                this.application.TasksView.render(TasksCollection.complete());
-            }
         },
         defaultAction: function(action) {
             console.log('#404 - No route:', action);
