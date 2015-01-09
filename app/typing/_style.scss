@@ -1,19 +1,29 @@
 .typing {
     background-color: #f1f1f1;
     bottom: 0;
-    height: $same-height;
     left: 0;
+    max-height: $typing-twoline-height;
+    min-height: $typing-oneline-height;
+    overflow-y: auto;
     z-index: 3;
 
     .title {
         background-color: transparent;
         border: none;
         font-weight: 300;
-        height: $same-height;
         outline: none;
         padding: 10px;
         position: relative;
         width: 100%;
         z-index: 1;
+
+        &:before {
+            color: $placeholder-color;
+            content: attr(placeholder);
+        }
+
+        &:focus:before {
+            content: "";
+        }
     }
 }

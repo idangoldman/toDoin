@@ -9,6 +9,8 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
+            'focus .title': 'focusOnTitle',
+            'focusout .title': 'focusOnTitle',
             'keyup': 'escTask'
         },
         initialize: function() {
@@ -28,6 +30,12 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                     .focus();
 
             return this;
+        },
+        focusOnTitle: function(event) {
+            // debugger;
+            // this.render();
+            var bool = event.type === 'focusin' || false;
+            this.$el.find('.title').attr('contentEditable', bool);
         },
         escTask: function(event) {
             if ((typeof event === 'string' && event === this.model.id) || (event.keyCode === 27 && this.model.id)) {

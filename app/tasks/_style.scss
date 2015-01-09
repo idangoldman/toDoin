@@ -1,10 +1,10 @@
 .tasks {
     @extend %no-select;
 
-    bottom: $same-height;
+    bottom: $typing-oneline-height;
     left: 0;
     overflow: hidden;
-    top: $same-height;
+    top: $typing-oneline-height;
     z-index: 1;
 
     .list {
