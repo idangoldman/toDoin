@@ -25,11 +25,13 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
-            'keydown': 'pressEnter',
-            'keyup': 'escTask'
+            'keydown': 'pressKeys',
+            'keyup': 'pressKeys',
+            'focusout': 'pressKeys'
         },
         initialize: function() {
             this.render(this.model);
+            this.$el.focus();
 
             Backbone.pubSub.on('task:edit', this.editTask, this);
             Backbone.pubSub.on('task:esc', this.escTask, this);
@@ -41,21 +43,32 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             this.$el
                 .empty()
                 .append(this.template(this.model.toJSON()))
-                .find('.title')
-                    .prop('selectionStart', this.model.get('title').length)
-                    .focus();
+                .find('.title');
 
             return this;
         },
-        pressEnter: function(event) {
+        pressKeys: function(event) {
             if (isKey('enter', event.keyCode)) {
                 this.$el.submit();
                 return false;
+            } else if (isKey('esc', event.keyCode)) {
+                this.escTask(event);
+            } else if (event.type === 'focusout') {
+                this.escTask(event);
             }
         },
         escTask: function(event) {
-            if ((typeof event === 'string' && event === this.model.id) || (isKey('esc', event.keyCode) && this.model.id)) {
+            var ifSameTask = typeof event === 'string' && event === this.model.id,
+                ifModelExist = isKey('esc', event.keyCode) && this.model.id,
+                ifFocusOut = event.type === 'focusout';
+
+            if (ifSameTask || ifModelExist || ifFocusOut) {
                 this.render();
+
+                if (ifSameTask || ifModelExist) {
+                    this.$el.find('.title')
+                        .focus();
+                }
             }
         },
         createTask: function(event) {
@@ -69,12 +82,18 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 }
 
                 this.render();
+                this.$el.find('.title')
+                    .focus();
             }
 
             return event && event.preventDefault();
         },
         editTask: function(taskId) {
             this.render(this.collection.get(taskId));
+
+            this.$el.find('.title')
+                .prop('selectionStart', this.model.get('title').length)
+                .focus();
         }
     });
 });
