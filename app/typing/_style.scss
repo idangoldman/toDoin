@@ -7,16 +7,22 @@
     .title {
         background-color: transparent;
         border: none;
-        box-sizing: border-box;
+        // box-sizing: border-box;
+        display: block;
         font-weight: 300;
         height: $typing-oneline-height;
-        display: block;
-        overflow-y: auto;
+        line-height: $typing-oneline-height / 2 + 1px;
+        max-height: $typing-twoline-height;
+        min-height: $typing-oneline-height;
         outline: none;
+        overflow-y: auto;
+        // overflow: hidden;
+        transition: none;
         padding: 10px;
         position: relative;
         resize: none;
         width: 100%;
+        word-wrap:break-word;
         z-index: 1;
     }
 }

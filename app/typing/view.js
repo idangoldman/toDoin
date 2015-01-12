@@ -25,7 +25,8 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
-            'keydown': 'pressKeys'
+            'keydown': 'pressKeys',
+            'keyup': 'adjustHeight'
         },
         initialize: function() {
             this.render(this.model);
@@ -44,6 +45,16 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 .find('.title');
 
             return this;
+        },
+        adjustHeight: function() {
+            console.log(this.$('.title').prop('scrollTop'), parseInt(this.$('.title').css('max-height')))
+            var blah = (this.$('.title').prop('scrollHeight') >= parseInt(this.$('.title').css('max-height'))) ? this.$('.title').css('max-height') : this.$('.title').css('min-height');
+
+            if (this.$('.title').val().trim().length) {
+                this.$('.title').css('height', this.$('.title').css('min-height'));
+            }
+
+            this.$('.title').css('height', blah);
         },
         pressKeys: function(event) {
             if (isKey('enter', event.keyCode)) {
@@ -64,7 +75,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 this.render();
 
                 if (ifSameTask || ifModelExist) {
-                    this.$el.find('.title')
+                    this.$('.title')
                         .focus();
                 }
             }
@@ -80,7 +91,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 }
 
                 this.render();
-                this.$el.find('.title')
+                this.$('.title')
                     .focus();
             }
 
@@ -88,8 +99,9 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         editTask: function(taskId) {
             this.render(this.collection.get(taskId));
+            this.adjustHeight();
 
-            this.$el.find('.title')
+            this.$('.title')
                 .prop('selectionStart', this.model.get('title').length)
                 .focus();
         }
