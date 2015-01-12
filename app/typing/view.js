@@ -25,9 +25,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
-            'keydown': 'pressKeys',
-            'keyup': 'pressKeys',
-            'focusout': 'pressKeys'
+            'keydown': 'pressKeys'
         },
         initialize: function() {
             this.render(this.model);

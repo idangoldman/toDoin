@@ -10,23 +10,13 @@
         box-sizing: border-box;
         font-weight: 300;
         height: $typing-oneline-height;
-        // max-height: $typing-twoline-height;
-        // min-height: $typing-oneline-height;
-        outline: none;
+        display: block;
         overflow-y: auto;
+        outline: none;
         padding: 10px;
         position: relative;
         resize: none;
         width: 100%;
         z-index: 1;
-
-        &:before {
-            color: $placeholder-color;
-            content: attr(placeholder);
-        }
-
-        &:focus:before {
-            content: "";
-        }
     }
 }
