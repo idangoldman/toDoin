@@ -1,37 +1,72 @@
 define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], function(Backbone, TaskModel, Template) {
-    return Backbone.View.extend({
-        initialize: function() {
-            this.render(this.model);
 
-            Backbone.pubSub.on('task:edit', this.editTask, this);
-            Backbone.pubSub.on('task:esc', this.escTask, this);
-        },
-        events: {
-            'submit': 'createTask',
-            'keyup': 'escTask'
-        },
-        template: _.template(Template),
+    function isKey(keyName, code) {
+        var result = null;
+
+        switch(code) {
+            case 27:
+                result = 'esc';
+            break;
+            case 13:
+                result = 'enter';
+            break;
+        }
+
+        return keyName === result || false;
+    }
+
+    return Backbone.View.extend({
         tagName: 'form',
+        template: _.template(Template),
         className: 'typing',
         attributes: {
             'action': 'blah.js',
             'method': 'post'
         },
+        events: {
+            'submit': 'createTask',
+            'keydown': 'pressKeys'
+        },
+        initialize: function() {
+            this.render(this.model);
+            this.$el.focus();
+
+            Backbone.pubSub.on('task:edit', this.editTask, this);
+            Backbone.pubSub.on('task:esc', this.escTask, this);
+        },
         render: function(model) {
             this.model = model || new TaskModel();
+            this.model.set('paraphrase', '');
 
             this.$el
                 .empty()
                 .append(this.template(this.model.toJSON()))
-                .find('.title')
-                    .prop('selectionStart', this.model.get('title').length)
-                    .focus();
+                .find('.title');
 
             return this;
         },
+        pressKeys: function(event) {
+            if (isKey('enter', event.keyCode)) {
+                this.$el.submit();
+                return false;
+            } else if (isKey('esc', event.keyCode)) {
+                this.escTask(event);
+            } else if (event.type === 'focusout') {
+                this.escTask(event);
+            }
+        },
         escTask: function(event) {
-            if ((typeof event === 'string' && event === this.model.id) || (event.keyCode === 27 && this.model.id)) {
+            var ifSameTask = typeof event === 'string' && event === this.model.id,
+                ifModelExist = isKey('esc', event.keyCode) && this.model.id,
+                ifFocusOut = event.type === 'focusout';
+
+            if (ifSameTask || ifModelExist || ifFocusOut) {
                 this.render();
+
+                if (ifSameTask || ifModelExist) {
+                    this.$el.find('.title')
+                        .focus();
+                }
             }
         },
         createTask: function(event) {
@@ -45,12 +80,18 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 }
 
                 this.render();
+                this.$el.find('.title')
+                    .focus();
             }
 
-            event.preventDefault();
+            return event && event.preventDefault();
         },
         editTask: function(taskId) {
             this.render(this.collection.get(taskId));
+
+            this.$el.find('.title')
+                .prop('selectionStart', this.model.get('title').length)
+                .focus();
         }
     });
 });

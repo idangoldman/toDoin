@@ -1,9 +1,8 @@
 <span class="logo">ToDoin</span>
 
-    <span class="stats">
-        <% if (remain || complete) {%>
-            <em class="remain"><%= remain %></em>
-            <em class="all"><%= remain + complete %></em>
-        <% }%>
-    </span>
-<i class="fa fa-check check-box" <% if ( disabled ) {%>disabled="disabled"<% }%>></i>
+<span class="stats">
+    <% if (remain || complete) {%>
+        <em class="remain"><%= remain %></em>
+        <em class="all"><%= remain + complete %></em>
+    <% }%>
+</span>

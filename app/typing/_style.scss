@@ -1,18 +1,21 @@
 .typing {
     background-color: #f1f1f1;
     bottom: 0;
-    height: $same-height;
     left: 0;
     z-index: 3;
 
     .title {
         background-color: transparent;
         border: none;
+        box-sizing: border-box;
         font-weight: 300;
-        height: $same-height;
+        height: $typing-oneline-height;
+        display: block;
+        overflow-y: auto;
         outline: none;
         padding: 10px;
         position: relative;
+        resize: none;
         width: 100%;
         z-index: 1;
     }
