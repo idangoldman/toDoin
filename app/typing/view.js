@@ -47,14 +47,19 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             return this;
         },
         adjustHeight: function() {
-            console.log(this.$('.title').prop('scrollTop'), parseInt(this.$('.title').css('max-height')))
-            var blah = (this.$('.title').prop('scrollHeight') >= parseInt(this.$('.title').css('max-height'))) ? this.$('.title').css('max-height') : this.$('.title').css('min-height');
+            var height = null;
 
-            if (this.$('.title').val().trim().length) {
-                this.$('.title').css('height', this.$('.title').css('min-height'));
+            if ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) {
+                height = this.$('.title').css('max-height');
+            } else {
+                height = this.$('.title').css('min-height');
             }
 
-            this.$('.title').css('height', blah);
+            if ( this.$('.title').val().trim().length ) {
+                this.$('.title').css('height', height);
+            } else {
+                this.$('.title').css('height', this.$('.title').css('min-height'));
+            }
         },
         pressKeys: function(event) {
             if (isKey('enter', event.keyCode)) {
@@ -64,6 +69,8 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 this.escTask(event);
             } else if (event.type === 'focusout') {
                 this.escTask(event);
+            } else {
+                this.adjustHeight();
             }
         },
         escTask: function(event) {
