@@ -6,6 +6,11 @@ define('TasksView', ['underscore', 'backbone', 'CleanButtonView', 'TaskView', 't
         initialize: function() {
             this.listenTo(this.collection, 'add', this.addTask);
             this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
+
+            Backbone.pubSub.on('typing:adjust-height', this.adjustHeight, this);
+        },
+        adjustHeight: function(toAdjust) {
+            this.$el.toggleClass('two-lines', toAdjust);
         },
         toggleCleanButton: function() {
             var completeTasksCount = this.collection.completeCount;

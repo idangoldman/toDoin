@@ -7,6 +7,10 @@
     top: $typing-oneline-height;
     z-index: 1;
 
+    &.two-lines {
+        bottom: $typing-twoline-height;
+    }
+
     .list {
         height: 100%;
         list-style-type: none;

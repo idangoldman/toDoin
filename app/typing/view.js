@@ -32,8 +32,8 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             this.render(this.model);
             this.$el.focus();
 
-            Backbone.pubSub.on('task:edit', this.editTask, this);
-            Backbone.pubSub.on('task:esc', this.escTask, this);
+            Backbone.pubSub.on('typing:edit', this.editTask, this);
+            Backbone.pubSub.on('typing:esc', this.escTask, this);
         },
         render: function(model) {
             this.model = model || new TaskModel();
@@ -47,19 +47,10 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
             return this;
         },
         adjustHeight: function() {
-            var height = null;
+            var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) );
 
-            if ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) {
-                height = this.$('.title').css('max-height');
-            } else {
-                height = this.$('.title').css('min-height');
-            }
-
-            if ( this.$('.title').val().trim().length ) {
-                this.$('.title').css('height', height);
-            } else {
-                this.$('.title').css('height', this.$('.title').css('min-height'));
-            }
+            this.$('.title').toggleClass('two-lines',  toggleHeight);
+            Backbone.pubSub.trigger('typing:adjust-height', toggleHeight);
         },
         pressKeys: function(event) {
             if (isKey('enter', event.keyCode)) {
