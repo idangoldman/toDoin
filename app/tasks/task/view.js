@@ -17,7 +17,7 @@ define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Back
             this.model.toggle();
 
             if (this.model.get('complete')) {
-                Backbone.pubSub.trigger('task:esc', this.model.id);
+                Backbone.pubSub.trigger('typing:esc', this.model.id);
             }
         },
         onComplete: function() {
@@ -40,7 +40,7 @@ define('TaskView', ['backbone', 'text!templates/tasks-task.html'], function(Back
         },
         editField: function () {
             if (!this.model.get('complete')) {
-                Backbone.pubSub.trigger('task:edit', this.model.get('id'));
+                Backbone.pubSub.trigger('typing:edit', this.model.get('id'));
             }
         },
         render: function() {

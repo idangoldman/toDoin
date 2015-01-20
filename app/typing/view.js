@@ -25,14 +25,15 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         events: {
             'submit': 'createTask',
-            'keydown': 'pressKeys'
+            'keydown': 'pressKeys',
+            'keyup': 'adjustHeight'
         },
         initialize: function() {
             this.render(this.model);
             this.$el.focus();
 
-            Backbone.pubSub.on('task:edit', this.editTask, this);
-            Backbone.pubSub.on('task:esc', this.escTask, this);
+            Backbone.pubSub.on('typing:edit', this.editTask, this);
+            Backbone.pubSub.on('typing:esc', this.escTask, this);
         },
         render: function(model) {
             this.model = model || new TaskModel();
@@ -45,6 +46,12 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
 
             return this;
         },
+        adjustHeight: function() {
+            var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) );
+
+            this.$('.title').toggleClass('two-lines',  toggleHeight);
+            Backbone.pubSub.trigger('typing:adjust-height', toggleHeight);
+        },
         pressKeys: function(event) {
             if (isKey('enter', event.keyCode)) {
                 this.$el.submit();
@@ -53,6 +60,8 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 this.escTask(event);
             } else if (event.type === 'focusout') {
                 this.escTask(event);
+            } else {
+                this.adjustHeight();
             }
         },
         escTask: function(event) {
@@ -64,7 +73,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 this.render();
 
                 if (ifSameTask || ifModelExist) {
-                    this.$el.find('.title')
+                    this.$('.title')
                         .focus();
                 }
             }
@@ -80,7 +89,7 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
                 }
 
                 this.render();
-                this.$el.find('.title')
+                this.$('.title')
                     .focus();
             }
 
@@ -88,8 +97,9 @@ define('TypingView', ['backbone', 'TaskModel', 'text!templates/typing.html'], fu
         },
         editTask: function(taskId) {
             this.render(this.collection.get(taskId));
+            this.adjustHeight();
 
-            this.$el.find('.title')
+            this.$('.title')
                 .prop('selectionStart', this.model.get('title').length)
                 .focus();
         }
