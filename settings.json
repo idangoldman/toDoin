@@ -10,25 +10,6 @@
             ]
         },
         "javascript": {
-            "bower": [
-                "./bower_components/requirejs/require.js",
-                "./bower_components/text/text.js",
-                "./bower_components/jquery/dist/jquery.js",
-                "./bower_components/underscore/underscore.js",
-                "./bower_components/backbone/backbone.js",
-                "./bower_components/backbone.localStorage/backbone.localStorage.js"
-            ],
-            "require": {
-                "config": "require-config.js",
-                "path": "vendors/js/require.js",
-                "files": {
-                    "text": "vendors/js/text",
-                    "jquery": "vendors/js/jquery",
-                    "underscore": "vendors/js/underscore",
-                    "backbone": "vendors/js/backbone",
-                    "backboneLocalstorage": "vendors/js/backbone.localStorage"
-                }
-            },
             "main": "script.js"
         }
     },

@@ -28,8 +28,6 @@ gulp.task('vendors', ['clean'], function() {
     gulp.src(data.assets.stylesheet.bower)
         .pipe(gulp.dest(getEnvPath() + '/vendors/css'));
 
-    return gulp.src(data.assets.javascript.bower)
-        .pipe(gulp.dest(getEnvPath() + '/vendors/js'));
 });
 
 gulp.task('ftp-deploy', function () {
@@ -44,7 +42,7 @@ gulp.task('ftp-deploy', function () {
 });
 
 gulp.task('jshint', function() {
-    return gulp.src(['./app/**/*.js', '!./app/require-config.js'])
+    return gulp.src(['./app/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -52,7 +50,7 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('javascript', ['jshint'], function() {
-    return gulp.src(['./app/**/*.js', '!./app/require-config.js'])
+    return gulp.src(['./app/**/*.js'])
         .pipe(concat('script.js'))
         .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());
@@ -91,9 +89,6 @@ gulp.task('swag', function() {
             switch (path.basename) {
                 case 'layout':
                     path.basename = fileName;
-                break;
-                case 'require-config':
-                    path.extname = '.js';
                 break;
             }
         }))
