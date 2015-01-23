@@ -1,33 +1,5 @@
-define('AppView', ['underscore', 'backbone', 'HeaderView', 'TasksView', 'TypingView'],
-    function( _, Backbone, HeaderView, TasksView, TypingView) {
-        return Backbone.View.extend({
-            'id': 'ToDoin',
-            initialize: function() {
-                var elements = {
-                    HeaderView : HeaderView,
-                    TasksView : TasksView,
-                    TypingView : TypingView
-                };
+var Backbone = require('backbone'),
+    Router = require('./router');
 
-                this.render(_.map(elements, function(element, elementName) {
-                    return ( this[elementName] = new element({collection: this.collection}) ).el;
-                }, this));
-            },
-            isMobile: function() {
-                return !!(navigator.userAgent.toLocaleLowerCase().match(/(android|webos|iphone|ipad|ipod|blackberry|windows phone)/));
-            },
-            render: function(elements) {
-                this.$el
-                    .append(elements)
-                        .appendTo('body')
-                    .end()
-                    .parent('body')
-                        .toggleClass('mobile', this.isMobile());
-
-                return this;
-            }
-        });
-    }
-);
-
-require(['PubSub', 'Router']);
+Backbone.pubSub = _.extend({}, Backbone.Events);
+new Router();
