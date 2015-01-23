@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream');
 
 gulp.task('jshint', function() {
-    return gulp.src(['./app/**/*.js'])
+    return gulp.src([appPath + '/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -12,7 +12,7 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('javascript', ['jshint'], function() {
-    return gulp.src(['./app/**/*.js'])
+    return gulp.src([appPath + '/**/*.js'])
         .pipe(browserify({
             insertGlobals : true,
             debug : !isChrome

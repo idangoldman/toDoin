@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     ftp = require('gulp-ftp');
 
 gulp.task('ftp-deploy', ['build'], function () {
-    return gulp.src('./www/**/*')
+    return gulp.src(envPath + '/**/*')
         .pipe(ftp({
             host: auth.ftp.host,
             user: auth.ftp.user,

@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     rename = require("gulp-rename");
 
 gulp.task('templates', ['swag'], function() {
-    return gulp.src('./app/**/template.html')
+    return gulp.src(appPath + '/**/template.html')
         .pipe(rename(function(path) {
             path.basename = path.dirname.replace("/", "-");
             path.dirname = '.';
@@ -15,7 +15,7 @@ gulp.task('templates', ['swag'], function() {
 gulp.task('swag', function() {
     var fileName = isChrome ? 'browser_action' : 'index';
 
-    return gulp.src(['./app/layout.html', './app/require-config.js'])
+    return gulp.src([appPath + '/layout.html'])
         .pipe(swig({
             defaults: {
                 autoescape: false,
@@ -24,11 +24,7 @@ gulp.task('swag', function() {
             }
         }))
         .pipe(rename(function(path) {
-            switch (path.basename) {
-                case 'layout':
-                    path.basename = fileName;
-                break;
-            }
+            path.basename = fileName;
         }))
         .pipe(gulp.dest(getEnvPath()))
         .pipe(connect.reload());

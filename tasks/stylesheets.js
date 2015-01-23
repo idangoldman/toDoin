@@ -8,7 +8,7 @@ gulp.task('stylesheet-vendors', ['clean'], function() {
 });
 
 gulp.task('stylesheet', ['stylesheet-vendors'], function() {
-    return gulp.src('./app/style.scss')
+    return gulp.src(appPath + '/style.scss')
         .pipe(compass(data.compass))
         .pipe(autoprefixer())
         .pipe(gulp.dest(getEnvPath()))

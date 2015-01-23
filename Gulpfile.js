@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 
     env = args.chrome ? 'chrome' : 'web',
     envPath = './www',
+    appPath = './app',
     envBrowserAction = envPath + '/src/browser_action',
     chromePath = './chrome',
     isChrome = false,
