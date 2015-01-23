@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
-    modRewrite = require('connect-modrewrite');
+    modRewrite = require('connect-modrewrite'),
+    open = require('gulp-open');
 
 gulp.task('connect', function() {
     connect.server({
@@ -17,18 +18,14 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('web', ['build'], function() {
-    return gulp.start('connect', 'watcher');
+gulp.task('open-web', ['connect'], function() {
+    return gulp.src(envPath + '/index.html')
+        .pipe(open('', {
+            url: 'http://localhost:8000',
+            app: 'google chrome'
+        }));
 });
 
-// var gulp = require('gulp'),
-//     open = require('gulp-open'),
-//     config = require('../config'),
-//     paths = config.paths;
-
-// gulp.task('open-build', function() {
-//     var page = '/demo/index.html',
-//         url = 'http' + (config.https ? 's' : '') + '://' + config.host + ':' + config.port;
-//     return gulp.src(paths.build.root + page)
-//         .pipe(open('', { url: url + page }));
-// });
+gulp.task('web', ['build'], function() {
+    return gulp.start('connect', 'open-web', 'watcher');
+});
