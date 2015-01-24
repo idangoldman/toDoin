@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 
 gulp.task('connect', function() {
     connect.server({
-        root: envPath,
+        root: '../build',
         port: 8000,
         livereload: true,
         middleware: function(connect, opt) {
@@ -19,7 +19,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('open-web', ['connect'], function() {
-    return gulp.src(envPath + '/index.html')
+    return gulp.src('../build/index.html')
         .pipe(open('', {
             url: 'http://localhost:8000',
             app: 'google chrome'

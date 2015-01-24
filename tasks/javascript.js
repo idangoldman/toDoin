@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream');
 
 gulp.task('jshint', function() {
-    return gulp.src([appPath + '/**/*.js'])
+    return gulp.src(['../app/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -12,19 +12,20 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('javascript', ['jshint'], function() {
-    return gulp.src([appPath + '/**/*.js'])
-        .pipe(browserify({
+    var bundleStream = browserify({
             insertGlobals : true,
-            debug : !isChrome
+            entries: ['../app/script.js'],
+            debug: true
         })
         .bundle()
-        .pipe(source(data.assets.javascript.main));
-        .pipe(gulp.dest(getEnvPath()))
-        .pipe(connect.reload());
+        .pipe(source('./script.js'));
+
+    return bundleStream.pipe(gulp.dest('../build'));
 });
 
 // gulp.task('browserify', ['jshint'], function() {
 //     var bundleStream = browserify({
+//             insertGlobals : true,
 //             entries: ['./scripts/main.js'],
 //             debug: true
 //         })

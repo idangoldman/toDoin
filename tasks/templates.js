@@ -1,31 +1,32 @@
 var gulp = require('gulp'),
     swig = require('gulp-swig'),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+
+    config = require('../settings/config.json');
 
 gulp.task('templates', ['swag'], function() {
-    return gulp.src(appPath + '/**/template.html')
-        .pipe(rename(function(path) {
-            path.basename = path.dirname.replace("/", "-");
-            path.dirname = '.';
-        }))
-        .pipe(gulp.dest(getEnvPath() + '/templates/'))
-        .pipe(connect.reload());
+    // return gulp.src('../app/**/template.html')
+    //     .pipe(rename(function(path) {
+    //         path.basename = path.dirname.replace("/", "-");
+    //         path.dirname = '.';
+    //     }))
+    //     .pipe(gulp.dest('../build/templates/'));
 });
 
 gulp.task('swag', function() {
-    var fileName = isChrome ? 'browser_action' : 'index';
+    // var fileName = isChrome ? 'browser_action' : 'index';
+    var fileName = 'index';
 
-    return gulp.src([appPath + '/layout.html'])
+    return gulp.src(['../app/layout.html'])
         .pipe(swig({
             defaults: {
                 autoescape: false,
                 cache: false,
-                locals: data
+                locals: config
             }
         }))
         .pipe(rename(function(path) {
             path.basename = fileName;
         }))
-        .pipe(gulp.dest(getEnvPath()))
-        .pipe(connect.reload());
+        .pipe(gulp.dest('../build'));
 });

@@ -1,4 +1,9 @@
 {
+    "path": {
+        "env": "./_www",
+        "app": "./app",
+        "build": "./build"
+    },
     "assets": {
         "stylesheet": {
             "bower": [
