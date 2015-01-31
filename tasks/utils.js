@@ -6,14 +6,14 @@ gulp.task('build', ['clean'], function() {
 });
 
 gulp.task('clean', function() {
-    return gulp.src('../build', {
+    return gulp.src('./_build', {
             read: false
         })
         .pipe(clean());
 });
 
 gulp.task('watcher', function() {
-    gulp.watch(['../app/**/*.html'], ['templates']);
-    gulp.watch(['../app/**/*.js'], ['javascript']);
-    gulp.watch(['../app/**/*.scss'], ['stylesheet']);
+    gulp.watch(['./app/**/*.html'], ['templates']);
+    gulp.watch(['./app/**/*.js'], ['javascript']);
+    gulp.watch(['./app/**/*.scss'], ['stylesheet']);
 });

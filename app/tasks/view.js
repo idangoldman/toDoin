@@ -1,7 +1,7 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
     CleanButtonView = require('./clean-button/view'),
-    TaskView = require('./task/view')
+    TaskView = require('./task/view'),
     Template = require('./template.html');
 
 module.exports = Backbone.View.extend({

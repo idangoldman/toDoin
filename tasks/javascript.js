@@ -1,10 +1,11 @@
 var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
-    browserify = require('gulp-browserify'),
+    browserify = require('browserify'),
+    handlebarsify = require('handlebarsify'),
     source = require('vinyl-source-stream');
 
 gulp.task('jshint', function() {
-    return gulp.src(['../app/**/*.js'])
+    return gulp.src(['./app/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default', {
             verbose: true
@@ -14,23 +15,12 @@ gulp.task('jshint', function() {
 gulp.task('javascript', ['jshint'], function() {
     var bundleStream = browserify({
             insertGlobals : true,
-            entries: ['../app/script.js'],
+            entries: ['./app/script.js'],
             debug: true
         })
+        .transform(handlebarsify)
         .bundle()
         .pipe(source('./script.js'));
 
-    return bundleStream.pipe(gulp.dest('../build'));
+    return bundleStream.pipe(gulp.dest('./_build'));
 });
-
-// gulp.task('browserify', ['jshint'], function() {
-//     var bundleStream = browserify({
-//             insertGlobals : true,
-//             entries: ['./scripts/main.js'],
-//             debug: true
-//         })
-//         .bundle()
-//         .pipe(source('./core.js'));
-
-//     return bundleStream.pipe(gulp.dest('./'));
-// });

@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     auth = require('../settings/auth.json');
 
 gulp.task('ftp-deploy', ['build'], function () {
-    return gulp.src('../build/**/*')
+    return gulp.src('./_build/**/*')
         .pipe(ftp({
             host: auth.ftp.host,
             user: auth.ftp.user,

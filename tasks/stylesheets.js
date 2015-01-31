@@ -6,12 +6,12 @@ var gulp = require('gulp'),
 
 gulp.task('stylesheet-vendors', ['clean'], function() {
     gulp.src(config.assets.stylesheet.bower)
-        .pipe(gulp.dest('../build/vendors/css'));
+        .pipe(gulp.dest('./_build/vendors/css'));
 });
 
 gulp.task('stylesheet', ['stylesheet-vendors'], function() {
-    return gulp.src('../app/style.scss')
+    return gulp.src('./app/style.scss')
         .pipe(compass(config.compass))
         .pipe(autoprefixer())
-        .pipe(gulp.dest('../build'));
+        .pipe(gulp.dest('./_build'));
 });

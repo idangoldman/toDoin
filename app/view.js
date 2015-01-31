@@ -1,7 +1,7 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
     HeaderView = require('./header/view'),
-    TasksView = require('./tasks/view')
+    TasksView = require('./tasks/view'),
     TypingView = require('./typing/view');
 
 module.exports = Backbone.View.extend({
