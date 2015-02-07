@@ -1,27 +1,28 @@
-define('TaskModel', ['backbone'], function(Backbone) {
-    return Backbone.Model.extend({
-        defaults: {
-            id: null,
-            title: '',
-            order: null,
-            complete: false,
-            created_at: Date.now(),
-            completed_at: null
-        },
-        toggle: function () {
-            var saveParams = {
-                'complete': !this.get('complete'),
-                'completed_at': null
-            };
+var $ = require('jquery'),
+    Backbone = require('backbone');
 
-            if (saveParams.complete) {
-                saveParams.completed_at = Date.now();
-            }
+module.exports = Backbone.Model.extend({
+    defaults: {
+        id: null,
+        title: '',
+        order: null,
+        complete: false,
+        created_at: Date.now(),
+        completed_at: null
+    },
+    toggle: function () {
+        var saveParams = {
+            'complete': !this.get('complete'),
+            'completed_at': null
+        };
 
-            return this.save(saveParams);
-        },
-        update: function (field, value) {
-            return this.save(field, value);
+        if (saveParams.complete) {
+            saveParams.completed_at = Date.now();
         }
-    });
+
+        return this.save(saveParams);
+    },
+    update: function (field, value) {
+        return this.save(field, value);
+    }
 });

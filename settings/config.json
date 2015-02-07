@@ -1,0 +1,29 @@
+{
+    "path": {
+        "env": "./_www",
+        "app": "./app",
+        "build": "./build"
+    },
+    "assets": {
+        "stylesheet": {
+            "bower": [
+                "./bower_components/normalize-css/normalize.css"
+            ],
+            "layout": [
+                "vendors/css/normalize.css",
+                "style.css"
+            ]
+        },
+        "javascript": {
+            "main": "script.js"
+        }
+    },
+    "compass": {
+        "config_file": "./config.rb",
+        "css": "./css",
+        "sass": "./app/"
+    },
+    "layout": {
+        "title": "ToDoin"
+    }
+}

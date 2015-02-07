@@ -1,10 +1,14 @@
-define('TasksCollection', ['backbone', 'backboneLocalstorage', 'TaskModel'], function(Backbone, Storage, TaskModel) {
-    var Collection = Backbone.Collection.extend({
+var _ = require('underscore'),
+    Backbone = require('backbone'),
+    Storage = require('backbone.localstorage'),
+    TaskModel = require('./task/model'),
+
+    Collection = Backbone.Collection.extend({
         initialize: function() {
             this.on('add', this.onModelAdd);
             this.on('change:complete', this.updateCount);
         },
-        localStorage: new Store('ToDoin'),
+        localStorage: new Storage('ToDoin'),
         model: TaskModel,
         getTaskOrder: function() {
             return this.length ? this.last().get('order') + 1 : 1;
@@ -32,5 +36,4 @@ define('TasksCollection', ['backbone', 'backboneLocalstorage', 'TaskModel'], fun
         }
     });
 
-    return new Collection();
-});
+module.exports = new Collection();

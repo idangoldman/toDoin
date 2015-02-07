@@ -1,5 +1,8 @@
-define('Router', ['backbone', 'AppView', 'TasksCollection'], function(Backbone, AppView, TasksCollection) {
-    var Router = Backbone.Router.extend({
+var Backbone = require('backbone'),
+    AppView = require('./view'),
+    TasksCollection = require('./tasks/collection'),
+
+    Router = Backbone.Router.extend({
         initialize: function() {
             TasksCollection.fetch({reset:true, async:false});
             TasksCollection.updateCount();
@@ -25,5 +28,4 @@ define('Router', ['backbone', 'AppView', 'TasksCollection'], function(Backbone, 
         }
     });
 
-    return new Router();
-});
+module.exports = new Router();
