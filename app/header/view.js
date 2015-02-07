@@ -1,5 +1,4 @@
-var _ = require('underscore'),
-    Backbone = require('backbone'),
+var Backbone = require('backbone'),
     Template = require('./template.html');
 
 module.exports = Backbone.View.extend({
@@ -13,7 +12,7 @@ module.exports = Backbone.View.extend({
         this.listenTo(this.collection, 'change', this.render);
         this.listenTo(this.collection, 'add', this.render);
     },
-    template: _.template(Template),
+    template: Template,
     tagName: 'header',
     updateStats: function() {
         this.model.complete = this.collection.completeCount;

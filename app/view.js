@@ -1,8 +1,11 @@
 var _ = require('underscore'),
+    $ = require('jquery'),
     Backbone = require('backbone'),
     HeaderView = require('./header/view'),
     TasksView = require('./tasks/view'),
     TypingView = require('./typing/view');
+
+    Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
     'id': 'ToDoin',

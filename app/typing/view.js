@@ -1,5 +1,6 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
+    Vent = require('../vent'),
     TaskModel = require('../tasks/task/model'),
     Template = require('./template.html');
 
@@ -20,7 +21,7 @@ function isKey(keyName, code) {
 
 module.exports = Backbone.View.extend({
     tagName: 'form',
-    template: _.template(Template),
+    template: Template,
     className: 'typing',
     attributes: {
         'action': 'blah.js',
@@ -35,8 +36,8 @@ module.exports = Backbone.View.extend({
         this.render(this.model);
         this.$el.focus();
 
-        Backbone.pubSub.on('typing:edit', this.editTask, this);
-        Backbone.pubSub.on('typing:esc', this.escTask, this);
+        Vent.on('typing:edit', this.editTask, this);
+        Vent.on('typing:esc', this.escTask, this);
     },
     render: function(model) {
         this.model = model || new TaskModel();
@@ -53,7 +54,7 @@ module.exports = Backbone.View.extend({
         var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) );
 
         this.$('.title').toggleClass('two-lines',  toggleHeight);
-        Backbone.pubSub.trigger('typing:adjust-height', toggleHeight);
+        Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
         if (isKey('enter', event.keyCode)) {

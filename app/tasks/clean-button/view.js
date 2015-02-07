@@ -1,4 +1,5 @@
-var Backbone = require('backbone');
+var _ = require('underscore'),
+    Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
     tagName: 'button',
@@ -41,13 +42,9 @@ module.exports = Backbone.View.extend({
     cleanCompleteModels: function(event) {
         this.collection.cleanCompleted();
 
-        if (Backbone.history.location.pathname === '/complete') {
-            Backbone.history.navigate('/', {trigger: true});
-        } else {
-            this.$el
-                .parent().removeClass('show-clean-button');
-            this.remove();
-        }
+        this.$el
+            .parent().removeClass('show-clean-button');
+        this.remove();
 
         event.preventDefault();
     },

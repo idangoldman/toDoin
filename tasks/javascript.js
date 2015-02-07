@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     browserify = require('browserify'),
-    handlebarsify = require('handlebarsify'),
+    jstify = require('jstify'),
     source = require('vinyl-source-stream');
 
 gulp.task('jshint', function() {
@@ -13,14 +13,14 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('javascript', ['jshint'], function() {
-    var bundleStream = browserify({
-            insertGlobals : true,
+    return browserify({
             entries: ['./app/script.js'],
-            debug: true
+            debug: true,
+            extensions: ['.js', '.html'],
+            withImports: true
         })
-        .transform(handlebarsify)
+        .transform('jstify')
         .bundle()
-        .pipe(source('./script.js'));
-
-    return bundleStream.pipe(gulp.dest('./_build'));
+        .pipe(source('script.js'))
+        .pipe(gulp.dest('./_build'));
 });

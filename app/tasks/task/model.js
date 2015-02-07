@@ -1,4 +1,5 @@
-var Backbone = require('backbone');
+var $ = require('jquery'),
+    Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
     defaults: {

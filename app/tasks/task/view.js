@@ -1,5 +1,5 @@
-var _ = require('underscore'),
-    Backbone = require('backbone'),
+var Backbone = require('backbone'),
+    Vent = require('../../vent'),
     Template = require('./template.html');
 
 module.exports = Backbone.View.extend({
@@ -10,7 +10,7 @@ module.exports = Backbone.View.extend({
         this.listenTo(this.model, 'change:complete', this.onComplete);
         this.listenTo(this.model, 'destroy', this.remove);
     },
-    template: _.template(Template),
+    template: Template,
     tagName: 'li',
     events: {
         'click .check-box': 'toggleComplete',
@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
         this.model.toggle();
 
         if (this.model.get('complete')) {
-            Backbone.pubSub.trigger('typing:esc', this.model.id);
+            Vent.trigger('typing:esc', this.model.id);
         }
     },
     onComplete: function() {
@@ -43,7 +43,7 @@ module.exports = Backbone.View.extend({
     },
     editField: function () {
         if (!this.model.get('complete')) {
-            Backbone.pubSub.trigger('typing:edit', this.model.get('id'));
+            Vent.trigger('typing:edit', this.model.get('id'));
         }
     },
     render: function() {
