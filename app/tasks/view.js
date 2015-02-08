@@ -27,7 +27,9 @@ module.exports = Backbone.View.extend({
         if (!this.$el.find('.clean-button').length && completeTasksCount) {
             this.$el
                 .addClass('show-clean-button')
-                .append(new CleanButtonView({collection: this.collection}).el);
+                .append(new CleanButtonView({
+                    collection: this.collection
+                }).el);
         } else if (!completeTasksCount) {
             this.$el
                 .removeClass('show-clean-button')
@@ -36,7 +38,11 @@ module.exports = Backbone.View.extend({
         }
     },
     addTask: function (model) {
-        this.$('ul').append(new TaskView({model: model, collection: this.collection}).el);
+        this.$('ul')
+            .append(new TaskView({
+                model: model,
+                collection: this.collection
+            }).el);
     },
     render: function(collection) {
         var completeModel = false,
@@ -51,7 +57,10 @@ module.exports = Backbone.View.extend({
                 completeModel = true;
             }
 
-            return new TaskView({model: model, collection: that.collection}).el;
+            return new TaskView({
+                    model: model,
+                    collection: that.collection
+                }).el;
         }));
 
         this.$('ul').sortable();
