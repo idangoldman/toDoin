@@ -3,7 +3,10 @@ var _ = require('underscore'),
     Vent = require('../vent'),
     CleanButtonView = require('./clean-button/view'),
     TaskView = require('./task/view'),
-    Template = require('./template.html');
+    Template = require('./template.html'),
+
+    // This is global
+    Sortable = require('../../bower_components/html5sortable/jquery.sortable');
 
 module.exports = Backbone.View.extend({
     tagName: 'section',
@@ -31,7 +34,6 @@ module.exports = Backbone.View.extend({
                 .find('.clean-button')
                     .remove();
         }
-
     },
     addTask: function (model) {
         this.$('ul').append(new TaskView({model: model, collection: this.collection}).el);
@@ -51,6 +53,8 @@ module.exports = Backbone.View.extend({
 
             return new TaskView({model: model, collection: that.collection}).el;
         }));
+
+        this.$('ul').sortable();
 
         if (completeModel) {
             this.$el
