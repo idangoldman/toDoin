@@ -1,12 +1,14 @@
 li {
     @include clearfix;
 
-    // min-height: $typing-oneline-height;
     align-items: flex-start;
     background-color: #f9f9f9;
     border-bottom: 1px solid #eee;
     display: flex;
 
+    &, .field {
+        min-height: $typing-oneline-height;
+    }
     .check-box {
         flex-shrink: 0;
     }
@@ -14,7 +16,6 @@ li {
     .field {
         display: block;
         flex-grow: 1;
-        min-height: 40px;
         padding: 9px 12px 9px 0;
         box-sizing: border-box;
     }
@@ -22,4 +23,5 @@ li {
     &.complete .field {
          text-decoration: line-through;
     }
+
 }
