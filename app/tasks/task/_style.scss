@@ -8,6 +8,7 @@ li {
 
     &, .field {
         min-height: $typing-oneline-height;
+        word-break: break-word;
     }
     .check-box {
         flex-shrink: 0;
