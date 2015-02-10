@@ -26,7 +26,9 @@ module.exports = Backbone.View.extend({
             .append(new TaskView({
                 model: model,
                 collection: this.collection
-            }).el);
+            }).el)
+            .sortable('destroy')
+            .sortable();
     },
     adjustHeight: function(toAdjust) {
         this.$el.toggleClass('two-lines', toAdjust);
@@ -34,7 +36,7 @@ module.exports = Backbone.View.extend({
     toggleCleanButton: function() {
         var completeTasksCount = this.collection.completeCount;
 
-        if (!this.$el.find('.clean-button').length && completeTasksCount) {
+        if (!this.$('.clean-button').length && completeTasksCount) {
             this.$el
                 .addClass('show-clean-button')
                 .append(new CleanButtonView({
