@@ -49,6 +49,7 @@ module.exports = Backbone.View.extend({
     render: function() {
         this.$el
             .empty()
+            .attr('id', this.model.get('id'))
             .append(this.template(this.model.toJSON()))
             .toggleClass('complete', this.model.get('complete'));
 

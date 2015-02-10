@@ -10,14 +10,11 @@
 
 // Simple reset, colors and extends
 @import "_helpers/reset";
+@import "_helpers/variables";
 @import "_helpers/colors";
 @import "_helpers/extend";
 @import "_helpers/function";
 @import "_ui/_check-box.scss";
-
-// Variables
-$typing-oneline-height: 42px;
-$typing-twoline-height: 64px;
 
 // Application
 body, #ToDoin {
