@@ -1,5 +1,6 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
+    $ = require('jquery'),
     Vent = require('../vent'),
     CleanButtonView = require('./clean-button/view'),
     TaskView = require('./task/view'),
@@ -16,7 +17,16 @@ module.exports = Backbone.View.extend({
         this.listenTo(this.collection, 'add', this.addTask);
         this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
 
+        this.$el.on('sortupdate', '.list', $.proxy(this.reOrder, this));
+
         Vent.on('typing:adjust-height', this.adjustHeight, this);
+    },
+    addTask: function (model) {
+        this.$('.list')
+            .append(new TaskView({
+                model: model,
+                collection: this.collection
+            }).el);
     },
     adjustHeight: function(toAdjust) {
         this.$el.toggleClass('two-lines', toAdjust);
@@ -37,12 +47,14 @@ module.exports = Backbone.View.extend({
                     .remove();
         }
     },
-    addTask: function (model) {
-        this.$('ul')
-            .append(new TaskView({
-                model: model,
-                collection: this.collection
-            }).el);
+    reOrder: function($event) {
+        var reOrderHash = {};
+
+        this.$el.find('.list li').each(function(index, item) {
+            reOrderHash[item.id] = index + 1;
+        });
+
+        this.collection.reOrder(reOrderHash);
     },
     render: function(collection) {
         var completeModel = false,
@@ -52,7 +64,11 @@ module.exports = Backbone.View.extend({
             .empty()
             .append(this.template());
 
-        this.$('ul').append(_.map(collection, function(model) {
+        collection = _.sortBy(collection, function(model) {
+            return model.get('order');
+        });
+
+        this.$('.list').append(_.map(collection, function(model) {
             if (model.get('complete')) {
                 completeModel = true;
             }
@@ -61,9 +77,7 @@ module.exports = Backbone.View.extend({
                     model: model,
                     collection: that.collection
                 }).el;
-        }));
-
-        this.$('ul').sortable();
+        })).sortable();
 
         if (completeModel) {
             this.$el

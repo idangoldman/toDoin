@@ -8,7 +8,7 @@ var _ = require('underscore'),
     Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
-    'id': 'ToDoin',
+    id: 'ToDoin',
     initialize: function() {
         var elements = {
             HeaderView : HeaderView,
