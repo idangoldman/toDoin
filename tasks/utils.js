@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     config = require('../settings/config');
 
 gulp.task('build', ['clean'], function() {
-    return gulp.start('styles', 'scripts', 'templates');
+    return gulp.start('styles', 'scripts', 'index-tpl');
 });
 
 gulp.task('clean', function() {
@@ -15,7 +15,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('watcher', function() {
-    gulp.watch([config.path.app + '/**/*.html'], ['templates']);
-    gulp.watch([config.path.app + '/**/*.js'], ['scripts']);
     gulp.watch([config.path.app + '/**/*.scss'], ['styles']);
+    gulp.watch([config.path.app + '/**/*.js'], ['scripts']);
+    gulp.watch([config.path.app + '/**/*.html'], ['index-tpl']);
 });

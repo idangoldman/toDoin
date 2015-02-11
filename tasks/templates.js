@@ -4,19 +4,7 @@ var gulp = require('gulp'),
 
     config = require('../settings/config');
 
-gulp.task('templates', ['swag'], function() {
-    // return gulp.src('./app/**/template.html')
-    //     .pipe(rename(function(path) {
-    //         path.basename = path.dirname.replace("/", "-");
-    //         path.dirname = '.';
-    //     }))
-    //     .pipe(gulp.dest('./build/templates/'));
-});
-
-gulp.task('swag', function() {
-    // var fileName = isChrome ? 'browser_action' : 'index';
-    var fileName = 'index';
-
+gulp.task('index-tpl', function() {
     return gulp.src([config.path.app + '/layout.html'])
         .pipe(swig({
             defaults: {
@@ -26,7 +14,7 @@ gulp.task('swag', function() {
             }
         }))
         .pipe(rename(function(path) {
-            path.basename = fileName;
+            path.basename = 'index';
         }))
         .pipe(gulp.dest(config.path.build));
 });
