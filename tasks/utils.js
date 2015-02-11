@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    bump = require('gulp-bump'),
     clean = require('gulp-clean'),
 
     config = require('../settings/config');
@@ -20,6 +21,12 @@ gulp.task('clean-dist', function() {
         })
         .pipe(clean());
 });
+
+// gulp.task('version-bump', function() {
+//     return gulp.src([config.path.chrome + '/manifest.json', config.path.app + '/../package.json'])
+//         .pipe(bump({type: 'patch', key: "version"}))
+//         .pipe(gulp.dest('./'));
+// });
 
 
 gulp.task('watcher', function() {
