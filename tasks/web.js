@@ -1,11 +1,13 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
     modRewrite = require('connect-modrewrite'),
-    open = require('gulp-open');
+    open = require('gulp-open'),
+
+    config = require('../settings/config');
 
 gulp.task('connect', function() {
     connect.server({
-        root: './_build',
+        root: config.path.build,
         port: 8000,
         livereload: true,
         middleware: function(connect, opt) {
@@ -19,7 +21,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('open-web', ['connect'], function() {
-    return gulp.src('./_build/index.html')
+    return gulp.src(config.path.build + '/index.html')
         .pipe(open('', {
             url: 'http://localhost:8000',
             app: 'google chrome'

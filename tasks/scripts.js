@@ -2,17 +2,19 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     browserify = require('browserify'),
     jstify = require('jstify'),
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+
+    config = require('../settings/config');
 
 gulp.task('jshint', function() {
-    return gulp.src(['./app/**/*.js'])
+    return gulp.src([config.path.app + '/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('javascript', ['jshint'], function() {
+gulp.task('scripts', ['jshint'], function() {
     return browserify({
-            entries: ['./app/script.js'],
+            entries: [config.path.app + '/script.js'],
             debug: true,
             extensions: ['.js', '.html'],
             withImports: true
@@ -20,5 +22,5 @@ gulp.task('javascript', ['jshint'], function() {
         .transform('jstify')
         .bundle()
         .pipe(source('script.js'))
-        .pipe(gulp.dest('./_build'));
+        .pipe(gulp.dest(config.path.build));
 });
