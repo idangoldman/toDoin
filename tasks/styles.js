@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
     config = require('../settings/config');
 
-gulp.task('styles-vendors', ['clean'], function() {
+gulp.task('styles-vendors', ['clean-build'], function() {
     gulp.src(config.assets.stylesheet.bower)
         .pipe(gulp.dest(config.path.build + '/vendors/css'));
 });

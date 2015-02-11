@@ -3,6 +3,7 @@ module.exports = {
         app: __dirname + '/../app',
         build: __dirname + '/../_build',
         chrome: __dirname + '/../chrome',
+        dist: __dirname + '/../_dist'
     },
     assets: {
         stylesheet: {
