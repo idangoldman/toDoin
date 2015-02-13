@@ -1,5 +1,6 @@
 module.exports = {
     path: {
+        root: __dirname + '/..',
         app: __dirname + '/../app',
         build: __dirname + '/../_build',
         chrome: __dirname + '/../chrome',

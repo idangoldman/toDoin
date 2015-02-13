@@ -12,7 +12,7 @@ gulp.task('chrome', ['build', 'chrome-copy'], function() {
     return gulp.start('watcher');
 });
 
-gulp.task('chrome-zip', function() {
+gulp.task('zip', function() {
     var manifest = require(config.path.chrome + '/manifest'),
         distFileName = manifest.name + '.' + manifest.version + '.zip';
 
@@ -20,3 +20,8 @@ gulp.task('chrome-zip', function() {
         .pipe(zip(distFileName))
         .pipe(gulp.dest(config.path.dist));
 });
+
+gulp.task('chrome-zip', ['build', 'chrome-copy'], function() {
+    gulp.start('zip');
+});
+

@@ -22,11 +22,15 @@ gulp.task('clean-dist', function() {
         .pipe(clean());
 });
 
-// gulp.task('version-bump', function() {
-//     return gulp.src([config.path.chrome + '/manifest.json', config.path.app + '/../package.json'])
-//         .pipe(bump({type: 'patch', key: "version"}))
-//         .pipe(gulp.dest('./'));
-// });
+gulp.task('version-bump', function() {
+    gulp.src([config.path.chrome + '/manifest.json'])
+        .pipe(bump({type: 'patch'}))
+        .pipe(gulp.dest(config.path.chrome));
+
+    gulp.src([config.path.app + '/../package.json'])
+        .pipe(bump({type: 'patch'}))
+        .pipe(gulp.dest(config.path.root));
+});
 
 
 gulp.task('watcher', function() {
