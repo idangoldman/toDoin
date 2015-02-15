@@ -44,20 +44,27 @@ module.exports = Backbone.View.extend({
         Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
-        if (Utility.isKey('enter', event.keyCode)) {
-            this.$el.submit();
-            return false;
-        } else if (Utility.isKey('esc', event.keyCode)) {
-            this.escTask(event);
-        } else if (event.type === 'focusout') {
-            this.escTask(event);
-        } else {
-            this.adjustHeight();
+        switch(Utility.keystroke.which(event.keyCode)) {
+            case 'enter':
+                this.$el.submit();
+                return false;
+            case 'esc':
+                this.escTask(event);
+            break;
+            case 'shift+enter':
+            case 'tab':
+                this.adjustHeight();
+                return false;
+            default:
+                if (event.type === 'focusout') {
+                    this.escTask(event);
+                }
+            break;
         }
     },
     escTask: function(event) {
         var ifSameTask = typeof event === 'string' && event === this.model.id,
-            ifModelExist = Utility.isKey('esc', event.keyCode) && this.model.id,
+            ifModelExist = Utility.keystroke.is('esc', event.keyCode) && this.model.id,
             ifFocusOut = event.type === 'focusout';
 
         if (ifSameTask || ifModelExist || ifFocusOut) {
