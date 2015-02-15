@@ -33,7 +33,8 @@ module.exports = Backbone.View.extend({
         this.$el
             .empty()
             .append(this.template(this.model.toJSON()))
-            .find('.title');
+            .find('.title')
+            .focus();
 
         return this;
     },
@@ -64,16 +65,13 @@ module.exports = Backbone.View.extend({
     },
     escTask: function(event) {
         var ifSameTask = typeof event === 'string' && event === this.model.id,
-            ifModelExist = Utility.keystroke.is('esc', event.keyCode) && this.model.id,
-            ifFocusOut = event.type === 'focusout';
+            ifModelExist = Utility.keystroke.is('esc', event.keyCode) && this.model.id;
 
-        if (ifSameTask || ifModelExist || ifFocusOut) {
+        if (ifSameTask || ifModelExist) {
             this.render();
 
-            if (ifSameTask || ifModelExist) {
-                this.$('.title')
-                    .focus();
-            }
+            this.$('.title')
+                .focus();
         }
     },
     createTask: function(event) {
