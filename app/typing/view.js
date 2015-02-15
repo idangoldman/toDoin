@@ -2,22 +2,9 @@ var _ = require('underscore'),
     Backbone = require('backbone'),
     Vent = require('../vent'),
     TaskModel = require('../tasks/task/model'),
-    Template = require('./template.html');
+    Template = require('./template.html'),
 
-function isKey(keyName, code) {
-    var result = null;
-
-    switch(code) {
-        case 27:
-            result = 'esc';
-        break;
-        case 13:
-            result = 'enter';
-        break;
-    }
-
-    return keyName === result || false;
-}
+    Utility = require('../utility/_main');
 
 module.exports = Backbone.View.extend({
     tagName: 'form',
@@ -57,10 +44,10 @@ module.exports = Backbone.View.extend({
         Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
-        if (isKey('enter', event.keyCode)) {
+        if (Utility.isKey('enter', event.keyCode)) {
             this.$el.submit();
             return false;
-        } else if (isKey('esc', event.keyCode)) {
+        } else if (Utility.isKey('esc', event.keyCode)) {
             this.escTask(event);
         } else if (event.type === 'focusout') {
             this.escTask(event);
@@ -70,7 +57,7 @@ module.exports = Backbone.View.extend({
     },
     escTask: function(event) {
         var ifSameTask = typeof event === 'string' && event === this.model.id,
-            ifModelExist = isKey('esc', event.keyCode) && this.model.id,
+            ifModelExist = Utility.isKey('esc', event.keyCode) && this.model.id,
             ifFocusOut = event.type === 'focusout';
 
         if (ifSameTask || ifModelExist || ifFocusOut) {
@@ -83,7 +70,7 @@ module.exports = Backbone.View.extend({
         }
     },
     createTask: function(event) {
-        var value = this.$('.title').val().trim();
+        var value = Utility.escaping(this.$('.title').val().trim());
 
         if (value.length) {
             if (this.model.id) {
