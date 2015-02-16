@@ -2,12 +2,13 @@ li {
     @include clearfix;
 
     align-items: flex-start;
-    background-color: #f9f9f9;
     border-bottom: 1px solid #eee;
     display: flex;
+    position: relative;
 
     &, .field {
         min-height: $typing-oneline-height;
+        white-space: pre-wrap;
         word-break: break-word;
     }
     .check-box {
@@ -15,14 +16,27 @@ li {
     }
 
     .field {
+        box-sizing: border-box;
         display: block;
         flex-grow: 1;
         padding: 9px 12px 9px 0;
-        box-sizing: border-box;
     }
 
     &.complete .field {
          text-decoration: line-through;
+    }
+
+    // moving side indication for task
+    &:hover:before {
+        background-color: rgba(#000, 0.2);
+        bottom: 0;
+        content: '';
+        cursor: move;
+        display: block;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 6px;
     }
 
     // &.sortable-placeholder {}
