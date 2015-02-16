@@ -15,11 +15,11 @@
     }
 
     &.remain {
-        color: #000;
+        color: $text-color;
     }
 
     &.complete {
-        color: #419a45;
+        color: $complete-color;
     }
 }
 

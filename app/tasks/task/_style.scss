@@ -2,6 +2,7 @@ li {
     @include clearfix;
 
     align-items: flex-start;
+    background-color: $background-color;
     border-bottom: 1px solid #eee;
     display: flex;
     position: relative;
@@ -28,7 +29,7 @@ li {
 
     // moving side indication for task
     &:hover:before {
-        background-color: rgba(#000, 0.2);
+        background-color: rgba($text-color, 0.2);
         bottom: 0;
         content: '';
         cursor: move;

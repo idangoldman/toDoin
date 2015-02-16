@@ -20,7 +20,7 @@
     z-index: 2;
 
     &:focus, &:hover {
-        background-color: rgba(#000, 0.5);
+        background-color: rgba($text-color, 0.5);
         color: #ff;
     }
 }
