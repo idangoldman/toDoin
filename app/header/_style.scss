@@ -13,6 +13,11 @@ header {
         @extend %no-select;
     }
 
+    .logo {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
     .stats {
         font-size: 13px;
         margin-left: auto;
