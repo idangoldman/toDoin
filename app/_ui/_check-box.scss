@@ -1,5 +1,4 @@
 %check-box {
-    // background-color: green;
     border-radius: 50%;
     box-sizing: border-box;
     color: #777;
@@ -16,11 +15,11 @@
     }
 
     &.remain {
-        color: #000;
+        color: $text-color;
     }
 
     &.complete {
-        color: #419a45;
+        color: $complete-color;
     }
 }
 

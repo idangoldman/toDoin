@@ -2,22 +2,9 @@ var _ = require('underscore'),
     Backbone = require('backbone'),
     Vent = require('../vent'),
     TaskModel = require('../tasks/task/model'),
-    Template = require('./template.html');
+    Template = require('./template.html'),
 
-function isKey(keyName, code) {
-    var result = null;
-
-    switch(code) {
-        case 27:
-            result = 'esc';
-        break;
-        case 13:
-            result = 'enter';
-        break;
-    }
-
-    return keyName === result || false;
-}
+    Utility = require('../utility/_main');
 
 module.exports = Backbone.View.extend({
     tagName: 'form',
@@ -46,44 +33,49 @@ module.exports = Backbone.View.extend({
         this.$el
             .empty()
             .append(this.template(this.model.toJSON()))
-            .find('.title');
+            .find('.title')
+            .focus();
 
         return this;
     },
     adjustHeight: function() {
-        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) );
+        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height'), 10 ) ) );
 
         this.$('.title').toggleClass('two-lines',  toggleHeight);
         Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
-        if (isKey('enter', event.keyCode)) {
-            this.$el.submit();
-            return false;
-        } else if (isKey('esc', event.keyCode)) {
-            this.escTask(event);
-        } else if (event.type === 'focusout') {
-            this.escTask(event);
-        } else {
-            this.adjustHeight();
+        switch(Utility.keystroke.which(event)) {
+            case 'enter':
+                this.$el.submit();
+                return false;
+            case 'esc':
+                this.escTask(event);
+            break;
+            case 'shift+enter':
+            case 'tab':
+                this.adjustHeight();
+                return false;
+            default:
+                if (event.type === 'focusout') {
+                    this.escTask(event);
+                }
+            break;
         }
     },
     escTask: function(event) {
         var ifSameTask = typeof event === 'string' && event === this.model.id,
-            ifModelExist = isKey('esc', event.keyCode) && this.model.id,
-            ifFocusOut = event.type === 'focusout';
+            ifModelExist = Utility.keystroke.is('esc', event) && this.model.id;
 
-        if (ifSameTask || ifModelExist || ifFocusOut) {
+        if (ifSameTask || ifModelExist) {
             this.render();
 
-            if (ifSameTask || ifModelExist) {
-                this.$('.title')
-                    .focus();
-            }
+            this.$('.title')
+                .focus();
         }
     },
     createTask: function(event) {
-        var value = this.$('.title').val().trim();
+        var value = Utility.escaping(this.$('.title').val().trim());
 
         if (value.length) {
             if (this.model.id) {

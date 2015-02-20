@@ -15,7 +15,7 @@ var _ = require('underscore'),
             return this.where({complete: true});
         },
         getTaskOrder: function() {
-            return this.length ? this.last().get('order') + 1 : 1;
+            return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
         },
         initialize: function() {
             this.on('add', this.onModelAdd);

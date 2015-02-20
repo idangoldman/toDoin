@@ -12,12 +12,6 @@ module.exports = Backbone.View.extend({
         this.listenTo(this.collection, 'change', this.render);
         this.listenTo(this.collection, 'add', this.render);
     },
-    template: Template,
-    tagName: 'header',
-    updateStats: function() {
-        this.model.complete = this.collection.completeCount;
-        this.model.remain = this.collection.remainCount;
-    },
     render: function() {
         this.updateStats();
 
@@ -26,5 +20,11 @@ module.exports = Backbone.View.extend({
             .append(this.template(this.model));
 
         return this;
-    }
+    },
+    tagName: 'header',
+    template: Template,
+    updateStats: function() {
+        this.model.complete = this.collection.completeCount;
+        this.model.remain = this.collection.remainCount;
+    },
 });
