@@ -1,4 +1,8 @@
+var packageJSON = require('../package.json');
+
 module.exports = {
+    title: 'ToDoin',
+    version: packageJSON.version,
     path: {
         root: __dirname + '/..',
         app: __dirname + '/../app',
@@ -24,8 +28,5 @@ module.exports = {
         config_file: './config.rb',
         css: './css',
         sass: './app/'
-    },
-    layout: {
-        title: 'ToDoin'
     }
 };
