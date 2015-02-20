@@ -12,16 +12,15 @@ gulp.task('chrome', ['build', 'chrome-copy'], function() {
     return gulp.start('watcher');
 });
 
-gulp.task('zip', function() {
+gulp.task('chrome-zip', function() {
     var manifest = require(config.path.chrome + '/manifest'),
-        distFileName = manifest.name + '.' + manifest.version + '.zip';
+        distFileName = manifest.name.toLowerCase() + '.' + manifest.version + '.zip';
 
     gulp.src(config.path.build + '/**/*')
         .pipe(zip(distFileName))
         .pipe(gulp.dest(config.path.dist));
 });
 
-gulp.task('chrome-zip', ['build', 'chrome-copy'], function() {
-    gulp.start('zip');
-});
-
+// gulp.task('chrome-zip', ['chrome-copy'], function() {
+//     gulp.start('zip');
+// });
