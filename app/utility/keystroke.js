@@ -14,25 +14,50 @@ keyMap = {
     93: 'cmd-left'
 };
 
-function is(keyName, code) {
-    return keyName === ifShiftPressed( keyMap[code] || code );
+
+function down(keyName, event) {
+    // should be written.
 }
 
-function which(code) {
-    return ifShiftPressed(keyMap[code] || code);
-}
+function altShiftPress(event, code) {
+    var pressedKey = [],
+        key = keyMap[code] || code;
 
-function ifShiftPressed(code) {
-    if (shiftOn) {
-        code = [keyMap[32], '+', code].join('');
+    if (event.altKey && key !== 'alt') {
+        pressedKey.push(keyMap[18]);
     }
 
-    shiftOn = code === 'shift';
+    if (event.shiftKey && key !== 'shift') {
+        pressedKey.push(keyMap[16]);
+    }
 
-    return code;
+    if (pressedKey.length && pressedKey.indexOf(key) === -1) {
+        pressedKey.push(key);
+    }
+
+    return pressedKey.join('+');
+}
+
+function is(keyName, event) {
+    var code = event.which || event.keyCode,
+        key = altShiftPress(event, code) || keyMap[code] || code;
+
+    return keyName === key;
+}
+
+function up(keyName, event) {
+    // should be written.
+}
+
+function which(event) {
+    var code = event.which || event.keyCode;
+
+    return altShiftPress(event, code) || keyMap[code] || code;
 }
 
 module.exports = {
+    down: down,
     is: is,
+    up: up,
     which: which
 };

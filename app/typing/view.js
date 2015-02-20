@@ -39,13 +39,13 @@ module.exports = Backbone.View.extend({
         return this;
     },
     adjustHeight: function() {
-        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height') ) ) );
+        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height'), 10 ) ) );
 
         this.$('.title').toggleClass('two-lines',  toggleHeight);
         Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
-        switch(Utility.keystroke.which(event.keyCode)) {
+        switch(Utility.keystroke.which(event)) {
             case 'enter':
                 this.$el.submit();
                 return false;
@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend({
     },
     escTask: function(event) {
         var ifSameTask = typeof event === 'string' && event === this.model.id,
-            ifModelExist = Utility.keystroke.is('esc', event.keyCode) && this.model.id;
+            ifModelExist = Utility.keystroke.is('esc', event) && this.model.id;
 
         if (ifSameTask || ifModelExist) {
             this.render();
