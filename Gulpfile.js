@@ -1,10 +1,11 @@
 var gulp = require('gulp');
 
-require('./tasks/stylesheets');
-require('./tasks/javascript');
-require('./tasks/templates');
 require('./tasks/chrome');
 require('./tasks/web');
+
+require('./tasks/styles');
+require('./tasks/scripts');
+require('./tasks/templates');
 require('./tasks/utils');
 require('./tasks/deploy');
 

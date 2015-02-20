@@ -2,22 +2,10 @@ var gulp = require('gulp'),
     swig = require('gulp-swig'),
     rename = require("gulp-rename"),
 
-    config = require('../settings/config.json');
+    config = require('../settings/config');
 
-gulp.task('templates', ['swag'], function() {
-    // return gulp.src('./app/**/template.html')
-    //     .pipe(rename(function(path) {
-    //         path.basename = path.dirname.replace("/", "-");
-    //         path.dirname = '.';
-    //     }))
-    //     .pipe(gulp.dest('./build/templates/'));
-});
-
-gulp.task('swag', function() {
-    // var fileName = isChrome ? 'browser_action' : 'index';
-    var fileName = 'index';
-
-    return gulp.src(['./app/layout.html'])
+gulp.task('index-tpl', function() {
+    return gulp.src([config.path.app + '/layout.html'])
         .pipe(swig({
             defaults: {
                 autoescape: false,
@@ -26,7 +14,7 @@ gulp.task('swag', function() {
             }
         }))
         .pipe(rename(function(path) {
-            path.basename = fileName;
+            path.basename = 'index';
         }))
-        .pipe(gulp.dest('./_build'));
+        .pipe(gulp.dest(config.path.build));
 });
