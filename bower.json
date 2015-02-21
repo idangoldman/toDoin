@@ -1,8 +1,8 @@
 {
-    "name": "todoin",
-    "dependencies": {
-        "normalize-css": "~3.0.1",
-        "html5sortable": "*"
-    },
-    "private": true
+  "name": "todoin",
+  "dependencies": {
+    "normalize-css": "~3.0.1",
+    "html5sortable": "*"
+  },
+  "private": true
 }

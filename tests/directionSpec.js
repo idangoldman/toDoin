@@ -3,6 +3,9 @@ var config = require('../settings/config'),
 
 describe("Direction", function() {
     it("Should be direction RTL", function() {
+    // Hebrew = U+0590-05FF
+    // Arabic = U+0600-06FF
+
         var text = '';
 
         expect(direction.is(text)).toBe('rtl');
