@@ -8,6 +8,7 @@ var packageJSON = require('../package.json'),
             build: __dirname + '/../_build',
             chrome: __dirname + '/../assets/chrome',
             dist: __dirname + '/../_dist',
+            fonts: __dirname + '/../assets/fonts',
             images: __dirname + '/../assets/images',
             root: __dirname + '/..'
         },

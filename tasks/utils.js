@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     config = require('../settings/config');
 
 gulp.task('build', ['clean-build'], function() {
-    return gulp.start('styles', 'scripts', 'index-tpl');
+    return gulp.start('index-tpl', 'styles', 'scripts', 'fonts');
 });
 
 gulp.task('clean-build', function() {
@@ -20,6 +20,11 @@ gulp.task('clean-dist', function() {
             read: false
         })
         .pipe(clean());
+});
+
+gulp.task('fonts', function() {
+    return gulp.src(config.path.fonts + '/*.woff')
+        .pipe(gulp.dest(config.path.build + '/fonts'));
 });
 
 // gulp.task('version-bump', function() {
