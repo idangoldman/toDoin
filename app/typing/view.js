@@ -39,9 +39,13 @@ module.exports = Backbone.View.extend({
         return this;
     },
     adjustHeight: function() {
-        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height'), 10 ) ) );
+        var toggleHeight = !!( this.$('.title').val().trim().length && ( this.$('.title').prop('scrollHeight') >= parseInt( this.$('.title').css('max-height'), 10 ) ) ),
+            text = _.escape(this.$('.title').val().trim());
 
-        this.$('.title').toggleClass('two-lines',  toggleHeight);
+        this.$('.title')
+            .toggleClass('rtl', Utility.direction.isRTL(text))
+            .toggleClass('two-lines',  toggleHeight);
+
         Vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
@@ -75,7 +79,7 @@ module.exports = Backbone.View.extend({
         }
     },
     createTask: function(event) {
-        var value = Utility.escaping(this.$('.title').val().trim());
+        var value = _.escape(this.$('.title').val().trim());
 
         if (value.length) {
             if (this.model.id) {

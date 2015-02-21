@@ -5,7 +5,11 @@ var charactersMap = {
 
 
 function checkChar(char) {
-    return char.match(new RegExp('[' + [charactersMap['arabic'], charactersMap['hebrew']].join('|') + ']'));
+    return char.match(new RegExp('[' + [charactersMap.arabic, charactersMap.hebrew].join('|') + ']'));
+}
+
+function firstChar(text) {
+    return text[0] || '';
 }
 
 function is(text) {
@@ -13,17 +17,11 @@ function is(text) {
 }
 
 function isLTR(text) {
-    var firstChar = text[0] || '',
-        result = checkChar(firstChar);
-
-    return !result;
+    return !checkChar(firstChar(text));
 }
 
 function isRTL(text) {
-    var firstChar = text[0] || '',
-        result = checkChar(firstChar);
-
-    return !!result;
+    return !!checkChar(firstChar(text));
 }
 
 module.exports = {
