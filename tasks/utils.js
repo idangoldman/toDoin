@@ -38,7 +38,7 @@ gulp.task('fonts', function() {
 // });
 
 gulp.task('watcher', function() {
-    gulp.watch([config.path.app + '/**/*.scss'], ['styles']);
-    gulp.watch([config.path.app + '/**/*.js'], ['scripts']);
-    gulp.watch([config.path.app + '/**/*.html'], ['index-tpl']);
+    gulp.watch(config.path.app + '/**/*.scss', ['styles']);
+    gulp.watch(config.path.app + '/**/*.js', ['scripts']);
+    gulp.watch(config.path.app + '/**/*.html', ['index-tpl']);
 });
