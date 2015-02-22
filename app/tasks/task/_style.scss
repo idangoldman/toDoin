@@ -25,10 +25,10 @@ li {
         flex-grow: 1;
         padding: 9px 12px 9px 0;
 
-        @at-root #{$root}.rtl .field {
-            padding-left: 12px;
-            padding-right: 0;
-        }
+        // @at-root #{$root}.rtl .field {
+        //     padding-left: 12px;
+        //     padding-right: 0;
+        // }
     }
 
     &.complete .field {
@@ -47,10 +47,10 @@ li {
         top: 0;
         width: 6px;
 
-        @at-root #{$root}.rtl:hover:before {
-            right: 0;
-            left: auto;
-        }
+        // @at-root #{$root}.rtl:hover:before {
+        //     right: 0;
+        //     left: auto;
+        // }
     }
 
     // &.sortable-placeholder {}

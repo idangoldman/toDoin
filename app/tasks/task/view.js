@@ -22,11 +22,11 @@ module.exports = Backbone.View.extend({
     render: function() {
         var model = this.model.toJSON();
 
+        model.direction = Utility.direction.is(model.title);
+
         this.$el
             .empty()
             .attr('id', this.model.get('id'))
-            .attr('class', '')
-            .attr('class', Utility.direction.is(model.title))
             .append(this.template(model))
             .toggleClass('complete', this.model.get('complete'));
 
