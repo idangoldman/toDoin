@@ -1,6 +1,5 @@
 li {
     $root: &;
-
     @include clearfix;
 
     align-items: flex-start;
