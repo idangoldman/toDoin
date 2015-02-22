@@ -1,6 +1,4 @@
-var shiftOn = null,
-
-keyMap = {
+var keyMap = {
     8: 'backspace',
     9: 'tab',
     13: 'enter',

@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     config = require('../settings/config');
 
 gulp.task('build', ['clean-build'], function() {
-    return gulp.start('styles', 'scripts', 'index-tpl');
+    return gulp.start('index-tpl', 'styles', 'scripts', 'fonts');
 });
 
 gulp.task('clean-build', function() {
@@ -22,6 +22,11 @@ gulp.task('clean-dist', function() {
         .pipe(clean());
 });
 
+gulp.task('fonts', function() {
+    return gulp.src(config.path.fonts + '/*.woff')
+        .pipe(gulp.dest(config.path.build + '/fonts'));
+});
+
 // gulp.task('version-bump', function() {
 //     gulp.src([config.path.chrome + '/manifest.json'])
 //         .pipe(bump({type: 'patch'}))
@@ -33,7 +38,7 @@ gulp.task('clean-dist', function() {
 // });
 
 gulp.task('watcher', function() {
-    gulp.watch([config.path.app + '/**/*.scss'], ['styles']);
-    gulp.watch([config.path.app + '/**/*.js'], ['scripts']);
-    gulp.watch([config.path.app + '/**/*.html'], ['index-tpl']);
+    gulp.watch(config.path.app + '/**/*.scss', ['styles']);
+    gulp.watch(config.path.app + '/**/*.js', ['scripts']);
+    gulp.watch(config.path.app + '/**/*.html', ['index-tpl']);
 });

@@ -1,1 +1,5 @@
-require('./router');
+var $ = require('jquery');
+
+$(function() {
+    require('./router');
+});
