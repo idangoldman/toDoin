@@ -1,10 +1,9 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
-    Vent = require('../vent'),
-    TaskModel = require('../tasks/task/model'),
+    TodoModel = require('../todos/todo/model'),
     Template = require('./template.html'),
 
-    Utility = require('../utility/_main');
+    Utility = require('../utility/.main');
 
 module.exports = Backbone.View.extend({
     tagName: 'form',
@@ -15,7 +14,7 @@ module.exports = Backbone.View.extend({
         'method': 'post'
     },
     events: {
-        'submit': 'createTask',
+        'submit': 'createTodo',
         'keydown': 'pressKeys',
         'keyup': 'adjustHeight'
     },
@@ -23,11 +22,11 @@ module.exports = Backbone.View.extend({
         this.render(this.model);
         this.$el.focus();
 
-        Vent.on('typing:edit', this.editTask, this);
-        Vent.on('typing:esc', this.escTask, this);
+        Utility.vent.on('typing:edit', this.editTodo, this);
+        Utility.vent.on('typing:esc', this.escTodo, this);
     },
     render: function(model) {
-        this.model = model || new TaskModel();
+        this.model = model || new TodoModel();
         this.model.set('paraphrase', '');
 
         this.$el
@@ -46,7 +45,7 @@ module.exports = Backbone.View.extend({
             .toggleClass('rtl', Utility.direction.isRTL(text))
             .toggleClass('two-lines',  toggleHeight);
 
-        Vent.trigger('typing:adjust-height', toggleHeight);
+        Utility.vent.trigger('typing:adjust-height', toggleHeight);
     },
     pressKeys: function(event) {
         switch(Utility.keystroke.which(event)) {
@@ -54,7 +53,7 @@ module.exports = Backbone.View.extend({
                 this.$el.submit();
                 return false;
             case 'esc':
-                this.escTask(event);
+                this.escTodo(event);
             break;
             case 'shift+enter':
             case 'tab':
@@ -62,23 +61,23 @@ module.exports = Backbone.View.extend({
                 return false;
             default:
                 if (event.type === 'focusout') {
-                    this.escTask(event);
+                    this.escTodo(event);
                 }
             break;
         }
     },
-    escTask: function(event) {
-        var ifSameTask = typeof event === 'string' && event === this.model.id,
+    escTodo: function(event) {
+        var ifSameTodo = typeof event === 'string' && event === this.model.id,
             ifModelExist = Utility.keystroke.is('esc', event) && this.model.id;
 
-        if (ifSameTask || ifModelExist) {
+        if (ifSameTodo || ifModelExist) {
             this.render();
 
             this.$('.title')
                 .focus();
         }
     },
-    createTask: function(event) {
+    createTodo: function(event) {
         var value = _.escape(this.$('.title').val().trim());
 
         if (value.length) {
@@ -95,8 +94,8 @@ module.exports = Backbone.View.extend({
 
         return event && event.preventDefault();
     },
-    editTask: function(taskId) {
-        this.render(this.collection.get(taskId));
+    editTodo: function(todo_id) {
+        this.render(this.collection.get(todo_id));
         this.adjustHeight();
 
         this.$('.title')

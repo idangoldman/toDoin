@@ -2,7 +2,7 @@ var _ = require('underscore'),
     $ = require('jquery'),
     Backbone = require('backbone'),
     HeaderView = require('./header/view'),
-    TasksView = require('./tasks/view'),
+    TodosView = require('./todos/view'),
     TypingView = require('./typing/view');
 
     Backbone.$ = $;
@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
     initialize: function() {
         var elements = {
             HeaderView : HeaderView,
-            TasksView : TasksView,
+            TodosView : TodosView,
             TypingView : TypingView
         };
 

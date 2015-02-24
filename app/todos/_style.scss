@@ -1,4 +1,4 @@
-.tasks {
+.todos {
     @extend %no-select;
 
     bottom: $typing-oneline-height;
@@ -20,7 +20,7 @@
         width: 100%;
         z-index: 1;
 
-        @import 'task/style';
+        @import 'todo/style';
     }
 
     @import 'clean-button/style';

@@ -1,7 +1,7 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
     Storage = require('backbone.localstorage'),
-    TaskModel = require('./task/model'),
+    TodoModel = require('./todo/model'),
 
     Collection = Backbone.Collection.extend({
         all: function() {
@@ -14,7 +14,7 @@ var _ = require('underscore'),
         complete: function() {
             return this.where({complete: true});
         },
-        getTaskOrder: function() {
+        getTodoOrder: function() {
             return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
         },
         initialize: function() {
@@ -22,10 +22,10 @@ var _ = require('underscore'),
             this.on('change:complete', this.updateCount);
         },
         localStorage: new Storage('ToDoin'),
-        model: TaskModel,
+        model: TodoModel,
         onModelAdd: function(model) {
             this.remainCount = this.remainCount + 1;
-            model.set('order', this.getTaskOrder());
+            model.set('order', this.getTodoOrder());
         },
         remain: function() {
             return this.where({complete: false});

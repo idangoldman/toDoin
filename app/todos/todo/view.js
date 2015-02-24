@@ -1,12 +1,11 @@
 var Backbone = require('backbone'),
-    Vent = require('../../vent'),
-    Utility = require('../../utility/_main'),
-    Template = require('./template.html');
+    Template = require('./template.html'),
+    Utility = require('../../utility/.main');
 
 module.exports = Backbone.View.extend({
     editField: function () {
         if (!this.model.get('complete')) {
-            Vent.trigger('typing:edit', this.model.get('id'));
+            Utility.vent.trigger('typing:edit', this.model.get('id'));
         }
     },
     events: {
@@ -27,6 +26,7 @@ module.exports = Backbone.View.extend({
         this.$el
             .empty()
             .attr('id', this.model.get('id'))
+            .addClass('todo')
             .append(this.template(model))
             .toggleClass('complete', this.model.get('complete'));
 
@@ -38,7 +38,7 @@ module.exports = Backbone.View.extend({
         this.model.toggle();
 
         if (this.model.get('complete')) {
-            Vent.trigger('typing:esc', this.model.id);
+            Utility.vent.trigger('typing:esc', this.model.id);
         }
     }
 });

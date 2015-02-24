@@ -1,13 +1,13 @@
 var Backbone = require('backbone'),
     AppView = require('./view'),
-    TasksCollection = require('./tasks/collection'),
+    TodosCollection = require('./todos/collection'),
 
     Router = Backbone.Router.extend({
         initialize: function() {
-            TasksCollection.fetch({reset:true, async:false});
-            TasksCollection.updateCount();
+            TodosCollection.fetch({reset:true, async:false});
+            TodosCollection.updateCount();
 
-            this.application = new AppView({collection: TasksCollection});
+            this.application = new AppView({collection: TodosCollection});
 
             Backbone.history.start({
                 pushState: true,
@@ -20,7 +20,7 @@ var Backbone = require('backbone'),
         },
         home: function() {
             this.application.HeaderView.render();
-            this.application.TasksView.render(TasksCollection.all());
+            this.application.TodosView.render(TodosCollection.all());
         },
         defaultAction: function(action) {
             console.log('#404 - No route:', action);

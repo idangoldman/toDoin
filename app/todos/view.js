@@ -1,29 +1,29 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    Vent = require('../vent'),
     CleanButtonView = require('./clean-button/view'),
-    TaskView = require('./task/view'),
     Template = require('./template.html'),
+    TodoView = require('./todo/view'),
+    Utility = require('../utility/.main'),
 
     // This is global
     Sortable = require('../../bower_components/html5sortable/jquery.sortable');
 
 module.exports = Backbone.View.extend({
     tagName: 'section',
-    className: 'tasks',
+    className: 'todos',
     template: Template,
     initialize: function() {
-        this.listenTo(this.collection, 'add', this.addTask);
+        this.listenTo(this.collection, 'add', this.addTodo);
         this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
 
         this.$el.on('sortupdate', '.list', $.proxy(this.reOrder, this));
 
-        Vent.on('typing:adjust-height', this.adjustHeight, this);
+        Utility.vent.on('typing:adjust-height', this.adjustHeight, this);
     },
-    addTask: function (model) {
+    addTodo: function (model) {
         this.$('.list')
-            .append(new TaskView({
+            .append(new TodoView({
                 model: model,
                 collection: this.collection
             }).el)
@@ -34,15 +34,15 @@ module.exports = Backbone.View.extend({
         this.$el.toggleClass('two-lines', toAdjust);
     },
     toggleCleanButton: function() {
-        var completeTasksCount = this.collection.completeCount;
+        var completeTodosCount = this.collection.completeCount;
 
-        if (!this.$('.clean-button').length && completeTasksCount) {
+        if (!this.$('.clean-button').length && completeTodosCount) {
             this.$el
                 .addClass('show-clean-button')
                 .append(new CleanButtonView({
                     collection: this.collection
                 }).el);
-        } else if (!completeTasksCount) {
+        } else if (!completeTodosCount) {
             this.$el
                 .removeClass('show-clean-button')
                 .find('.clean-button')
@@ -75,7 +75,7 @@ module.exports = Backbone.View.extend({
                 completeModel = true;
             }
 
-            return new TaskView({
+            return new TodoView({
                     model: model,
                     collection: that.collection
                 }).el;
