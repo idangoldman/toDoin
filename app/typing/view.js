@@ -16,7 +16,11 @@ module.exports = Backbone.View.extend({
     events: {
         'submit': 'createTodo',
         'keydown': 'pressKeys',
-        'keyup': 'adjustHeight'
+        'keyup': 'adjustHeight',
+        'click .privacy': 'private'
+    },
+    private: function() {
+
     },
     initialize: function() {
         this.render(this.model);
