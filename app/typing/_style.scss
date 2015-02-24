@@ -29,6 +29,41 @@
         }
     }
 
+    .nav {
+        align-items: center;
+        background-color: $white-bg;
+        border-top: 2px solid #f1f1f1;
+        bottom: $typing-oneline-height;
+        display: flex;
+        height: $typing-oneline-height;
+        left: 0;
+        position: absolute;
+        right: 0;
+
+        & >  * {
+            align-items: center;
+            color: $placeholder-color;
+            display: inline-flex;
+            height: 100%;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            width: 50%;
+
+            &:hover, &.current {
+                background-color: #f1f1f1;
+            }
+
+            [class^="fa-"] {
+                margin-right: 5px;
+            }
+        }
+
+        .todo {
+            border-left: 1px solid #f1f1f1;
+        }
+    }
+
     .privacy {
         background-size: 32px 32px;
         background: url("./images/glasses-32.png") 50% 5px no-repeat;
