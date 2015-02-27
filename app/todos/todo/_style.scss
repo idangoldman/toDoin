@@ -24,11 +24,22 @@
         flex-grow: 1;
         padding: 9px 12px 9px 0;
 
+        &.privacy {
+            filter: blur(5px);
+            transition: 100ms filter ease-in;
+            transition: 100ms -webkit-filter ease-in;
+
+            &:hover {
+                filter: blur(0);
+            }
+        }
+
         // @at-root #{$root}.rtl .field {
         //     padding-left: 12px;
         //     padding-right: 0;
         // }
     }
+
 
     &.complete .field {
          text-decoration: line-through;

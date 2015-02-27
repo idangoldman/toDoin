@@ -64,7 +64,7 @@
         }
     }
 
-    .privacy {
+    .toggle-privacy {
         background-size: 32px 32px;
         background: url("./images/glasses-32.png") 50% 5px no-repeat;
         border: 0;
@@ -81,7 +81,7 @@
         width: 47px;
         z-index: 2;
 
-        &:hover {
+        &.sunglasses {
             background-image: url('./images/glasses-32-hover.png');
             opacity: 0.5;
         }
