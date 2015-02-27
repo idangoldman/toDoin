@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
     Utility = require('../../utility/.main');
 
 module.exports = Backbone.View.extend({
+    className: 'todo',
     editField: function () {
         if (!this.model.get('complete')) {
             Utility.vent.trigger('typing:edit', this.model.get('id'));
@@ -26,7 +27,6 @@ module.exports = Backbone.View.extend({
         this.$el
             .empty()
             .attr('id', this.model.get('id'))
-            .addClass('todo')
             .append(this.template(model))
             .toggleClass('complete', this.model.get('complete'));
 
