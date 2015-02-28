@@ -57,6 +57,10 @@
         top: 0;
         width: 6px;
 
+        @at-root #{$root}.complete:hover:before {
+            background-color: $complete-color;
+        }
+
         // @at-root #{$root}.rtl:hover:before {
         //     right: 0;
         //     left: auto;

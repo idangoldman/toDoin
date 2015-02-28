@@ -1,12 +1,12 @@
 %check-box {
     border-radius: 50%;
     box-sizing: border-box;
-    color: #777;
+    color: rgba($text-color, 0.2);
     cursor: pointer !important;
     display: inline-block;
     font-size: 18px;
-    height: 40px;
-    line-height: 40px;
+    height: $typing-oneline-height;
+    line-height: $typing-oneline-height;
     text-align: center;
     width: 40px;
 
