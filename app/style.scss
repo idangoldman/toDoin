@@ -10,7 +10,9 @@
 @import "_ui/colors";
 @import "_ui/extend";
 @import "_ui/function";
-@import "_ui/_check-box.scss";
+
+@import "_ui/components/check-box";
+@import "_ui/components/tooltip";
 
 // Application
 body, #ToDoin {
