@@ -4,13 +4,15 @@
 @import "compass/utilities/general/clearfix";
 
 // Simple reset, colors and extends
-@import "_helpers/fonts";
-@import "_helpers/reset";
-@import "_helpers/variables";
-@import "_helpers/colors";
-@import "_helpers/extend";
-@import "_helpers/function";
-@import "_ui/_check-box.scss";
+@import "_ui/fonts";
+@import "_ui/reset";
+@import "_ui/variables";
+@import "_ui/colors";
+@import "_ui/extend";
+@import "_ui/function";
+
+@import "_ui/components/check-box";
+@import "_ui/components/tooltip";
 
 // Application
 body, #ToDoin {

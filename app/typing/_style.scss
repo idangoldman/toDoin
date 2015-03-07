@@ -17,7 +17,7 @@
         overflow-y: auto;
         // overflow: hidden;
         transition: none;
-        padding: 10px;
+        padding: 10px 47px 10px 10px;
         position: relative;
         resize: none;
         width: 100%;
@@ -26,6 +26,64 @@
 
         &.two-lines {
             height: $typing-twoline-height;
+        }
+    }
+
+    .nav {
+        align-items: center;
+        background-color: $white-bg;
+        border-top: 2px solid #f1f1f1;
+        bottom: $typing-oneline-height;
+        display: flex;
+        height: $typing-oneline-height;
+        left: 0;
+        position: absolute;
+        right: 0;
+
+        & >  * {
+            align-items: center;
+            color: $placeholder-color;
+            display: inline-flex;
+            height: 100%;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            width: 50%;
+
+            &:hover, &.current {
+                background-color: #f1f1f1;
+            }
+
+            [class^="fa-"] {
+                margin-right: 5px;
+            }
+        }
+
+        .todo {
+            border-left: 1px solid #f1f1f1;
+        }
+    }
+
+    .toggle-privacy {
+        background-size: 32px 32px;
+        background: url("./images/glasses-32.png") 50% 5px no-repeat;
+        border: 0;
+        cursor: pointer;
+        display: block;
+        height: 42px;
+        opacity: 0.3;
+        outline: none;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        text-indent: -99em;
+        top: 0;
+        width: 47px;
+        z-index: 2;
+
+        &.sunglasses {
+            background-image: url('./images/glasses-32-hover.png');
+            opacity: 0.5;
         }
     }
 }

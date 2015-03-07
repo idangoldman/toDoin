@@ -16,7 +16,13 @@ module.exports = Backbone.View.extend({
     events: {
         'submit': 'createTodo',
         'keydown': 'pressKeys',
-        'keyup': 'adjustHeight'
+        'keyup': 'adjustHeight',
+        'click .toggle-privacy': 'togglePrivacy'
+    },
+    togglePrivacy: function(event) {
+        this.$('.toggle-privacy').toggleClass('sunglasses');
+        this.$('.title').focus();
+        event.preventDefault();
     },
     initialize: function() {
         this.render(this.model);
@@ -27,7 +33,6 @@ module.exports = Backbone.View.extend({
     },
     render: function(model) {
         this.model = model || new TodoModel();
-        this.model.set('paraphrase', '');
 
         this.$el
             .empty()
@@ -78,13 +83,25 @@ module.exports = Backbone.View.extend({
         }
     },
     createTodo: function(event) {
-        var value = _.escape(this.$('.title').val().trim());
+        var value = _.escape(this.$('.title').val().trim()),
+            model = {
+                title: '',
+                privacy: false
+            };
 
         if (value.length) {
+            model.title = value;
+
+            // check if private
+            if (this.$('.sunglasses').length) {
+                model.privacy = true;
+            }
+
+            // submit todo
             if (this.model.id) {
-                this.model.update('title', value);
+                this.model.update(model);
             } else {
-                this.collection.create({title: value});
+                this.collection.create(model);
             }
 
             this.render();
@@ -92,7 +109,7 @@ module.exports = Backbone.View.extend({
                 .focus();
         }
 
-        return event && event.preventDefault();
+        return event.preventDefault();
     },
     editTodo: function(todo_id) {
         this.render(this.collection.get(todo_id));

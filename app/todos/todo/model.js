@@ -3,12 +3,13 @@ var $ = require('jquery'),
 
 module.exports = Backbone.Model.extend({
     defaults: {
-        id: null,
-        title: '',
-        order: null,
         complete: false,
+        completed_at: null,
         created_at: Date.now(),
-        completed_at: null
+        id: null,
+        order: null,
+        privacy: false,
+        title: ''
     },
     toggle: function () {
         var saveParams = {
@@ -20,9 +21,9 @@ module.exports = Backbone.Model.extend({
             saveParams.completed_at = Date.now();
         }
 
-        return this.save(saveParams);
+        return this.update(saveParams);
     },
-    update: function (field, value) {
-        return this.save(field, value);
+    update: function (model) {
+        return this.save(model);
     }
 });

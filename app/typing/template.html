@@ -1,3 +1,7 @@
+<!--nav class="nav">
+    <a href="#" class="thought"><i class="fa-comment"></i> a thought</a>
+    <a href="#" class="todo"><i class="fa-check"></i> todo</a>
+</nav-->
 <input
     name="id"
     type="hidden"
@@ -6,3 +10,4 @@
     class="title"
     name="title"
     placeholder="What's Next?"><%= title %></textarea>
+<button type="button" class="toggle-privacy <%  if (privacy) { %>sunglasses<% } %>">Keep your thoughts private.</button>
