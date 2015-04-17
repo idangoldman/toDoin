@@ -9,13 +9,13 @@ var Base = require('./base'),
 
     Sentences = Base.extend({
         init: function() {
-            this.exprOnce = /^[a-zA-Z]$/;
-            this.exprMore = /[a-zA-Z]/g;
+            this.exprOnce = /^([a-zA-Z0-9()'"@#$%&+\-=,]\s?(\w\.\w)*?)+$/;
+            this.exprMore = /([a-zA-Z0-9()'"@#$%&+\-=,]\s?(\w\.\w)*?)+/g;
         }
     });
 
 Sentences.prototype.info = function(string) {
-    var items = string.match(/([a-zA-Z0-9()'"@#$%&+\-=,]\s?(\w\.\w)*?)+/g),
+    var items = this.match(string),
         output = [];
 
     if (items.length) {
