@@ -1,5 +1,5 @@
 var config = require('../settings/config'),
-    Email = require(config.path.app + '/../blah/helpers/email');
+    Email = require(config.path.app + '/../blah/language/email');
 
 describe("Email validation check", function() {
     it("Should be a valid email", function() {

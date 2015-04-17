@@ -1,7 +1,7 @@
 'use strict';
 
-var Email = require('./helpers/email'),
-    Url = require('./helpers/url');
+var Email = require('./language/email'),
+    Url = require('./language/url');
 
 module.exports = function(string) {
     if (string.length) {

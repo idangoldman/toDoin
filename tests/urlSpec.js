@@ -1,5 +1,5 @@
 var config = require('../settings/config'),
-    Url = require(config.path.app + '/../blah/helpers/url');
+    Url = require(config.path.app + '/../blah/language/url');
 
 describe("Url validation check", function() {
     it("Should be a valid url", function() {
