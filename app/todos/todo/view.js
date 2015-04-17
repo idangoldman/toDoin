@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     Template = require('./template.html'),
-    Utility = require('../../utility/.main');
+    Utility = require('../../utility/.main'),
+    Blah = require('../../../blah/.main');
 
 module.exports = Backbone.View.extend({
     className: 'todo',
@@ -22,6 +23,7 @@ module.exports = Backbone.View.extend({
     render: function() {
         var model = this.model.toJSON();
 
+        model.title = Blah.html(model.title);
         model.direction = Utility.direction.is(model.title);
 
         this.$el
