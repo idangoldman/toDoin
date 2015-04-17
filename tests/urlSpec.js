@@ -18,10 +18,10 @@ describe("Url validation check", function() {
 
 describe("Url html tag check", function() {
     it("Should be a valid url link", function() {
-        expect(Blah.url.html('http://idan.com')).toBe('<a href="http://idan.com">http://idan.com</a>');
-        expect(Blah.url.html('some thing to say: www.idan.com')).toBe('some thing to say: <a href="www.idan.com">www.idan.com</a>');
-        expect(Blah.url.html('http://blah.co.il <- my old url.')).toBe('<a href="http://blah.co.il">http://blah.co.il</a> <- my old url.');
-        expect(Blah.url.html('http://idan.com <- two urls -> http://leeya.com')).toBe('<a href="http://idan.com">http://idan.com</a> <- two urls -> <a href="http://leeya.com">http://leeya.com</a>');
+        expect(Blah.url.html('http://idan.com')).toBe('<a href="http://idan.com" target="_blank">http://idan.com</a>');
+        expect(Blah.url.html('some thing to say: www.idan.com')).toBe('some thing to say: <a href="www.idan.com" target="_blank">www.idan.com</a>');
+        expect(Blah.url.html('http://blah.co.il <- my old url.')).toBe('<a href="http://blah.co.il" target="_blank">http://blah.co.il</a> <- my old url.');
+        expect(Blah.url.html('http://idan.com <- two urls -> http://leeya.com')).toBe('<a href="http://idan.com" target="_blank">http://idan.com</a> <- two urls -> <a href="http://leeya.com" target="_blank">http://leeya.com</a>');
     });
 
     it("Should not be a valid url link", function() {

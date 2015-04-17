@@ -17,10 +17,10 @@ describe("Email validation check", function() {
 
 describe("Email html tag check", function() {
     it("Should be a valid email link", function() {
-        expect(Blah.email.html('idan@idan.com')).toBe('<a href="mailto:idan@idan.com">idan</a>');
-        expect(Blah.email.html('some thing to say: idan@idan.com')).toBe('some thing to say: <a href="mailto:idan@idan.com">idan</a>');
-        expect(Blah.email.html('idan@idan.com <- my old email.')).toBe('<a href="mailto:idan@idan.com">idan</a> <- my old email.');
-        expect(Blah.email.html('idan@idan.com <- two emails -> leeya@leeya.com')).toBe('<a href="mailto:idan@idan.com">idan</a> <- two emails -> <a href="mailto:leeya@leeya.com">leeya</a>');
+        expect(Blah.email.html('idan@idan.com')).toBe('<a href="mailto:idan@idan.com" target="_blank">idan</a>');
+        expect(Blah.email.html('some thing to say: idan@idan.com')).toBe('some thing to say: <a href="mailto:idan@idan.com" target="_blank">idan</a>');
+        expect(Blah.email.html('idan@idan.com <- my old email.')).toBe('<a href="mailto:idan@idan.com" target="_blank">idan</a> <- my old email.');
+        expect(Blah.email.html('idan@idan.com <- two emails -> leeya@leeya.com')).toBe('<a href="mailto:idan@idan.com" target="_blank">idan</a> <- two emails -> <a href="mailto:leeya@leeya.com" target="_blank">leeya</a>');
     });
 
     it("Should not be a valid email link", function() {
