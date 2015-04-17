@@ -1,7 +1,9 @@
 'use strict';
 
+var Email = require('./email'),
+    Url = require('./url');
+
 module.exports = {
-    email: require('./email'),
-    url: require('./url'),
-    word: require('./word')
+    email: new Email(),
+    url: new Url()
 };
