@@ -16,7 +16,7 @@ Email.prototype.html = function(string) {
     if (emails.length) {
         _.each(emails, function(email) {
             var name = email.split('@')[0],
-                emailTag = ['<a href="mailto:', email, '">', name, '</a>'].join('');
+                emailTag = ['<a href="mailto:', email, '" target="_blank">', name, '</a>'].join('');
 
             string = string.replace(email, emailTag);
         });
@@ -25,4 +25,4 @@ Email.prototype.html = function(string) {
     return string;
 };
 
-module.exports = Email;
+module.exports = new Email();
