@@ -1,15 +1,23 @@
 'use strict';
 
-function base(_expression) {
-    var expression = _expression || null;
-}
+var Class = require('class.extend'),
 
-base.prototype.is = function(string) {
-  return this.expression.test(string);
+    Base = Class.extend({
+        init: function() {
+            this.expression = null;
+        }
+    });
+
+Base.prototype.is = function(string) {
+    var regex = new RegExp(this.exprOnce);
+
+    return regex.test(string);
 };
 
-base.prototype.match = function(string) {
-    return this.expression.match(string);
+Base.prototype.match = function(string) {
+    var regex = new RegExp(this.exprMore);
+
+    return string.match(regex) || [];
 };
 
-module.exports = base;
+module.exports = Base;
