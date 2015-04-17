@@ -4,7 +4,30 @@
 // ([a-zA-Z0-9()'"@#$%&+\-=]\s?)+       parts of sentence
 // ([a-zA-Z0-9()'"@#$%&+\-=]\S?(\w\.\w)*?)+      words?
 
-var _ = require('underscore');
+var Base = require('./base'),
+    _ = require('underscore'),
+
+    Sentences = Base.extend({
+        init: function() {
+            this.exprOnce = /^[a-zA-Z]$/;
+            this.exprMore = /[a-zA-Z]/g;
+        }
+    });
+
+Sentences.prototype.info = function(string) {
+    var items = string.match(/([a-zA-Z0-9()'"@#$%&+\-=,]\s?(\w\.\w)*?)+/g),
+        output = [];
+
+    if (items.length) {
+        _.each(items, function(item) {
+            output.push(sentence(item));
+        });
+    }
+
+    return output.length ? output : string;
+};
+
+module.exports = new Sentences();
 
 function sentence(string) {
     var type = '',
@@ -39,18 +62,3 @@ function sentence(string) {
         'parts': parts
     };
 }
-
-function sentences(string) {
-    var items = string.match(/([a-zA-Z0-9()'"@#$%&+\-=,]\s?(\w\.\w)*?)+/g),
-        output = [];
-
-    if (items.length) {
-        _.each(items, function(item) {
-            output.push(sentence(item));
-        });
-    }
-
-    return output.length ? output : string;
-};
-
-module.exports = sentences;

@@ -1,9 +1,9 @@
 'use strict';
 
 var html = require('./html'),
-    read = require('./read');
+    info = require('./info');
 
 module.exports = {
     html: html,
-    read: read
+    info: info
 };
