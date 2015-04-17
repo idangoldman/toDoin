@@ -14,11 +14,12 @@ Url.prototype.html = function(string) {
     var urls = this.match(string);
 
     if (urls.length) {
-        _.each(urls, function(url) {
-            var title = url,
+        _.each(urls, function(rawUrl) {
+            var url =  rawUrl.indexOf('www.') === 0 ? 'http://' + rawUrl : rawUrl,
+                title = url.replace(/((https?):\/\/)?(www\.)?/, ''),
                 urlTag = ['<a href="', url, '" target="_blank">', title, '</a>'].join('');
 
-            string = string.replace(url, urlTag);
+            string = string.replace(rawUrl, urlTag);
         });
     }
 
