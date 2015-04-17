@@ -5,7 +5,8 @@ var Base = require('./base'),
 
     Url = Base.extend({
         init: function() {
-            this.expression = "((https?:)?\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?";
+            this.exprOnce = /^https?:\/\/w{0,3}\w*?\.(\w*?\.)?\w{2,3}\S*|www\.(\w*?\.)?\w*?\.\w{2,3}\S*|(\w*?\.)?\w*?\.\w{2,3}[\/\?]\S*$/;
+            this.exprMore = /https?:\/\/w{0,3}\w*?\.(\w*?\.)?\w{2,3}\S*|www\.(\w*?\.)?\w*?\.\w{2,3}\S*|(\w*?\.)?\w*?\.\w{2,3}[\/\?]\S*/g;
         }
     });
 
@@ -15,7 +16,7 @@ Url.prototype.html = function(string) {
     if (urls.length) {
         _.each(urls, function(url) {
             var title = url,
-                urlTag = ['<a href="', url, '" class="url">', title, '</a>'].join('');
+                urlTag = ['<a href="', url, '">', title, '</a>'].join('');
 
             string = string.replace(url, urlTag);
         });

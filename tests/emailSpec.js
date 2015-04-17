@@ -1,7 +1,7 @@
 var config = require('../settings/config'),
     Blah = require(config.path.app + '/../blah/.main');
 
-describe("Email checking", function() {
+describe("Email validation check", function() {
     it("Should be a valid email", function() {
         expect(Blah.email.is('idan@idan.com')).toBeTruthy();
         expect(Blah.email.is('id.an@idan.com')).toBeTruthy();
@@ -15,7 +15,7 @@ describe("Email checking", function() {
     });
 });
 
-describe("Email checking", function() {
+describe("Email html tag check", function() {
     it("Should be a valid email link", function() {
         expect(Blah.email.html('idan@idan.com')).toBe('<a href="mailto:idan@idan.com">idan</a>');
         expect(Blah.email.html('some thing to say: idan@idan.com')).toBe('some thing to say: <a href="mailto:idan@idan.com">idan</a>');
