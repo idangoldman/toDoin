@@ -16,7 +16,7 @@ Url.prototype.html = function(string) {
     if (urls.length) {
         _.each(urls, function(url) {
             var title = url,
-                urlTag = ['<a href="', url, '">', title, '</a>'].join('');
+                urlTag = ['<a href="', url, '" target="_blank">', title, '</a>'].join('');
 
             string = string.replace(url, urlTag);
         });
@@ -25,4 +25,4 @@ Url.prototype.html = function(string) {
     return string;
 };
 
-module.exports = Url;
+module.exports = new Url();
