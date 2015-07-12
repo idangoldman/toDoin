@@ -10,7 +10,8 @@ var packageJSON = require('../package.json'),
             dist: __dirname + '/../_dist',
             fonts: __dirname + '/../assets/fonts',
             images: __dirname + '/../assets/images',
-            root: __dirname + '/..'
+            root: __dirname + '/..',
+            page: __dirname + '/../page'
         },
         assets: {
             stylesheet: {
@@ -28,7 +29,7 @@ var packageJSON = require('../package.json'),
         },
         compass: {
             config_file: './config.rb',
-            css: './css',
+            css: './_build',
             sass: './app/'
         }
     };
