@@ -16,6 +16,8 @@ tags
 ._*
 .Spotlight-V100
 .Trashes
+*.lock
+
 
 # Vi
 #
