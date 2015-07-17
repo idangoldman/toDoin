@@ -70,6 +70,7 @@ a:hover {
     .features {
         @include full;
 
+        margin-top: 0;
         padding: 0;
 
         li {
