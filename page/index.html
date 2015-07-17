@@ -1,0 +1,75 @@
+<!doctype html><html><head>
+
+    <meta charset="utf-8">
+    <title>ToDoin, app for everyday.</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head><body>
+
+    <section id="page">
+
+        <header class="title">
+            <h1>ToDoin, app for everyday.</h1>
+        </header>
+
+        <article class="description">
+
+        </article>
+
+        <a href="#" class="install-button">
+            <strong>Install ToDoin</strong>
+            <small>version 1.5.0 for Desktop Chrome Browser</small>
+        </a>
+
+        <ul class="features">
+            <li>
+                <h3>New Todo</h3>
+                <p>"What's Next" field is where you write new todos and submit them by hitting the ENTER key.</p>
+            </li>
+            <li>
+                <h3>Edit Todo</h3>
+                <p>Double click on a todo you want to edit. It will show up in the "What's Next" field in editing mode.</p>
+                <p>Hitting the ESC will cancel changes.</p>
+            </li>
+            <li>
+                <h3>Complete a Todo</h3>
+                <p>Click on "V" icon. The icon turned green and the todo crossed? Congrats you have completed a todo!</p>
+            </li>
+            <li>
+                <h3>Clear Todos List</h3>
+                <p>After completing a todo "Eat a X" button will show. Click on it to clear the list. This is still work in progress :)</p>
+            </li>
+            <li>
+                <h3>Drag &amp; Drop Todos</h3>
+                <p>Click on and hold the todo you want, then drag it up or down the list and release the click to drop it.</p>
+            </li>
+            <li>
+                <h3>Parsing Links and Email</h3>
+                <p>Included urls and email addresses into a todo will be parsed into clickble links. Like: <u>blah.co.il</u> and <u>@idan</u> for emails</p>
+            </li>
+            <li>
+                <h3>Private Todo</h3>
+                <p>Click on the glasses and turn them into sunglasses for private todos. Which means they will be blurred out.</p>
+            </li>
+            <li>
+                <h3>Todo Killer Feature</h3>
+                <p>Haven't found him yet, but don't worry more cool features comming right after all the basic onces will be ready.</p>
+            </li>
+        </ul>
+
+    </section>
+
+    <script>
+        function isMobile() {
+            return !!(window.navigator.userAgent.toLocaleLowerCase().match(/(mobile|iemobile|android|webos|iphone|ipad|ipod|blackberry|windows phone)/));
+        }
+
+        if (isMobile()) {
+            document.getElementById('page').className = 'mobile';
+            document.getElementById('page').innerHTML = 'Sorry, nothing to see here on mobile.';
+        }
+
+    </script>
+
+</body></html>
