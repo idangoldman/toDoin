@@ -15,6 +15,7 @@ $susy: (
 
 * {
     -webkit-tap-highlight-color: rgba(#000, 0);
+    box-sizing: border-box;
 }
 
 body {
@@ -43,7 +44,7 @@ a:hover {
 
     .install-button {
         @include span(4);
-        @include push(4 wider);
+        @include push(4);
 
         background-color: rgba(#bada55, 0.9);
         border-radius: 5px;
@@ -63,8 +64,11 @@ a:hover {
     }
 
     .features {
+        padding: 0;
+
         li {
             @include gallery(4);
+            // @include pad(1);
         }
     }
 }
