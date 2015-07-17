@@ -39,10 +39,12 @@ a:hover {
 
     .title {
         @include full;
+
         text-align: center;
     }
 
     .install-button {
+        @include break;
         @include span(4);
         @include push(4);
 
@@ -51,6 +53,8 @@ a:hover {
         border: 0;
         color: #fff;
         display: inline-block;
+        margin-top: 20px;
+        margin-bottom: 15px;
         padding: 5px 10px;
         text-decoration: none;
 
@@ -64,6 +68,8 @@ a:hover {
     }
 
     .features {
+        @include full;
+
         padding: 0;
 
         li {
@@ -71,4 +77,12 @@ a:hover {
             // @include pad(1);
         }
     }
+}
+
+
+.mobile {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
 }
