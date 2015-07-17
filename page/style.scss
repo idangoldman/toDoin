@@ -5,9 +5,12 @@
 
 $susy: (
   columns: 12,
-  gutters: .25,
   container: 960px,
-  global-box-sizing: border-box
+  flow: ltr,
+  global-box-sizing: border-box,
+  gutters: .25,
+  math: fluid,
+  output: float
 );
 
 * {
@@ -31,15 +34,37 @@ a:hover {
 
 
 #page {
-    @include container;
+    @include container();
 
     .title {
+        @include full;
         text-align: center;
+    }
+
+    .install-button {
+        @include span(4);
+        @include push(4 wider);
+
+        background-color: rgba(#bada55, 0.9);
+        border-radius: 5px;
+        border: 0;
+        color: #fff;
+        display: inline-block;
+        padding: 5px 10px;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #bada55;
+        }
+
+        strong {
+            display: block;
+        }
     }
 
     .features {
         li {
-             @include gallery(4);
+            @include gallery(4);
         }
     }
 }
