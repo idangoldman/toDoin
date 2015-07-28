@@ -4,5 +4,14 @@
         "user": "user",
         "pass": "password",
         "path": "/"
+    },
+    "ssh": {
+        "host": "",
+        "port": "",
+        "username": "",
+        "privateKey": "",
+        "path": {
+            "page": ""
+        }
     }
 }
