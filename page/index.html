@@ -12,8 +12,8 @@
 
     <section id="page">
 
-        <header class="title">
-            <h1>ToDoin, app for everyday.</h1>
+        <header class="fold">
+            <h1 class="title">ToDoin, app for everyday.</h1>
         </header>
 
         <article class="description">
@@ -74,7 +74,7 @@
             document.querySelector('#page').innerHTML = 'Sorry, nothing to see here on mobile.';
         }
 
-        if (chrome.app.isInstalled) {
+        if (chrome.app.isInstalled || isMobile()) {
             document.querySelector(".install-button").style.display = 'none';
         }
 
