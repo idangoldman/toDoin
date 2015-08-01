@@ -2,6 +2,7 @@ var packageJSON = require('../package.json'),
     config = {
         title: 'ToDoin',
         version: packageJSON.version,
+        googleAnalyticsId: "UA-1296333-5",
         chromeExtension: {
             id: "gobimjknanlaehcjalekeoolepmmjhpk",
             url: "https://chrome.google.com/webstore/detail/todoin/gobimjknanlaehcjalekeoolepmmjhpk"
