@@ -32,7 +32,7 @@ var _ = require('underscore'),
         },
         reOrder: function(hash) {
             _.each(this.models, function(model) {
-                model.update('order', hash[model.id]);
+                model.save({'order': hash[model.id]});
             });
         },
         updateCount: function() {

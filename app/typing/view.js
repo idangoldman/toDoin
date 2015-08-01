@@ -99,7 +99,7 @@ module.exports = Backbone.View.extend({
 
             // submit todo
             if (this.model.id) {
-                this.model.update(model);
+                this.model.save(model);
             } else {
                 this.collection.create(model);
             }

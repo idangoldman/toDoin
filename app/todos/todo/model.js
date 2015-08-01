@@ -23,7 +23,4 @@ module.exports = Backbone.Model.extend({
 
         return this.update(saveParams);
     },
-    update: function (model) {
-        return this.save(model);
-    }
 });
