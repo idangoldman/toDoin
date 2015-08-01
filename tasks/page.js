@@ -33,11 +33,14 @@ gulp.task('page-styles', function() {
 gulp.task('page-misc-files-move', function() {
     return gulp.src([
             config.path.page + '/robots.txt',
-            config.path.images + '/icons/16.ico'
+            config.path.images + '/icons/16.ico',
+            config.path.page + '/images/**/*'
         ])
         .pipe(rename(function(path) {
             if (path.extname === '.ico') {
                 path.basename = 'favicon';
+            } else if (['.jpg', '.gif', '.png'].indexOf(path.extname) !== -1) {
+                path.dirname = './images';
             }
         }))
         .pipe(gulp.dest(config.path.build));

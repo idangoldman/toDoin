@@ -37,10 +37,58 @@ a:hover {
 #page {
     @include container();
 
-    .title {
+    .fold {
         @include full;
 
+        background-image: url('../images/fold.jpg');
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #fff;
+        height: 506px;
+        position: relative;
         text-align: center;
+
+        .title {
+            left: 60px;
+            position: absolute;
+            top: 185px;
+
+            @media (max-width: 900px) {
+                left: 22%;
+                right: 0;
+                text-align: center;
+                top: 35px;
+            }
+
+            @media (max-width: 450px) {
+                left: 10%;
+            }
+            @media (max-width: 400px) {
+                left: 0;
+            }
+        }
+    }
+
+
+    .features {
+        @include full;
+
+        margin-top: 0;
+        padding: 0;
+
+        li {
+            @include gallery(4);
+            // @include pad(1);
+
+            @media (max-width: 900px) {
+                @include gallery(6);
+            }
+
+            @media (max-width: 450px) {
+                @include gallery(10);
+            }
+        }
     }
 
     .install-button {
@@ -64,18 +112,6 @@ a:hover {
 
         strong {
             display: block;
-        }
-    }
-
-    .features {
-        @include full;
-
-        margin-top: 0;
-        padding: 0;
-
-        li {
-            @include gallery(4);
-            // @include pad(1);
         }
     }
 }

@@ -12,7 +12,7 @@ gulp.task('connect', function() {
         middleware: function(connect, opt) {
             return [
                 modRewrite([
-                    '!\\.html|\\.js|\\.css|\\.png$ /index.html [L]'
+                    '!\\.html|\\.js|\\.css|\\.png|\\.jpg|\\.gif|\\.ico|\\.woff|\\.woff2$ /index.html [L]'
                 ])
             ];
         }
