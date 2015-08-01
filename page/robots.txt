@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+
+# Disallow these directories, url types & file-types
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Adsbot-Google
+Allow: /
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: ia_archiver*
+Disallow: /
+
+User-agent: duggmirror
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+Disallow: /*.gif$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.bmp$
+Disallow: /*.xml$
+Disallow: /*.css$
+Disallow: /*.js$
+
+#Sitemap: http://todo.help/sitemap.xml
