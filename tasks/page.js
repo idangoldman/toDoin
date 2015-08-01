@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     compass = require('gulp-compass'),
     autoprefixer = require('gulp-autoprefixer'),
     clean = require('gulp-clean'),
+    debug = require('gulp-debug'),
 
     config = require('../settings/config');
 
@@ -29,6 +30,11 @@ gulp.task('page-styles', function() {
         .pipe(gulp.dest(config.path.build));
 });
 
+gulp.task('page-misc-files-move', function() {
+    return gulp.src(config.path.page + '/robots.txt')
+        .pipe(gulp.dest(config.path.build));
+});
+
 gulp.task('page-clean-build', function() {
     return gulp.src(config.path.build, {
             read: false
@@ -37,7 +43,7 @@ gulp.task('page-clean-build', function() {
 });
 
 gulp.task('page-build', ['page-clean-build'], function() {
-    return gulp.start('page-index-tpl', 'page-styles');
+    return gulp.start('page-index-tpl', 'page-styles', 'page-misc-files-move');
 });
 
 gulp.task('page-watcher', function() {
