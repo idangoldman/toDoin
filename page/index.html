@@ -71,11 +71,14 @@
             document.querySelector('#page').innerHTML = 'Sorry, nothing to see here on mobile.';
         }
 
+        if (chrome.app.isInstalled) {
+            document.querySelector(".install-button").style.display = 'none';
+        }
+
         document.querySelector(".install-button").addEventListener('click', function(event){
             event.preventDefault();
 
             chrome.webstore.install();
-            console.log(chrome.app.isInstalled);
         });
     </script>
 
