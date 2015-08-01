@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     compass = require('gulp-compass'),
     autoprefixer = require('gulp-autoprefixer'),
     clean = require('gulp-clean'),
-    debug = require('gulp-debug'),
+    rename = require('gulp-rename'),
 
     config = require('../settings/config');
 
@@ -31,7 +31,15 @@ gulp.task('page-styles', function() {
 });
 
 gulp.task('page-misc-files-move', function() {
-    return gulp.src(config.path.page + '/robots.txt')
+    return gulp.src([
+            config.path.page + '/robots.txt',
+            config.path.images + '/icons/16.ico'
+        ])
+        .pipe(rename(function(path) {
+            if (path.extname === '.ico') {
+                path.basename = 'favicon';
+            }
+        }))
         .pipe(gulp.dest(config.path.build));
 });
 
