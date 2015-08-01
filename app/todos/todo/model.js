@@ -21,6 +21,6 @@ module.exports = Backbone.Model.extend({
             saveParams.completed_at = Date.now();
         }
 
-        return this.update(saveParams);
+        return this.save(saveParams);
     },
 });
