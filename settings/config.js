@@ -2,6 +2,10 @@ var packageJSON = require('../package.json'),
     config = {
         title: 'ToDoin',
         version: packageJSON.version,
+        chromeExtension: {
+            id: "gobimjknanlaehcjalekeoolepmmjhpk",
+            url: "https://chrome.google.com/webstore/detail/todoin/gobimjknanlaehcjalekeoolepmmjhpk"
+        },
         path: {
             app: __dirname + '/../app',
             assets: __dirname + '/../assets',
