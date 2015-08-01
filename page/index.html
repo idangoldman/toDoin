@@ -1,8 +1,8 @@
 <!doctype html><html><head>
-
     <meta charset="utf-8">
     <title>ToDoin, app for everyday.</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/{{ chromeExtension.id }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head><body>
@@ -53,10 +53,12 @@
             </li>
         </ul>
 
-        <!-- a href="#" class="install-button">
+        <a class="install-button"
+            href="{{ chromeExtension.url }}"
+            target="_blank">
             <strong>Install ToDoin</strong>
             <small>Version {{ version }} for Desktop Chrome Browser</small>
-        </a -->
+        </a>
     </section>
 
     <script>
@@ -65,10 +67,19 @@
         }
 
         if (isMobile()) {
-            document.getElementById('page').className = 'mobile';
-            document.getElementById('page').innerHTML = 'Sorry, nothing to see here on mobile.';
+            document.querySelector('#page').className = 'mobile';
+            document.querySelector('#page').innerHTML = 'Sorry, nothing to see here on mobile.';
         }
 
+        if (chrome.app.isInstalled) {
+            document.querySelector(".install-button").style.display = 'none';
+        }
+
+        document.querySelector(".install-button").addEventListener('click', function(event){
+            event.preventDefault();
+
+            chrome.webstore.install();
+        });
     </script>
 
 </body></html>
