@@ -6,7 +6,7 @@ module.exports = Backbone.View.extend({
         this.model = {
             complete: 0,
             remain: 0,
-            version: '1.5.2'
+            version: '1.5.3'
         };
 
         this.listenTo(this.collection, 'remove', this.render);
