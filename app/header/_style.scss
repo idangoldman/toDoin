@@ -5,7 +5,7 @@ header {
     display: flex;
     height: $typing-oneline-height;
     left: 0;
-    padding: 10px 12px;
+    padding: 10px 5px 10px 10px;
     top: 0;
     z-index: 2;
 
@@ -16,15 +16,53 @@ header {
     .logo {
         font-size: 16px;
         font-weight: 400;
+        letter-spacing: -1px;
     }
 
-    .stats {
-        font-size: 13px;
+    .sort-by {
+        font-size: 11px;
         margin-left: auto;
+        position: relative;
 
-        em:not(:last-child):after {
-            content: "/";
-            margin-left: 4px;
+        .toggle {
+            color: $placeholder-color;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 5px;
+        }
+
+        .menu {
+            background-color: #f1f1f1;
+            border: 1px solid #000;
+            display: none;
+            opacity: 0;
+            padding: 5px;
+            position: absolute;
+            right: 0;
+            top: 23px;
+
+
+            a {
+                cursor: pointer;
+                font-size: 12px;
+                display: block;
+                margin-bottom: 5px;
+                white-space: nowrap;
+
+                &:hover {
+                    background-color: $background-color;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &:hover .menu {
+            display: block;
+            opacity: 1;
+            transition: opacity 1s ease;
         }
     }
 }
