@@ -43,7 +43,7 @@ gulp.task('images', function() {
 // });
 
 gulp.task('watcher', function() {
-    gulp.watch(config.path.app + '/**/*.html', ['index-tpl']);
+    gulp.watch(config.path.app + '/**/*.html', ['index-tpl', 'scripts']);
     gulp.watch(config.path.app + '/**/*.js', ['scripts']);
     gulp.watch(config.path.app + '/**/*.scss', ['styles']);
     gulp.watch(config.path.fonts + '/*.woff', ['fonts']);
