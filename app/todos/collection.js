@@ -35,6 +35,9 @@ var _ = require('underscore'),
                 model.save({'order': hash[model.id]});
             });
         },
+        sortBy: function(type) {
+            console.log(type);
+        },
         updateCount: function() {
             this.remainCount = this.remain().length;
             this.completeCount = this.complete().length;
