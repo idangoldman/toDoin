@@ -20,10 +20,10 @@ var Backbone = require('backbone'),
             '*action': 'defaultAction',
         },
         home: function() {
-            this.application.TodosView.render(TodosCollection.all());
+            this.application.TodosView.render(TodosCollection.sortBy('order'));
         },
         sortBy: function(type) {
-            this.application.TodosView.render(TodosCollection.sortBy(type));
+            this.application.TodosView.render(TodosCollection.sortBy(type, 'desc'));
         },
         defaultAction: function(action) {
             console.log('#404 - No route:', action);
