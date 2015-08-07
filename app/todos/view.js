@@ -57,6 +57,7 @@ module.exports = Backbone.View.extend({
         });
 
         this.collection.reOrder(reOrderHash);
+        Backbone.history.navigate('/', {trigger: true});
     },
     render: function(collection) {
         var completeModel = false,
@@ -65,10 +66,6 @@ module.exports = Backbone.View.extend({
         this.$el
             .empty()
             .append(this.template());
-
-        collection = _.sortBy(collection, function(model) {
-            return model.get('order');
-        });
 
         this.$('.list').append(_.map(collection, function(model) {
             if (model.get('complete')) {
