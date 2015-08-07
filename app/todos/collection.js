@@ -11,9 +11,6 @@ var _ = require('underscore'),
             this.completeCount = 0;
             return _.invoke(this.complete(), 'destroy');
         },
-        complete: function() {
-            return this.where({complete: true});
-        },
         getTodoOrder: function() {
             return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
         },
@@ -27,20 +24,20 @@ var _ = require('underscore'),
             this.remainCount = this.remainCount + 1;
             model.set('order', this.getTodoOrder());
         },
-        remain: function() {
-            return this.where({complete: false});
-        },
         reOrder: function(hash) {
             _.each(this.models, function(model) {
                 model.save({'order': hash[model.id]});
             });
         },
-        sortBy: function(type) {
-            console.log(type);
+        sortBy: function(type, direction) {
+            direction = direction || 'asc';
+            return _.sortBy(this.models, function(model) {
+                return direction === 'asc' ? model.get(type) : !model.get(type);
+            });
         },
         updateCount: function() {
-            this.remainCount = this.remain().length;
-            this.completeCount = this.complete().length;
+            this.remainCount = this.where({complete: false}).length;
+            this.completeCount = this.where({complete: true}).length;
         }
     });
 
