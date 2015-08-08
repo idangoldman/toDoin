@@ -4,8 +4,11 @@ var _ = require('underscore'),
     TodoModel = require('./todo/model'),
 
     Collection = Backbone.Collection.extend({
-        all: function() {
-            return this.slice();
+        localStorage: new Storage('ToDoin'),
+        model: TodoModel,
+        initialize: function() {
+            this.on('add', this.onModelAdd);
+            this.on('change:complete', this.updateCount);
         },
         cleanCompleted: function() {
             this.completeCount = 0;
@@ -14,12 +17,6 @@ var _ = require('underscore'),
         getTodoOrder: function() {
             return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
         },
-        initialize: function() {
-            this.on('add', this.onModelAdd);
-            this.on('change:complete', this.updateCount);
-        },
-        localStorage: new Storage('ToDoin'),
-        model: TodoModel,
         onModelAdd: function(model) {
             this.remainCount = this.remainCount + 1;
             model.set('order', this.getTodoOrder());
