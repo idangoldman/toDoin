@@ -22,10 +22,7 @@ module.exports = Backbone.View.extend({
     },
     addTodo: function (model) {
         this.$('.list')
-            .append(new TodoView({
-                model: model,
-                collection: this.collection
-            }).el)
+            .append(new TodoView({ model: model, collection: this.collection }).el)
             .sortable('destroy')
             .sortable();
     },
@@ -68,10 +65,7 @@ module.exports = Backbone.View.extend({
                 completeModel = true;
             }
 
-            return new TodoView({
-                    model: model,
-                    collection: that.collection
-                }).el;
+            return new TodoView({ model: model, collection: that.collection }).el;
         })).sortable();
 
         if (completeModel) {
