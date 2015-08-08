@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
     events: {
         'click': 'cleanCompleteModels'
     },
-    eatText: [{
+    model: [{
         one: 'Cookie',
         many: 'Cookies'
     },
@@ -51,13 +51,13 @@ module.exports = Backbone.View.extend({
     render: function() {
         var completeTasksCount = this.collection.completeCount,
             buttonText = null,
-            eatText = _.sample(this.eatText);
+            model = _.sample(this.model);
 
         if (completeTasksCount) {
             if (completeTasksCount > 1) {
-                buttonText = ['Eat', completeTasksCount,  eatText.many + '.'].join(' ');
+                buttonText = ['Eat', completeTasksCount,  model.many + '.'].join(' ');
             } else  {
-                buttonText = ['Eat a', eatText.one + '.'].join(' ');
+                buttonText = ['Eat a', model.one + '.'].join(' ');
             }
 
             this.$el

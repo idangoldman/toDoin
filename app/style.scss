@@ -37,5 +37,15 @@ body.mobile, body.mobile #ToDoin {
 
     @import "header/style";
     @import "todos/style";
+    @import "clean-button/style";
     @import "typing/style";
+
+    .show-clean-button {
+        .list {
+            padding-bottom: 60px;
+        }
+        .clean-button {
+            display: block;
+        }
+    }
 }

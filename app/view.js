@@ -1,8 +1,10 @@
 var _ = require('underscore'),
-    $ = require('jquery'),
     Backbone = require('backbone'),
+    $ = require('jquery'),
+    isMobile = require('./common/scripts/is-mobile'),
     HeaderView = require('./header/view'),
     TodosView = require('./todos/view'),
+    CleanButtonView = require('./clean-button/view'),
     TypingView = require('./typing/view');
 
     Backbone.$ = $;
@@ -11,17 +13,15 @@ module.exports = Backbone.View.extend({
     id: 'ToDoin',
     initialize: function() {
         var elements = {
-            HeaderView : HeaderView,
-            TodosView : TodosView,
-            TypingView : TypingView
+            HeaderView: HeaderView,
+            TodosView: TodosView,
+            CleanButtonView: CleanButtonView,
+            TypingView: TypingView
         };
 
         this.render(_.map(elements, function(element, elementName) {
             return ( this[elementName] = new element({collection: this.collection}) ).el;
         }, this));
-    },
-    isMobile: function() {
-        return !!(navigator.userAgent.toLocaleLowerCase().match(/(android|webos|iphone|ipad|ipod|blackberry|windows phone)/));
     },
     render: function(elements) {
         this.$el
@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
                 .appendTo('body')
             .end()
             .parent('body')
-                .toggleClass('mobile', this.isMobile());
+                .toggleClass('mobile', isMobile());
 
         return this;
     }

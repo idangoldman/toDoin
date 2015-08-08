@@ -1,7 +1,6 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    CleanButtonView = require('./clean-button/view'),
     Template = require('./template.html'),
     TodoView = require('./todo/view'),
     Utility = require('../utility/.main'),
@@ -38,10 +37,7 @@ module.exports = Backbone.View.extend({
 
         if (!this.$('.clean-button').length && completeTodosCount) {
             this.$el
-                .addClass('show-clean-button')
-                .append(new CleanButtonView({
-                    collection: this.collection
-                }).el);
+                .addClass('show-clean-button');
         } else if (!completeTodosCount) {
             this.$el
                 .removeClass('show-clean-button')
@@ -80,8 +76,7 @@ module.exports = Backbone.View.extend({
 
         if (completeModel) {
             this.$el
-                .addClass('show-clean-button')
-                .append(new CleanButtonView({collection: this.collection}).el);
+                .addClass('show-clean-button');
         } else {
             this.$el.removeClass('show-clean-button');
         }
