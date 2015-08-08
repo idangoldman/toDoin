@@ -3,7 +3,8 @@
 <div class="sort-by">
     <i class="toggle fa-sort-amount-desc"></i>
     <nav class="menu">
-        <a href="/sort-by/complete">Sort by complete</a>
-        <a href="/sort-by/created_at">Sort by date</a>
+        <% _.each(sortMenu, function(item) { %>
+            <a href="<%= item.link %>" class="<%= item.selected ? 'selected' : '' %>"><%= item.title %></a>
+        <% }); %>
     </nav>
 </div>
