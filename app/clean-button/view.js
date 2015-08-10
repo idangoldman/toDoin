@@ -1,5 +1,6 @@
 var _ = require('underscore'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    Utility = require('../utility/.main');
 
 module.exports = Backbone.View.extend({
     tagName: 'button',
@@ -9,68 +10,34 @@ module.exports = Backbone.View.extend({
     className: 'clean-button',
     initialize: function() {
         this.render();
-
         this.listenTo(this.collection, 'change:complete', this.render);
+        Utility.vent.on('typing:adjust-height', this.adjustHeight, this);
     },
     events: {
         'click': 'cleanCompleteModels'
     },
-    model: [{
-        one: 'Cookie',
-        many: 'Cookies'
+    adjustHeight: function(toAdjust) {
+        this.$el.toggleClass('bottom-double-space', toAdjust);
     },
-    {
-        one: 'Walnut',
-        many: 'Walnuts'
-    },
-    {
-        one: 'Apple',
-        many: 'Apples'
-    },
-    {
-        one: 'Cucumber',
-        many: 'Cucumbers'
-    },
-    {
-        one: 'Banana',
-        many: 'Bananas'
-    },
-    {
-        one: 'Tomato',
-        many: 'Tomatoes'
-    }],
     cleanCompleteModels: function(event) {
         this.collection.cleanCompleted();
-
-        this.$el
-            .parent().removeClass('show-clean-button');
-        this.remove();
-
+        this.$el.removeClass('show');
         event.preventDefault();
     },
+    toggleShow: function() {
+        this.$el.toggleClass('show', !!this.collection.completeCount);
+    },
+    pickButtonText: function(completeCount) {
+        return 'Clear Complete ' + (completeCount > 1 ? 'Todos' : 'Todo');
+    },
     render: function() {
-        var completeTasksCount = this.collection.completeCount,
-            buttonText = null,
-            model = _.sample(this.model);
+        var completeCount = this.collection.completeCount,
+            buttonText = this.pickButtonText(completeCount);
 
-        if (completeTasksCount) {
-            if (completeTasksCount > 1) {
-                buttonText = ['Eat', completeTasksCount,  model.many + '.'].join(' ');
-            } else  {
-                buttonText = ['Eat a', model.one + '.'].join(' ');
-            }
-
-            this.$el
-                .empty()
-                .append(buttonText);
-
-            this.$el
-                .parent().addClass('show-clean-button');
-        } else {
-            this.$el
-                .parent().removeClass('show-clean-button');
-            this.remove();
-        }
+        this.$el
+            .empty()
+            .toggleClass('show', !!completeCount)
+            .append(buttonText);
 
         return this;
     }

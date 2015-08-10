@@ -22,4 +22,8 @@
 
         @import 'todo/style';
     }
+
+    &.bottom-padding .list {
+        padding-bottom: 60px;
+    }
 }

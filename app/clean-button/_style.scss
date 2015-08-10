@@ -1,10 +1,12 @@
+$bottom-space: 10px;
+
 .clean-button {
     background-color: rgba(#000, 0.2);
     border-radius: 5px;
     border: none;
-    bottom: 10px;
+    bottom: $typing-oneline-height + $bottom-space;
     color: #f9f9f9;
-    display: block;
+    display: none;
     font-size: 14px;
     font-weight: 600;
     height: 40px;
@@ -12,15 +14,23 @@
     line-height: 40px;
     margin: 0 auto;
     outline: none;
-    padding: 0 20px;
     position: absolute;
     text-align: center;
     transform: translateX(-50%);
     white-space: nowrap;
+    width: 60%;
     z-index: 2;
 
     &:focus, &:hover {
         background-color: rgba($text-color, 0.5);
         color: #ff;
+    }
+
+    &.show {
+        display: block;
+    }
+
+    &.bottom-double-space {
+        bottom: $typing-twoline-height + $bottom-space;
     }
 }
