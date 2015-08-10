@@ -14,10 +14,8 @@ module.exports = Backbone.View.extend({
     template: Template,
     initialize: function() {
         this.listenTo(this.collection, 'add', this.addTodo);
-        this.listenTo(this.collection, 'change:complete', this.toggleCleanButton);
-
+        this.listenTo(this.collection, 'change:complete', this.toggleComplete);
         this.$el.on('sortupdate', '.list', $.proxy(this.reOrder, this));
-
         Utility.vent.on('typing:adjust-height', this.adjustHeight, this);
     },
     addTodo: function (model) {
@@ -26,21 +24,18 @@ module.exports = Backbone.View.extend({
             .sortable('destroy')
             .sortable();
     },
+    toggleComplete: function() {
+        var splitedPath = window.location.pathname.split('/');
+        var type = splitedPath[splitedPath.length - 1];
+
+        if (type.length) {
+            this.render(this.collection.sortBy(type, 'desc'));
+        }
+
+        this.$el.toggleClass('bottom-padding', !!this.collection.completeCount);
+    },
     adjustHeight: function(toAdjust) {
         this.$el.toggleClass('two-lines', toAdjust);
-    },
-    toggleCleanButton: function() {
-        var completeTodosCount = this.collection.completeCount;
-
-        if (!this.$('.clean-button').length && completeTodosCount) {
-            this.$el
-                .addClass('show-clean-button');
-        } else if (!completeTodosCount) {
-            this.$el
-                .removeClass('show-clean-button')
-                .find('.clean-button')
-                    .remove();
-        }
     },
     reOrder: function($event) {
         var reOrderHash = {};
@@ -53,27 +48,14 @@ module.exports = Backbone.View.extend({
         Backbone.history.navigate('/', {trigger: true});
     },
     render: function(collection) {
-        var completeModel = false,
-            that = this;
-
         this.$el
             .empty()
-            .append(this.template());
-
-        this.$('.list').append(_.map(collection, function(model) {
-            if (model.get('complete')) {
-                completeModel = true;
-            }
-
-            return new TodoView({ model: model, collection: that.collection }).el;
-        })).sortable();
-
-        if (completeModel) {
-            this.$el
-                .addClass('show-clean-button');
-        } else {
-            this.$el.removeClass('show-clean-button');
-        }
+            .append(this.template())
+            .toggleClass('bottom-padding', !!this.collection.completeCount)
+            .find('.list')
+                .append(_.map(collection, function(model) {
+                    return new TodoView({ model: model, collection: this.collection }).el;
+                }, this)).sortable();
 
         return this;
     }

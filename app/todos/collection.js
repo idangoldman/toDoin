@@ -12,7 +12,7 @@ var _ = require('underscore'),
         },
         cleanCompleted: function() {
             this.completeCount = 0;
-            return _.invoke(this.complete(), 'destroy');
+            return _.invoke(this.where({complete: true}), 'destroy');
         },
         getTodoOrder: function() {
             return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
