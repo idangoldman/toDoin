@@ -16,16 +16,19 @@ var Backbone = require('backbone'),
         },
         routes: {
             '': 'home',
-            '*action': 'defaultAction'
+            'sort-by/:type': 'sortBy',
+            '*action': 'defaultAction',
         },
         home: function() {
-            this.application.HeaderView.render();
-            this.application.TodosView.render(TodosCollection.all());
+            this.application.TodosView.render(TodosCollection.sortBy('order'));
+        },
+        sortBy: function(type) {
+            this.application.TodosView.render(TodosCollection.sortBy(type, 'desc'));
         },
         defaultAction: function(action) {
             console.log('#404 - No route:', action);
             this.navigate('/', {trigger: true});
-        }
+        },
     });
 
 module.exports = new Router();

@@ -30,3 +30,12 @@
     @extend %fa;
     &:before { content: "\f075"; }
 }
+
+.fa-chevron-circle-down {
+    @extend %fa;
+    &:before { content: "\f13a"; }
+}
+.fa-sort-amount-desc {
+    @extend %fa;
+    &:before { content: "\f161"; }
+}

@@ -23,14 +23,7 @@
         @import 'todo/style';
     }
 
-    @import 'clean-button/style';
-
-    &.show-clean-button {
-        .list {
-            padding-bottom: 60px;
-        }
-        .clean-button {
-            display: block;
-        }
+    &.bottom-padding .list {
+        padding-bottom: 60px;
     }
 }

@@ -24,12 +24,12 @@ var packageJSON = require('../package.json'),
                     './bower_components/normalize-css/normalize.css'
                 ],
                 layout: [
-                    'vendors/css/normalize.css',
-                    'style.css'
+                    '/vendors/css/normalize.css',
+                    '/style.css'
                 ]
             },
             javascript: {
-                main: 'script.js'
+                main: '/script.js'
             }
         },
         compass: {

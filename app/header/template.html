@@ -1,8 +1,10 @@
 <h1 class="logo" title="<%= version %>">ToDoin</h1>
 
-<span class="stats">
-    <% if (remain || complete) {%>
-        <em class="remain"><%= remain %></em>
-        <em class="all"><%= remain + complete %></em>
-    <% }%>
-</span>
+<div class="sort-by">
+    <i class="toggle fa-sort-amount-desc"></i>
+    <nav class="menu">
+        <% _.each(sortMenu, function(item) { %>
+            <a href="<%= item.link %>" class="<%= item.selected ? 'selected' : '' %>"><%= item.title %></a>
+        <% }); %>
+    </nav>
+</div>
