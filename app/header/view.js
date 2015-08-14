@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
-        version: '1.5.3'
+        version: '2.0.0'
     },
     initialize: function() {
         this.render(this.model);
