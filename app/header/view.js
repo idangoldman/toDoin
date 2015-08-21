@@ -44,7 +44,9 @@ module.exports = Backbone.View.extend({
     getWeather: function() {
         var that = this;
         weather().then(function(data) {
-            that.$el.find('.weather').html(Math.ceil(data.temperature));
+            that.$el.find('.weather').html(data.temperature);
+        }).catch(function(data) {
+            that.$el.find('.weather').prop('title', 'Please enable geolocation to get the correct weather');
         });
     },
     render: function() {

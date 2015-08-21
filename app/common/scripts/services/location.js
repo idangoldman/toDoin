@@ -31,7 +31,6 @@ function get_location() {
                             message = 'UNKNOWN';
                         break;
                     }
-
                     reject(message);
                 },
                 options);

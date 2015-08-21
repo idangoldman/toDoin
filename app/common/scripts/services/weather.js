@@ -8,6 +8,11 @@ function fetch_weather(latitude, longitude, units) {
     units = units || 'metric'; // or 'imperial'.
 
     var app_id = 'db0d5a0bab46d4ac8c60f053ffbef6bf';
+    var default_data = {
+        city: 'NA',
+        country: 'NA',
+        temperature: Math.ceil(Math.random() * 100)
+    };
 
     return new RSVP.Promise(function(resolve, reject) {
         location().then(function(position) {
@@ -16,17 +21,19 @@ function fetch_weather(latitude, longitude, units) {
                 url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + position.latitude + '&lon=' + position.longitude + '&units=' + units + '&APPID=' + app_id
             }, function( err, resp, body ) {
                 if (err) {
-                    reject();
+                    reject(default_data);
                 } else {
                     var data = JSON.parse(body);
 
                     resolve({
                         city: data.name,
                         country: data.sys.county,
-                        temperature: data.main.temp
+                        temperature: Math.ceil(data.main.temp)
                     });
                 }
             });
+        }).catch(function() {
+            reject(default_data);
         });
     });
 }
