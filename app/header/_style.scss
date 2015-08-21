@@ -19,9 +19,28 @@ header {
         letter-spacing: -1px;
     }
 
+    .weather {
+        color: #666;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: auto;
+
+        &:after {
+            display: inline-block;
+            font-size: 65%;
+        }
+
+        &.celsius:after {
+            content: "#{'\2103'}";
+        }
+        &.fahrenheit:after {
+            content: "#{'\2109'}";
+        }
+    }
+
     .sort-by {
         font-size: 11px;
-        margin-left: auto;
+        margin-left: 5px;
         position: relative;
 
         .toggle {
