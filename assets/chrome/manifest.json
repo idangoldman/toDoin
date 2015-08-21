@@ -2,8 +2,8 @@
     "name": "ToDoin",
     "version": "2.0.0",
     "manifest_version": 2,
-    "description": "Make your life easier.",
-    "homepage_url": "http://blah.co.il/todo",
+    "description": "App for everyday.",
+    "homepage_url": "http://todo.help",
     "default_locale": "en",
     "offline_enabled": true,
     "icons": {
@@ -21,6 +21,7 @@
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions": [
         "cookies",
-        "fontSettings"
+        "fontSettings",
+        "geolocation"
     ]
 }
