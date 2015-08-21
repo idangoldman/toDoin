@@ -49,3 +49,4 @@ auth.json
 _build
 _build.zip
 _dist
+npm-debug.log
