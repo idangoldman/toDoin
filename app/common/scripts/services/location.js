@@ -35,7 +35,7 @@ function get_location() {
                 },
                 options);
         } else {
-            reject('not cool man...');
+            reject('no geo location support.');
         }
     });
 }
