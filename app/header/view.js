@@ -7,7 +7,6 @@ module.exports = Backbone.View.extend({
     tagName: 'header',
     template: Template,
     model: {
-        weatherTempature: Math.floor(Math.random() * 100),
         sortMenu: [{
             name: 'complete',
             link: '/sort-by/complete',
@@ -20,7 +19,7 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
-        version: '2.1.0'
+        version: '2.2.0'
     },
     initialize: function() {
         this.listenTo(this.collection, 'remove', this.render);
@@ -43,10 +42,15 @@ module.exports = Backbone.View.extend({
     },
     getWeather: function() {
         var that = this;
+
         weather().then(function(data) {
-            that.$el.find('.weather').html(data.temperature);
-        }).catch(function(data) {
-            that.$el.find('.weather').prop('title', 'Please enable geolocation to get the correct weather');
+            var class_names = 'show owf owf-' + data.icon_id;
+            var title = [data.description, 'in', data.city].join(' ');
+
+            that.$el.find('.weather')
+                .html(data.temperature)
+                .addClass(class_names)
+                .prop('title', title);
         });
     },
     render: function() {

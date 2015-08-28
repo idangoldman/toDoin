@@ -1,9 +1,9 @@
 <h1 class="logo" title="<%= version %>">ToDoin</h1>
 
-<div class="weather celsius"><%= weatherTempature %></div>
+<div class="weather celsius"></div>
 
 <div class="sort-by">
-    <i class="toggle fa-sort-amount-desc"></i>
+    <i class="toggle fa-align-left"></i>
     <nav class="menu">
         <% _.each(sortMenu, function(item) { %>
             <a href="<%= item.link %>" class="<%= item.selected ? 'selected' : '' %>"><%= item.title %></a>

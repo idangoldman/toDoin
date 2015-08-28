@@ -39,3 +39,7 @@
     @extend %fa;
     &:before { content: "\f161"; }
 }
+.fa-align-left {
+    @extend %fa;
+    &:before { content: "\f036"; }
+}
