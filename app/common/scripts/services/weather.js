@@ -3,6 +3,10 @@ var xhr = require('xhr');
 var location = require('./location');
 var store = require('./store');
 
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function two_hours_past(timestamp) {
     var now = Date.now();
     var TWO_HOURS = 60 * 60 * 2 * 1000;
@@ -41,6 +45,8 @@ function fetch_weather(latitude, longitude, units) {
                         var weather = store.set_item('weather', {
                             city: data.name,
                             country: data.sys.country,
+                            icon_id: data.weather[0].id,
+                            description: capitalizeFirstLetter(data.weather[0].description),
                             temperature: Math.ceil(data.main.temp),
                             update_at: Date.now()
                         });

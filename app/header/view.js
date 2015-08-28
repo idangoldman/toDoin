@@ -44,7 +44,13 @@ module.exports = Backbone.View.extend({
         var that = this;
 
         weather().then(function(data) {
-            that.$el.find('.weather').html(data.temperature).addClass('show');
+            var class_names = 'show owf owf-' + data.icon_id;
+            var title = [data.description, 'in', data.city].join(' ');
+
+            that.$el.find('.weather')
+                .html(data.temperature)
+                .addClass(class_names)
+                .prop('title', title);
         });
     },
     render: function() {
