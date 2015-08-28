@@ -7,7 +7,6 @@ module.exports = Backbone.View.extend({
     tagName: 'header',
     template: Template,
     model: {
-        weatherTempature: Math.floor(Math.random() * 100),
         sortMenu: [{
             name: 'complete',
             link: '/sort-by/complete',
@@ -43,10 +42,9 @@ module.exports = Backbone.View.extend({
     },
     getWeather: function() {
         var that = this;
+
         weather().then(function(data) {
-            that.$el.find('.weather').html(data.temperature);
-        }).catch(function(data) {
-            that.$el.find('.weather').prop('title', 'Please enable geolocation to get the correct weather');
+            that.$el.find('.weather').html(data.temperature).addClass('show');
         });
     },
     render: function() {

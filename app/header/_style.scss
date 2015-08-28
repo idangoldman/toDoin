@@ -24,6 +24,7 @@ header {
         font-size: 12px;
         font-weight: 600;
         margin-left: auto;
+        opacity: 0;
 
         &:after {
             display: inline-block;
@@ -35,6 +36,11 @@ header {
         }
         &.fahrenheit:after {
             content: "#{'\2109'}";
+        }
+
+        &.show {
+            opacity: 1;
+            transition: opacity 200ms ease-in;
         }
     }
 
