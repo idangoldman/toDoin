@@ -1,7 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Template = require('./template.html'),
-    weather = require('../common/scripts/services/weather');
+    Template = require('./template.html');
 
 module.exports = Backbone.View.extend({
     tagName: 'header',
@@ -40,27 +39,12 @@ module.exports = Backbone.View.extend({
             return item;
         });
     },
-    getWeather: function() {
-        var that = this;
-
-        weather().then(function(data) {
-            var class_names = 'show owf owf-' + data.icon_id;
-            var title = [data.description, 'in', data.city].join(' ');
-
-            that.$el.find('.weather')
-                .html(data.temperature)
-                .addClass(class_names)
-                .prop('title', title);
-        });
-    },
     render: function() {
         this.model.sortMenu = this.filterSortMenu(this.model.sortMenu);
 
         this.$el
             .empty()
             .append(this.template(this.model));
-
-        this.getWeather();
 
         return this;
     }
