@@ -1,7 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Template = require('./template.html'),
-    weather = require('../common/scripts/services/weather');
+    Template = require('./template.html');
 
 module.exports = Backbone.View.extend({
     tagName: 'header',
@@ -19,18 +18,33 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
-        version: '2.2.0'
+        version: '2.3.0'
+    },
+    events: {
+        'click .sort-by': 'open',
+        'click .sort-by a': 'navigate'
     },
     initialize: function() {
         this.listenTo(this.collection, 'remove', this.render);
         this.listenTo(this.collection, 'change', this.render);
         Backbone.history.on('route', this.render, this);
     },
-    events: {
-        'click .sort-by a': 'navigate'
+    open: function(event) {
+        this.$el.find('.sort-by').toggleClass('open');
+        event.preventDefault();
     },
     navigate: function(event) {
-        Backbone.history.navigate(event.target.pathname, {trigger: true});
+        var newPathname = event.target.pathname.slice(1),
+            oldPathname = Backbone.history.getFragment();
+
+        if (newPathname === oldPathname) {
+            newPathname = '';
+        }
+
+        Backbone.history.navigate(newPathname, { trigger: true });
+        this.$el.find('.sort-by').removeClass('open');
+
+        event.stopPropagation();
         event.preventDefault();
     },
     filterSortMenu: function(sortMenu) {
@@ -40,27 +54,12 @@ module.exports = Backbone.View.extend({
             return item;
         });
     },
-    getWeather: function() {
-        var that = this;
-
-        weather().then(function(data) {
-            var class_names = 'show owf owf-' + data.icon_id;
-            var title = [data.description, 'in', data.city].join(' ');
-
-            that.$el.find('.weather')
-                .html(data.temperature)
-                .addClass(class_names)
-                .prop('title', title);
-        });
-    },
     render: function() {
         this.model.sortMenu = this.filterSortMenu(this.model.sortMenu);
 
         this.$el
             .empty()
             .append(this.template(this.model));
-
-        this.getWeather();
 
         return this;
     }

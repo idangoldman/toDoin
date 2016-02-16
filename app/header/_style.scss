@@ -19,41 +19,9 @@ header {
         letter-spacing: -1px;
     }
 
-    .weather {
-        color: #666;
-        font-size: 12px;
-        font-weight: 600;
-        margin-left: auto;
-        opacity: 0;
-
-        &:after {
-            display: inline-block;
-            font-size: 65%;
-        }
-
-        &.celsius:after {
-            content: "#{'\2103'}";
-        }
-        &.fahrenheit:after {
-            content: "#{'\2109'}";
-        }
-
-        &.show {
-            opacity: 1;
-            transition: opacity 200ms ease-in;
-        }
-
-        &[class*="owf-"]:before {
-            font-size: 14px;
-            position: relative;
-            top: 3px;
-            right: 3px;
-        }
-    }
-
     .sort-by {
         font-size: 11px;
-        margin-left: 5px;
+        margin-left: auto;
         position: relative;
 
         .toggle {
@@ -96,7 +64,7 @@ header {
             }
         }
 
-        &:hover .menu {
+        &.open .menu {
             display: block;
             opacity: 1;
             transition: opacity 1s ease;
