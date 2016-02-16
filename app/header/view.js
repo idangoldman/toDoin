@@ -20,16 +20,31 @@ module.exports = Backbone.View.extend({
         }],
         version: '2.2.0'
     },
+    events: {
+        'click .sort-by': 'open',
+        'click .sort-by a': 'navigate'
+    },
     initialize: function() {
         this.listenTo(this.collection, 'remove', this.render);
         this.listenTo(this.collection, 'change', this.render);
         Backbone.history.on('route', this.render, this);
     },
-    events: {
-        'click .sort-by a': 'navigate'
+    open: function(event) {
+        this.$el.find('.sort-by').toggleClass('open');
+        event.preventDefault();
     },
     navigate: function(event) {
-        Backbone.history.navigate(event.target.pathname, {trigger: true});
+        var newPathname = event.target.pathname.slice(1),
+            oldPathname = Backbone.history.getFragment();
+
+        if (newPathname === oldPathname) {
+            newPathname = '';
+        }
+
+        Backbone.history.navigate(newPathname, { trigger: true });
+        this.$el.find('.sort-by').removeClass('open');
+
+        event.stopPropagation();
         event.preventDefault();
     },
     filterSortMenu: function(sortMenu) {
