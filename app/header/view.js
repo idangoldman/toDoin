@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
-        version: '2.3.0'
+        version: '2.3.1'
     },
     events: {
         'click .sort-by': 'open',

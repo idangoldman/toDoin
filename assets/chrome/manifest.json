@@ -1,8 +1,8 @@
 {
     "name": "ToDoin",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "manifest_version": 2,
-    "description": "App for everyday.",
+    "description": "Extension for everyday.",
     "homepage_url": "http://todo.help",
     "default_locale": "en",
     "offline_enabled": true,
