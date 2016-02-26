@@ -1,11 +1,7 @@
 header {
-    align-items: center;
-    background-color: #eee;
-    box-sizing: border-box;
-    display: flex;
-    height: $typing-oneline-height;
+    background-color: $brand-color;
+    height: $strip-height;
     left: 0;
-    padding: 10px 5px 10px 10px;
     top: 0;
     z-index: 2;
 
@@ -14,60 +10,68 @@ header {
     }
 
     .logo {
-        font-size: 16px;
-        font-weight: 400;
-        letter-spacing: -1px;
+        background-image: url("./images/logo.svg");
+        background-position: 50% 50%;
+        background-size: 40px 20px;
+        background-repeat: no-repeat;
+        height: $strip-height;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 60px;
     }
 
     .sort-by {
-        font-size: 11px;
-        margin-left: auto;
-        position: relative;
+        position: absolute;
+        right: 0;
+        top: 0;
 
-        .toggle {
-            color: $placeholder-color;
+        .icon {
+            background-image: url("./images/sort-by-menu.svg");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 30px 24px;
             cursor: pointer;
-            font-size: 13px;
-            padding: 7px 5px 5px 5px;
+            display: block;
+            height: 50px;
+            width: 50px;
         }
 
         .menu {
-            background-color: #f1f1f1;
+            background-color: $brand-hover-color;
             display: none;
-            opacity: 0;
+            padding: 12px 10px;
             position: absolute;
             right: 0;
-            top: 23px;
-
+            top: $strip-height;
 
             a {
+                color: $white-color;
                 cursor: pointer;
-                color: #000;
-                padding: 5px;
                 display: block;
-                font-size: 12px;
-                margin-bottom: 5px;
+                font-size: 16px;
+                font-style: italic;
+                line-height: 22px;
+                margin-bottom: 12px;
                 text-decoration: none;
                 white-space: nowrap;
-
-                &:hover {
-                    background-color: $background-color;
-                }
 
                 &:last-child {
                     margin-bottom: 0;
                 }
 
                 &.selected {
-                    font-weight: bold;
+                    font-weight: 600;
                 }
             }
         }
 
+        &.open, &:hover {
+            background-color: $background-hover-color;
+        }
+
         &.open .menu {
             display: block;
-            opacity: 1;
-            transition: opacity 1s ease;
         }
     }
 }
