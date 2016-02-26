@@ -40,7 +40,7 @@ header {
         .menu {
             background-color: $brand-hover-color;
             display: none;
-            padding: 12px 10px;
+            padding: 10px 0;
             position: absolute;
             right: 0;
             top: $strip-height;
@@ -49,10 +49,12 @@ header {
                 color: $white-color;
                 cursor: pointer;
                 display: block;
+                display: block;
                 font-size: 16px;
                 font-style: italic;
-                line-height: 22px;
-                margin-bottom: 12px;
+                line-height: 30px;
+                height: 30px;
+                padding: 0 10px;
                 text-decoration: none;
                 white-space: nowrap;
 
@@ -62,6 +64,10 @@ header {
 
                 &.selected {
                     font-weight: 600;
+                }
+
+                &:hover {
+                    background-color: rgba($black-color, 0.2);
                 }
             }
         }
