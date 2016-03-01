@@ -19,18 +19,25 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
+        breadcrumb: '',
         version: '2.3.1'
     },
     events: {
+        'click .logo': 'home',
         'click .sort-by': 'openSortBy',
         'click .sort-by a': 'navigate'
     },
     initialize: function() {
         this.listenTo(this.collection, 'remove', this.render);
         this.listenTo(this.collection, 'change', this.render);
+
         Backbone.history.on('route', this.render, this);
         this.closeSortBy = this.closeSortBy.bind(this);
-        $el = this.$el;
+    },
+    home: function(event) {
+        Backbone.history.navigate('', { trigger: true });
+
+        event.preventDefault();
     },
     closeSortBy: function(event) {
         if(!$(event.target).closest('.sort-by').length && !$(event.target).is('.sort-by')) {
@@ -60,15 +67,27 @@ module.exports = Backbone.View.extend({
         event.preventDefault();
     },
     filterSortMenu: function(sortMenu) {
-        return _.map(sortMenu, function(item) {
+        return _.map(sortMenu, (item) => {
             item.selected = item.link === window.location.pathname;
 
             return item;
         });
     },
-    render: function() {
-        this.model.sortMenu = this.filterSortMenu(this.model.sortMenu);
+    filterBreadcrumb: function(breadcrumbs) {
+        var item = _.where(breadcrumbs, { selected: true })[0],
+            title = !!item ? item.title : '';
 
+        return title;
+    },
+    render: function() {
+        this.model.sortMenu = this.filterSortMenu(
+            this.model.sortMenu
+        );
+
+        this.model.breadcrumb = this.filterBreadcrumb(
+            this.model.sortMenu
+        );
+console.log(this.model);
         this.$el
             .empty()
             .append(this.template(this.model));

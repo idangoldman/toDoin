@@ -11,14 +11,43 @@ header {
 
     .logo {
         background-image: url("./images/logo.svg");
-        background-position: 50% 50%;
+        background-position: 50% 43%;
         background-size: 40px 20px;
         background-repeat: no-repeat;
+        cursor: pointer;
         height: $strip-height;
         left: 0;
         position: absolute;
         top: 0;
         width: 60px;
+    }
+
+    .breadcrumb {
+        color: $white-color;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 600;
+        left: 60px;
+        line-height: 16px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        right: 50px;
+        text-overflow: ellipsis;
+        top: 17px;
+        white-space: nowrap;
+        width: #{ 320 - (60 + 50) }px;
+        // transition: opacity 1s ease;
+
+        &:before {
+            content: $heavy-right-angle;
+            font-style: normal;
+            padding-right: 5px;
+        }
+
+        &.show {
+            opacity: 1;
+        }
     }
 
     .sort-by {

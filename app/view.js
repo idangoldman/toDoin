@@ -19,9 +19,11 @@ module.exports = Backbone.View.extend({
             TypingView: TypingView
         };
 
-        this.render(_.map(elements, function(element, elementName) {
-            return ( this[elementName] = new element({collection: this.collection}) ).el;
-        }, this));
+        this.render(
+            _.map(elements, (element, elementName) => {
+                return ( this[elementName] = new element({ collection: this.collection }) ).el;
+            },
+        this));
     },
     render: function(elements) {
         this.$el
