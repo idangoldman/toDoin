@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
     },
     events: {
         'click .check-box': 'toggleComplete',
-        'dblclick .field': 'editField'
+        'dblclick .title': 'editField'
     },
     initialize: function() {
         this.render();
