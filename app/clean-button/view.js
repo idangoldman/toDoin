@@ -11,30 +11,6 @@ module.exports = Backbone.View.extend({
     events: {
         'click': 'cleanCompleteModels'
     },
-    eatText: [{
-        one: 'Cookie',
-        many: 'Cookies'
-    },
-    {
-        one: 'Walnut',
-        many: 'Walnuts'
-    },
-    {
-        one: 'Apple',
-        many: 'Apples'
-    },
-    {
-        one: 'Cucumber',
-        many: 'Cucumbers'
-    },
-    {
-        one: 'Banana',
-        many: 'Bananas'
-    },
-    {
-        one: 'Tomato',
-        many: 'Tomatoes'
-    }],
     initialize: function() {
         this.render();
         this.listenTo(this.collection, 'change:complete', this.render);
@@ -51,30 +27,13 @@ module.exports = Backbone.View.extend({
     toggleShow: function() {
         this.$el.toggleClass('show', !!this.collection.completeCount);
     },
-    pickButtonText: function(completeCount) {
-        var eatText = _.sample(this.eatText),
-            buttonText = '',
-            noun = 'a';
-
-        if (completeCount > 1) {
-            buttonText = ['Eat', completeCount,  eatText.many + '.'].join(' ');
-        } else {
-            if (eatText.one === 'Apple') {
-                noun = 'an';
-            }
-
-            buttonText = ['Eat', noun, eatText.one + '.'].join(' ');
-        }
-        return buttonText;
-    },
     render: function() {
-        var completeCount = this.collection.completeCount,
-            buttonText = this.pickButtonText(completeCount);
+        var completeCount = this.collection.completeCount;
 
         this.$el
             .empty()
             .toggleClass('show', !!completeCount)
-            .append(buttonText);
+            .html('Clear Complete');
 
         return this;
     }
