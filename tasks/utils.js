@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     bump = require('gulp-bump'),
     clean = require('gulp-clean'),
-
     config = require('../settings/config');
 
 gulp.task('build', ['clean-build'], function() {
@@ -31,16 +30,6 @@ gulp.task('images', function() {
     return gulp.src([config.path.images + '/**/*.{png,svg}', !config.path.images + '/icons'])
         .pipe(gulp.dest(config.path.build + '/images'));
 });
-
-// gulp.task('version-bump', function() {
-//     gulp.src([config.path.chrome + '/manifest.json'])
-//         .pipe(bump({type: 'patch'}))
-//         .pipe(gulp.dest(config.path.chrome));
-
-//     gulp.src([config.path.app + '/../package.json'])
-//         .pipe(bump({type: 'patch'}))
-//         .pipe(gulp.dest(config.path.root));
-// });
 
 gulp.task('watcher', function() {
     gulp.watch(config.path.app + '/**/*.html', ['index-tpl', 'scripts']);

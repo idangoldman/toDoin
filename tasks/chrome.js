@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     zip = require('gulp-zip'),
     rename = require("gulp-rename"),
-
     config = require('../settings/config');
 
 gulp.task('chrome-copy', ['clean-build', 'build', 'icons'], function() {
@@ -29,7 +28,3 @@ gulp.task('chrome-zip', function() {
         .pipe(zip(distFileName))
         .pipe(gulp.dest(config.path.dist));
 });
-
-// gulp.task('chrome-zip', ['chrome-copy'], function() {
-//     gulp.start('zip');
-// });

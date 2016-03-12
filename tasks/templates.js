@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     swig = require('gulp-swig'),
     rename = require("gulp-rename"),
-
     config = require('../settings/config');
 
 gulp.task('index-tpl', function() {

@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 
 require('./tasks/chrome');
-require('./tasks/web');
 
 require('./tasks/styles');
 require('./tasks/scripts');
