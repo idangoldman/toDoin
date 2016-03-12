@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
         'click .toggle-privacy': 'togglePrivacy'
     },
     togglePrivacy: function(event) {
-        this.$('.toggle-privacy').toggleClass('sunglasses');
+        this.$('.toggle-privacy').toggleClass('active');
         this.$('.title').focus();
         event.preventDefault();
     },
@@ -93,7 +93,7 @@ module.exports = Backbone.View.extend({
             model.title = value;
 
             // check if private
-            if (this.$('.sunglasses').length) {
+            if (this.$('.active').length) {
                 model.privacy = true;
             }
 

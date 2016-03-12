@@ -12,7 +12,8 @@ gulp.task('jshint', function() {
         .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('scripts', ['jshint'], function() {
+// gulp.task('scripts', ['jshint'], function() {
+gulp.task('scripts', function() {
     return browserify({
             entries: [config.path.app + '/script.js'],
             debug: true,

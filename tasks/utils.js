@@ -28,7 +28,7 @@ gulp.task('fonts', function() {
 });
 
 gulp.task('images', function() {
-    return gulp.src([config.path.images + '/**/*.png', !config.path.images + '/icons'])
+    return gulp.src([config.path.images + '/**/*.{png,svg}', !config.path.images + '/icons'])
         .pipe(gulp.dest(config.path.build + '/images'));
 });
 

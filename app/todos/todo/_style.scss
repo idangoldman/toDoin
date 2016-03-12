@@ -1,31 +1,42 @@
 .todo {
-    $root: &;
     @include clearfix;
 
     align-items: flex-start;
-    background-color: $background-color;
-    border-bottom: 1px solid #eee;
+    box-shadow: inset 0 -2px 0 0 rgba($black-color, 0.1);
     display: flex;
     position: relative;
+    transition: background-color 100ms ease-in;
 
-    &, .field {
-        min-height: $typing-oneline-height;
-        white-space: pre-wrap;
-        word-break: break-word;
+
+    &, .title {
+        min-height: $row-height;
+    }
+
+    &:hover {
+        background-color: rgba($black-color, 0.1);
     }
 
     .check-box {
+        background-image: url('./images/checkbox.svg');
+        background-position: 12px 18px;
+        background-repeat: no-repeat;
+        background-size: 21px 15px;
         flex-shrink: 0;
+        height: 48px;
+        width: 43px;
     }
 
-    .field {
+    .title {
         box-sizing: border-box;
+        cursor: pointer;
         display: block;
         flex-grow: 1;
-        padding: 9px 12px 9px 0;
+        padding: 14px 10px 14px 0;
+        white-space: pre-wrap;
+        word-break: break-word;
 
         &.privacy {
-            filter: blur(5px);
+            filter: blur(3px);
             transition: 0.1s 0.4s filter ease-in;
             transition: 0.1s 0.4s -webkit-filter ease-in;
 
@@ -33,42 +44,19 @@
                 filter: blur(0);
             }
         }
-
-        // @at-root #{$root}.rtl .field {
-        //     padding-left: 12px;
-        //     padding-right: 0;
-        // }
     }
 
-
-    &.complete .field {
-         text-decoration: line-through;
-    }
-
-    // moving side indication for task
-    &:hover:before {
-        background-color: rgba($text-color, 0.2);
-        bottom: 0;
-        content: '';
-        cursor: move;
-        display: block;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 6px;
-
-        @at-root #{$root}.complete:hover:before {
-            background-color: $complete-color;
+    &.complete {
+        .check-box {
+            background-image: url('./images/checkbox-complete.svg');
         }
-
-        // @at-root #{$root}.rtl:hover:before {
-        //     right: 0;
-        //     left: auto;
-        // }
+        .title {
+            text-decoration: line-through;
+        }
     }
-
 }
 
 .sortable-placeholder {
-    min-height: $typing-oneline-height;
+    min-height: $row-height;
+    box-shadow: inset 0 -2px 0 0 rgba($black-color, 0.1);
 }

@@ -1,7 +1,11 @@
-<h1 class="logo" title="<%= version %>">ToDoin</h1>
+<a class="logo" title="<%= version %>"></a>
+
+<blockquote class="breadcrumb <%= !!breadcrumb ? 'show' : '' %>">
+    <%= breadcrumb %>
+</blockquote>
 
 <div class="sort-by">
-    <i class="toggle fa-align-left"></i>
+    <i class="icon"></i>
     <nav class="menu">
         <% _.each(sortMenu, function(item) { %>
             <a href="<%= item.link %>" class="<%= item.selected ? 'selected' : '' %>"><%= item.title %></a>

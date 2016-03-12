@@ -1,5 +1,4 @@
-var $ = require('jquery'),
-    Backbone = require('backbone');
+var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
     defaults: {
@@ -22,5 +21,5 @@ module.exports = Backbone.Model.extend({
         }
 
         return this.save(saveParams);
-    },
+    }
 });

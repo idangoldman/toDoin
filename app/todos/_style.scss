@@ -1,14 +1,14 @@
 .todos {
     @extend %no-select;
 
-    bottom: $typing-oneline-height;
+    bottom: $row-height;
     left: 0;
     overflow: hidden;
-    top: $typing-oneline-height;
+    top: $row-height;
     z-index: 1;
 
     &.two-lines {
-        bottom: $typing-twoline-height;
+        bottom: $row-height + 24px;
     }
 
     .list {
