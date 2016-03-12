@@ -1,4 +1,4 @@
-$bottom-space: 10px;
+$bottom-space: 20px;
 
 .clean-button {
     background-color: $brand-color;
@@ -32,6 +32,6 @@ $bottom-space: 10px;
     }
 
     &.bottom-double-space {
-        bottom: $typing-twoline-height + $bottom-space;
+        bottom: $row-height + 24px + $bottom-space;
     }
 }
