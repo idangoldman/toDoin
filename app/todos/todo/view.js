@@ -1,7 +1,7 @@
 var Backbone = require('backbone'),
     Template = require('./template.html'),
-    Utility = require('../../utility/.main'),
-    Blah = require('../../../blah/.main');
+    Utility = require('common/utility/.main'),
+    Blah = require('common/blah/.main');
 
 module.exports = Backbone.View.extend({
     className: 'todo',

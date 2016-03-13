@@ -3,7 +3,7 @@ var _ = require('underscore'),
     TodoModel = require('../todos/todo/model'),
     Template = require('./template.html'),
 
-    Utility = require('../utility/.main');
+    Utility = require('common/utility/.main');
 
 module.exports = Backbone.View.extend({
     tagName: 'form',

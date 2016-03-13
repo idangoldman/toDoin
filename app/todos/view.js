@@ -3,7 +3,7 @@ var _ = require('underscore'),
     $ = require('jquery'),
     Template = require('./template.html'),
     TodoView = require('./todo/view'),
-    Utility = require('../utility/.main'),
+    Utility = require('common/utility/.main'),
 
     // This is global
     Sortable = require('../../bower_components/html5sortable/jquery.sortable');
