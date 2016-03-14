@@ -86,7 +86,7 @@ module.exports = Backbone.View.extend({
         this.model.breadcrumb = this.filterBreadcrumb(
             this.model.sortMenu
         );
-console.log(this.model);
+
         this.$el
             .empty()
             .append(this.template(this.model));
