@@ -1,11 +1,13 @@
 // color scheme
 
-$background-hover-color: rgba($black-color, 0.1);
 $black-color: #212121;
 $brand-color: #4caf50;
 $brand-hover-color: #419e42;
-$browser-action-badge-color: #9E9E9E;
+$browser-action-badge-color: #9e9e9e;
 $hash-color: #673ab7;
 $link-color: #1976d2;
-$text-hover-color: rgba($black-color, 0.4);
 $white-color: #fff;
+
+// Based on black color
+$background-hover-color: rgba($black-color, 0.1);
+$text-hover-color: rgba($black-color, 0.4);
