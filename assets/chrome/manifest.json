@@ -1,6 +1,6 @@
 {
     "name": "ToDoin",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "manifest_version": 2,
     "description": "Extension for everyday.",
     "homepage_url": "http://todo.help",
@@ -18,7 +18,7 @@
     },
     "browser_action": {
         "default_icon": "icons/icon16.png",
-        "default_title": "ToDoin 3.1.0",
+        "default_title": "ToDoin 3.2.0",
         "default_popup": "index.html"
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
