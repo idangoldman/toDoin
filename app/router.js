@@ -5,7 +5,7 @@ var Backbone = require('backbone'),
     Router = Backbone.Router.extend({
         initialize: function() {
             TodosCollection.fetch({reset:true, async:false});
-            TodosCollection.updateCount();
+            TodosCollection.updateBadgeCount();
 
             this.application = new AppView({collection: TodosCollection});
 
