@@ -38,7 +38,10 @@ thumb.db
 *.sublime-project
 *.sublime-workspace
 
-node_modules
+
+/node_modules/*
+!/node_modules/common
+!/node_modules/app
 dist
 .sass-cache
 bower_components

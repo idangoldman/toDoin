@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
             selected: false
         }],
         breadcrumb: '',
-        version: '3.0.0'
+        version: '3.1.0'
     },
     events: {
         'click .logo': 'home',

@@ -1,6 +1,6 @@
 {
     "name": "ToDoin",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "manifest_version": 2,
     "description": "Extension for everyday.",
     "homepage_url": "http://todo.help",
@@ -12,6 +12,9 @@
         "48": "icons/icon48.png",
         "64": "icons/icon64.png",
         "128": "icons/icon128.png"
+    },
+    "background": {
+        "page": "index.html"
     },
     "browser_action": {
         "default_icon": "icons/icon16.png",

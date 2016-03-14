@@ -1,6 +1,6 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
-    Utility = require('../utility/.main');
+    Utility = require('common/utility/.main');
 
 module.exports = Backbone.View.extend({
     tagName: 'button',

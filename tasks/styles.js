@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     compass = require('gulp-compass'),
     autoprefixer = require('gulp-autoprefixer'),
-
     config = require('../settings/config');
 
 gulp.task('styles-vendors', function() {
