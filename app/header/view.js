@@ -19,8 +19,7 @@ module.exports = Backbone.View.extend({
             title: 'Sort by date',
             selected: false
         }],
-        breadcrumb: '',
-        version: '3.1.0'
+        breadcrumb: ''
     },
     events: {
         'click .logo': 'home',
