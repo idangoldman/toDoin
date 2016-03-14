@@ -2,23 +2,24 @@ var _ = require('underscore'),
     Backbone = require('backbone'),
     Storage = require('backbone.localstorage'),
     TodoModel = require('./todo/model'),
+    badgeCounter = require('common/services/chrome/badge-counter'),
 
     Collection = Backbone.Collection.extend({
         localStorage: new Storage('ToDoin'),
         model: TodoModel,
         initialize: function() {
             this.on('add', this.onModelAdd);
-            this.on('change:complete', this.updateCount);
+            this.on('change:complete', this.updateBadgeCount);
         },
         cleanCompleted: function() {
             this.completeCount = 0;
-            return _.invoke(this.where({complete: true}), 'destroy');
+            return _.invoke(this.where({ complete: true }), 'destroy');
         },
         getTodoOrder: function() {
             return this.length > 1 ? this.at(this.length - 2).get('order') + 1 : 1;
         },
         onModelAdd: function(model) {
-            this.remainCount = this.remainCount + 1;
+            badgeCounter.plusOne();
             model.set('order', this.getTodoOrder());
         },
         reOrder: function(hash) {
@@ -32,9 +33,11 @@ var _ = require('underscore'),
                 return direction === 'asc' ? model.get(type) : !model.get(type);
             });
         },
-        updateCount: function() {
-            this.remainCount = this.where({complete: false}).length;
-            this.completeCount = this.where({complete: true}).length;
+        updateBadgeCount: function() {
+            var numberOfRemain = this.where({ complete: false }).length;
+            this.completeCount = this.where({ complete: true }).length;
+
+            badgeCounter.setCount(numberOfRemain);
         }
     });
 
