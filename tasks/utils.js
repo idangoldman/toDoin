@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-    bump = require('gulp-bump'),
     clean = require('gulp-clean'),
     config = require('../settings/config');
 
