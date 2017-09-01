@@ -52,3 +52,4 @@ _build.zip
 _dist
 npm-debug.log
 package-lock.json
+info.js
