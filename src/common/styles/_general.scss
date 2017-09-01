@@ -1,0 +1,100 @@
+*, fieldset {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img,
+fieldset {
+    border: none;
+}
+
+a {
+    outline: none;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+body, button, input[type="text"], select, textarea {
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Open Sans', 'Open Sans Hebrew', Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+// html {
+//     -ms-text-size-adjust: 100%;
+//     -webkit-text-size-adjust: 100%;
+// }
+// body {
+//     font-weight: 400;
+//     margin: 0;
+//     font: 16px/1 'Nunito Sans', sans-serif;
+//     -moz-osx-font-smoothing: grayscale;
+//     -webkit-font-smoothing: antialiased;
+// }
+// h1,
+// h2,
+// h3,
+// h4,
+// p,
+// div,
+// span,
+// blockquote,
+// figure,
+// ol,
+// ul {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+//
+// }
+// main,
+// li {
+//     display: block;
+// }
+// h1,
+// h2,
+// h3,
+// h4 {
+//     font-size: inherit;
+// }
+// strong {
+//     font-weight: bold;
+// }
+// a,
+// button,
+// :active,
+// :hover {
+//     color: inherit;
+//     transition: 300ms;
+// }
+// a {
+//     text-decoration: none;
+// }
+// button {
+//     overflow: visible;
+//     border: 0;
+//     font: inherit;
+//     -webkit-font-smoothing: inherit;
+//     letter-spacing: inherit;
+//     background: none;
+//     cursor: pointer;
+// }
+// ::-moz-focus-inner {
+//     padding: 0;
+//     border: 0;
+// }
+// :focus {
+//     outline: 0;
+// }
+// img {
+//     max-width: 100%;
+//     height: auto;
+//     border: 0;
+// }
+//

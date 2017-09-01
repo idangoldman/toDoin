@@ -1,6 +1,6 @@
 {
-    "name": "ToDoin",
-    "version": "3.2.2",
+    "name": "toDoin",
+    "version": "4.0.0",
     "manifest_version": 2,
     "description": "Keep Things Simple.",
     "homepage_url": "http://todo.help",
@@ -18,8 +18,8 @@
     },
     "browser_action": {
         "default_icon": "icons/icon16.png",
-        "default_title": "ToDoin 3.2.2",
-        "default_popup": "index.html"
+        "default_title": "toDoin 4.0.0",
+        "default_popup": "popup.html"
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions": [

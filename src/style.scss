@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+// Simple reset, colors and extends
+@import "common/styles/fonts";
+@import "common/styles/general";
+@import "common/styles/variables";
+@import "common/styles/colors";
+@import "common/styles/extend";
+
+// Application
+body, #page {
+    height: 568px;
+    width: 320px;
+}
+
+#page {
+    background-color: $white-color;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    & > * {
+        position: absolute;
+        width: 100%;
+    }
+
+    @import "header/style";
+    // @import "todos/style";
+    // @import "clean-button/style";
+    // @import "typing/style";
+}
