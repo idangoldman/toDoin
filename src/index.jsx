@@ -12,7 +12,7 @@ import 'frontend/style.scss';
 // Components
 import Header from 'src/header';
 import Todos from 'src/todos';
-// import CleanButton from 'src/cleanButton';
+// import HelloButton from 'src/HelloButton';
 // import Typing from 'src/typing';
 
 // App Render

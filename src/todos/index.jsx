@@ -14,14 +14,23 @@ export default class Todos extends React.Component {
     constructor( props ) {
         super( props );
 
-        this.onTodoChange = this.onTodoChange.bind( this );
+        this.onTodoComplete = this.onTodoComplete.bind( this );
+        this.onTodoOpen = this.onTodoOpen.bind( this );
+    }
+
+    onTodoComplete({ id, complete }) {
+        // this.props.dispatch( todoUpdateAction({ id, complete }) )
+    }
+
+    onTodoOpen( id ) {
+        // this.props.dispatch( todoOpenAction( id ) );
     }
 
     render() {
         return (
-            <section className="todos">
+            <ul className="todos">
                 { this.renderTodos() }
-            </section>
+            </ul>
         );
     }
 
@@ -31,8 +40,9 @@ export default class Todos extends React.Component {
         return allIds.map(( id, index ) => (
             <Todo
                 key={ index }
-                item={ byId[ id ] }
-                onChange={ this.onTodoChange }
+                { ...byId[ id ] }
+                onComplete={ this.onTodoComplete }
+                onOpen={ this.onTodoOpen }
             />
         );
     }
