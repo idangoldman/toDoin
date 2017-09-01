@@ -1,12 +1,11 @@
 import React from 'react';
 
 
-export default class ShiftStats extends React.Component {
+export default class Header extends React.Component {
     constructor( props ) {
         super( props );
 
-        this.onFieldUpdate = this.onFieldUpdate.bind( this );
-        this.onFormSubmit = this.onFormSubmit.bind( this );
+        this.onClick = this.onClick.bind( this );
     }
 
     onClick( event ) {
