@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import CheckboxSVG = 'common/images/checkbox';
+import CheckboxCompleteSVG = 'common/images/checkbox-complete';
+
 
 export default class Todo extends React.Component {
     static propTypes = {
@@ -58,9 +61,14 @@ export default class Todo extends React.Component {
         let classNames = cx('checkbox', {
             'complete': complete,
         });
+        let SVG = complete ? CheckboxCompleteSVG : CheckboxSVG;
 
         return (
-            <i className={ classNames } onClick={ this.onComplete }></i>
+            <i className={ classNames } onClick={ this.onComplete }>
+                <svg viewBox="{ SVG.viewBox }">
+                    <use xlink:href="#{ SVG.id }" />
+                </svg>
+            </i>
         )
     }
 

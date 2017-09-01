@@ -4,7 +4,7 @@
 }
 
 .no-select {
-    @@extend %no-select;
+    @extend %no-select;
 }
 
 .ltr {

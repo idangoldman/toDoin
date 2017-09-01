@@ -3,14 +3,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const path = require('path');
-const webpack = require( 'webpack' );
 
 
 module.exports = {
     devtool: 'eval',
 
     entry: {
-        popup: path.resolve( __dirname, 'src/popup.jsx')
+        popup: path.resolve( __dirname, 'src/index.jsx')
         // inject: path.resolve( __dirname, 'src/inject.js' ),
         // background: path.resolve( __dirname, 'src/background.js' ),
     },
@@ -20,7 +19,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [ /.jsx?$/, '.json' ],
+        extensions: [ '.svg', '.js', '.jsx', '.json' ],
         alias: {
             src: path.resolve( __dirname + '/src' )
         }
@@ -44,6 +43,10 @@ module.exports = {
                         'sass-loader'
                     ]
                 })
+            },
+            {
+                test   : /\.(woff(2)?)(\?[a-z0-9]+)?$/,
+                loader : 'file-loader'
             }
         ]
     },
@@ -62,10 +65,10 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            filename: 'popup.html',
+            filename: 'index.html',
             hash: true,
             showErrors: false,
-            template: './popup.html',
+            template: './index.html',
             xhtml: true
         })
     ]

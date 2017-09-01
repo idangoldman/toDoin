@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/.bin/webpack --progress -p --colors"
+    "start": "node ./node_modules/.bin/webpack --progress -p --colors --display-error-details"
   },
   "author": "idan.goldman",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "cssnano": "^3.10.0",
     "deepmerge": "^1.5.1",
@@ -42,11 +43,11 @@
     "sass-loader": "^6.0.6",
     "shortid": "^2.2.8",
     "style-loader": "^0.18.2",
+    "svg-sprite-loader": "^3.2.5",
     "universal-cookie": "^2.0.8",
     "url-loader": "^0.5.9",
     "webpack": "^3.4.0",
-    "webpack-dev-server": "^2.6.1",
-    "webpack-hot-middleware": "^2.18.2",
+    "webpack-chrome-extension-reloader": "^0.5.0",
     "webpack-merge": "^4.1.0"
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LogoSVG from 'common/images/logo'
+
 
 export default class Header extends React.Component {
     constructor( props ) {
@@ -17,7 +19,11 @@ export default class Header extends React.Component {
     render() {
         return (
             <header className="header">
-                <a class="logo" onClicl={ this.onClick }></a>
+                <button class="logo" onClicl={ this.onClick }>
+                    <svg viewBox="{ LogoSVG.viewBox }">
+                        <use xlink:href="#{ LogoSVG.id }" />
+                    </svg>
+                </button>
             </header>
         );
     }

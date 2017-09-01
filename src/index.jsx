@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import store from 'src/store';
 
 // Main Style
-import 'frontend/style.scss';
+import 'src/style.scss';
 
 // Components
 import Header from 'src/header';
