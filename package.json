@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./node_modules/.bin/webpack-dev-server --env=dev",
-    "prod": "rm -fr ./dist && node ./node_modules/.bin/webpack --env=prod --progress -p --colors"
+    "start": "node ./node_modules/.bin/webpack --progress -p --colors"
   },
   "author": "idan.goldman",
   "license": "ISC",

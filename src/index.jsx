@@ -11,7 +11,7 @@ import 'frontend/style.scss';
 
 // Components
 import Header from 'src/header';
-// import Todos from 'src/todos';
+import Todos from 'src/todos';
 // import CleanButton from 'src/cleanButton';
 // import Typing from 'src/typing';
 
@@ -21,6 +21,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Route path="/" component={ Header } />
+                <Route path="/" component={ Todos } />
             </div>
         </BrowserRouter>
     </Provider>,
