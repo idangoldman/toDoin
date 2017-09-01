@@ -7,5 +7,4 @@ Hey friends, thanks for helping to make it happen. Here is some guidance to help
 install node -
 http://nodejs.org/download/
 
-npm install -g bower
 npm install

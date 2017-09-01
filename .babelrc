@@ -1,0 +1,38 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 versions"
+                    ]
+                },
+                "useBuiltIns": true
+            }
+        ],
+        [
+            "react"
+        ]
+    ],
+    "plugins": [
+        [
+            "transform-object-rest-spread",
+            {
+                "useBuiltIns": true
+            }
+        ],
+        [
+            "transform-decorators-legacy",
+            {
+                "userBuiltIns": true
+            }
+        ],
+        [
+            "transform-class-properties",
+            {
+                "spec": true
+            }
+        ]
+    ]
+}

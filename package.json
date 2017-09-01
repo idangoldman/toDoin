@@ -1,47 +1,53 @@
 {
-  "name": "ToDoin",
-  "version": "3.2.2",
-  "dependencies": {
-    "backbone": "^1.1.2",
-    "backbone.localstorage": "^1.1.16",
-    "bower": "^1.3.12",
-    "browserify": "^8.1.1",
-    "browserify-shim": "^3.8.2",
-    "class.extend": "^0.9.1",
-    "gulp": "^3.8.10",
-    "gulp-autoprefixer": "^2.0.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-compass": "^2.0.1",
-    "gulp-debug": "^2.0.1",
-    "gulp-jshint": "^1.9.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-ssh": "^0.5.1",
-    "gulp-swig": "^0.7.4",
-    "gulp-util": "^3.0.1",
-    "gulp-zip": "^2.0.2",
-    "jasmine-core": "^2.2.0",
-    "jasmine-node": "^2.0.0",
-    "jquery": "^2.1.3",
-    "jshint-stylish": "^1.0.0",
-    "jstify": "^0.7.0",
-    "object-assign": "^2.0.0",
-    "object-assign": "^2.1.1",
-    "rsvp": "^3.0.21",
-    "underscore": "^1.7.0",
-    "vinyl-source-stream": "^1.0.0",
-    "xhr": "^2.0.3"
+  "name": "toDoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./node_modules/.bin/webpack-dev-server --env=dev",
+    "prod": "rm -fr ./dist && node ./node_modules/.bin/webpack --env=prod --progress -p --colors"
   },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "./bower_components/html5sortable/jquery.sortable.js": {
-      "exports": null,
-      "depends": [
-        "jquery:jQuery"
-      ]
-    }
+  "author": "idan.goldman",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "axios": "^0.16.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.28.4",
+    "cssnano": "^3.10.0",
+    "deepmerge": "^1.5.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "image-webpack-loader": "^3.3.1",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "^1.3.1",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.3.0",
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6",
+    "shortid": "^2.2.8",
+    "style-loader": "^0.18.2",
+    "universal-cookie": "^2.0.8",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.0",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-hot-middleware": "^2.18.2",
+    "webpack-merge": "^4.1.0"
   }
 }

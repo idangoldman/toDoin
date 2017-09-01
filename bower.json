@@ -1,8 +1,0 @@
-{
-  "name": "ToDoin",
-  "dependencies": {
-    "normalize-css": "~3.0.1",
-    "html5sortable": "*"
-  },
-  "private": true
-}
