@@ -9,6 +9,7 @@ export function todoCompleteAction({ id, complete }) {
         }
     }
 }
+
 //
 // export function todoAddAction({}) {
 //     return {
@@ -19,11 +20,9 @@ export function todoCompleteAction({ id, complete }) {
 //     }
 // }
 //
-// export function todoDeleteAction({}) {
-//     return {
-//         type: 'TODO_DELETE',
-//         payload: {
-//
-//         }
-//     }
-// }
+
+export function clearCompleteAction() {
+    return {
+        type: 'CLEAR_COMPLETE'
+    }
+}

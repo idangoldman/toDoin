@@ -6,7 +6,8 @@ $bottom-space: 20px;
     border: none;
     bottom: 75px;
     color: $white-color;
-    display: none;
+    cursor: pointer;
+    display: inline-block;
     font-style: italic;
     font-weight: 600;
     height: 40px;
@@ -25,10 +26,6 @@ $bottom-space: 20px;
     &:focus, &:hover {
         background-color: $brand-hover-color;
         color: $white-color;
-    }
-
-    &.show {
-        display: inline-block;
     }
 
     &.bottom-double-space {

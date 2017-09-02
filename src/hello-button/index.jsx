@@ -1,24 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { clearCompleteAction } from 'src/todos/actions';
 
 
-export default class Header extends React.Component {
+@connect(( store ) => {
+    return {
+        todos: store.todos
+    };
+})
+export default class HelloButton extends React.Component {
     constructor( props ) {
         super( props );
 
-        this.onLogoClick = this.onLogoClick.bind( this );
+        this.onClick = this.onClick.bind( this );
     }
 
-    onLogoClick( event ) {
+    onClick( event ) {
         event.preventDefault();
 
-        console.log('toDo: onLogoClick, navigate to top of the list');
+        this.props.dispatch( clearCompleteAction() );
     }
 
     render() {
-        return (
-            <header className="header">
-                <button className="logo" onClick={ this.onLogoClick }>toDoin</button>
-            </header>
+        return ! HelloButton.show( this.props.todos ) ? null : (
+            <button className="hello-button" onClick={ this.onClick }>
+                Clear Complete
+            </button>
         );
+    }
+
+    static show( todos ) {
+        return todos.allIds.filter( id => todos.byId[ id ].complete ).length > 0;
     }
 }

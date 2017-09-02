@@ -10,7 +10,7 @@ export default function TodosReducer( state = stub || defaultState, action ) {
     switch ( action.type ) {
         case 'TODO_COMPLETE':
             let { id, complete } = action.payload;
-            
+
             return {
                 ...state,
                 byId: {
@@ -27,7 +27,11 @@ export default function TodosReducer( state = stub || defaultState, action ) {
             //     allIds: state.allIds.concat([ id ]);
             // }
         break;
-        case 'TODO_DELETE':
+        case 'CLEAR_COMPLETE':
+            return {
+                ...state,
+                allIds: state.allIds.filter( id => ! state.byId[ id ].complete )
+            };
         break;
         default:
             return state;
