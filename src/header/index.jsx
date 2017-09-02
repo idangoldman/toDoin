@@ -1,5 +1,6 @@
 import React from 'react';
 
+import INFO from 'root/info';
 import LogoSVG from 'common/images/logo.svg';
 
 
@@ -19,7 +20,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <header className="header">
-                <button class="logo" onClicl={ this.onClick }>
+                <button className="logo" onClick={ this.onClick } title={ INFO.name + ' ' + INFO.version }>
                     <svg><use xlinkHref={ LogoSVG } /></svg>
                 </button>
             </header>

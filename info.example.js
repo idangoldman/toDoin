@@ -1,7 +1,7 @@
-import PACKAGE_INFO from 'package';
+import PACKAGE_INFO from './package';
 
 
-export const INFO = {
+export default {
     name: PACKAGE_INFO.name,
     author: PACKAGE_INFO.author,
     version: PACKAGE_INFO.version,

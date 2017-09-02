@@ -1,6 +1,8 @@
 header {
+    align-items: center;
     background-color: $brand-color;
-    height: $row-height;
+    display: flex;
+    height: 40px;
     left: 0;
     top: 0;
     z-index: 2;
@@ -10,11 +12,11 @@ header {
     }
 
     .logo {
+        box-sizing: content-box;
         cursor: pointer;
-        height: $row-height;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 60px;
+        display: inline-block;
+        height: 20px;
+        padding: 10px;
+        width: 40px;
     }
 }

@@ -25,6 +25,18 @@ body, button, input[type="text"], select, textarea {
     font-size: 16px;
 }
 
+button {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+}
+
+
+svg {
+    display: inline-block;
+    height: inherit;
+    width: inherit;
+}
 
 // html {
 //     -ms-text-size-adjust: 100%;

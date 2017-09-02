@@ -17,7 +17,7 @@ import Todos from 'src/todos';
 
 // App Render
 ReactDOM.render(
-    <Provider store={ store() }>
+    <Provider store={ store }>
         <BrowserRouter>
             <div>
                 <Route path="/" component={ Header } />

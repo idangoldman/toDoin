@@ -7,6 +7,7 @@ const path = require('path');
 
 module.exports = {
     devtool: 'source-map',
+    watch: true,
 
     entry: {
         popup: path.resolve( __dirname, 'src/index.jsx')
@@ -22,8 +23,9 @@ module.exports = {
     resolve: {
         extensions: [ '.html', '.svg', '.js', '.jsx', '.json' ],
         alias: {
-            src: path.resolve( __dirname + '/src' ),
-            common: path.resolve( __dirname + '/src/common' )
+            common: path.resolve( __dirname + '/src/common' ),
+            root: path.resolve( __dirname ),
+            src: path.resolve( __dirname + '/src' )
         }
     },
 
@@ -64,7 +66,7 @@ module.exports = {
     },
 
     plugins: [
-        new ChromeExtensionReloader(),
+        // new ChromeExtensionReloader(),
 
         new CopyWebpackPlugin([{
             from: path.resolve( __dirname + '/chrome/' ),
