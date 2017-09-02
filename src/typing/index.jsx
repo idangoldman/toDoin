@@ -5,7 +5,6 @@ import cx from 'classnames';
 
 import { todoUpdateAction } from 'src/todos/actions';
 import { which as whichKeystroke } from 'src/typing/helpers/key-stroke';
-import GlassesSVG from './glasses.svg';
 
 
 @connect(( store ) => {
@@ -36,7 +35,6 @@ export default class Typing extends React.Component {
             description: props.description
         };
 
-        this.onPrivacyClick = this.onPrivacyClick.bind( this );
         this.onTyping = this.onTyping.bind( this );
         this.onChange = this.onChange.bind( this );
         this.onSubmit = this.onSubmit.bind( this );
@@ -63,12 +61,6 @@ export default class Typing extends React.Component {
         }
     }
 
-    onPrivacyClick( event ) {
-        event.preventDefault();
-
-        // this.props.dispatch( clearCompleteAction() );
-    }
-
     onSubmit( event ) {
         event.preventDefault();
     }
@@ -79,11 +71,8 @@ export default class Typing extends React.Component {
     }
 
     render() {
-        let { placeholder, privacyDescription, privacy } = this.props;
+        let { placeholder } = this.props;
         let { description } = this.state;
-        let privacyClassName = cx('privacy', {
-            'checked': privacy
-        });
 
         return (
             <form className="typing" onSubmit={ this.onSubmit }>
@@ -94,11 +83,6 @@ export default class Typing extends React.Component {
                     onChange={ this.onChange }
                     value={ description }
                 />
-                <button className={ privacyClassName }
-                        onClick={ this.onPrivacyClick }
-                        title={ privacyDescription }>
-                    <svg><use xlinkHref={ GlassesSVG } /></svg>
-                </button>
             </form>
         );
     }
