@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import CheckboxSVG = 'common/images/checkbox';
-import CheckboxCompleteSVG = 'common/images/checkbox-complete';
+import CheckboxSVG from 'common/images/checkbox.svg';
+import CheckboxCompleteSVG from 'common/images/checkbox-complete.svg';
 
 
 export default class Todo extends React.Component {
@@ -65,9 +65,7 @@ export default class Todo extends React.Component {
 
         return (
             <i className={ classNames } onClick={ this.onComplete }>
-                <svg viewBox="{ SVG.viewBox }">
-                    <use xlink:href="#{ SVG.id }" />
-                </svg>
+                <svg><use xlinkHref={ SVG } /></svg>
             </i>
         )
     }

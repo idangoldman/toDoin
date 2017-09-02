@@ -44,6 +44,6 @@ export default class Todos extends React.Component {
                 onComplete={ this.onTodoComplete }
                 onOpen={ this.onTodoOpen }
             />
-        );
+        ));
     }
 }

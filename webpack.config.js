@@ -6,7 +6,7 @@ const path = require('path');
 
 
 module.exports = {
-    devtool: 'eval',
+    devtool: 'source-map',
 
     entry: {
         popup: path.resolve( __dirname, 'src/index.jsx')
@@ -16,12 +16,14 @@ module.exports = {
     output: {
         path: path.resolve( __dirname, 'dist' ),
         filename: '[name].js',
+        publicPath: path.resolve( __dirname, 'dist' )
     },
 
     resolve: {
-        extensions: [ '.svg', '.js', '.jsx', '.json' ],
+        extensions: [ '.html', '.svg', '.js', '.jsx', '.json' ],
         alias: {
-            src: path.resolve( __dirname + '/src' )
+            src: path.resolve( __dirname + '/src' ),
+            common: path.resolve( __dirname + '/src/common' )
         }
     },
 
@@ -30,12 +32,12 @@ module.exports = {
             {
                 test: /.jsx?$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                loader: 'babel-loader'
             },
             {
                 test: /\.s?css$/,
                 exclude: /node_modules/,
-                use: ExtractTextPlugin.extract({
+                loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
                         'css-loader',
@@ -45,14 +47,24 @@ module.exports = {
                 })
             },
             {
-                test   : /\.(woff(2)?)(\?[a-z0-9]+)?$/,
-                loader : 'file-loader'
+                test: /\.(woff2?)(\?[a-z0-9]+)?$/,
+                loader: 'file-loader',
+                options: {
+                    publicPath: 'fonts/'
+                }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                options: {
+                    runtimeCompat: true
+                }
             }
         ]
     },
 
     plugins: [
-        new ChromeExtensionReloader(),
+        // new ChromeExtensionReloader(),
 
         new CopyWebpackPlugin([{
             from: path.resolve( __dirname + '/chrome/' ),
@@ -67,7 +79,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             hash: true,
-            showErrors: false,
+            showErrors: true,
             template: './index.html',
             xhtml: true
         })
