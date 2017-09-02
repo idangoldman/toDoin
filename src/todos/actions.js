@@ -10,16 +10,20 @@ export function todoCompleteAction({ id, complete }) {
     }
 }
 
-//
-// export function todoAddAction({}) {
-//     return {
-//         type: 'TODO_ADD',
-//         payload: {
-//
-//         }
-//     }
-// }
-//
+
+export function todoUpdateAction({ id = '', description = '', privacy = false }) {
+    if ( ! id.length ) {
+        id = shortid.generate();
+    }
+
+    return {
+        type: 'TODO_UPDATE',
+        payload: {
+            id, description, privacy
+        }
+    }
+}
+
 
 export function clearCompleteAction() {
     return {

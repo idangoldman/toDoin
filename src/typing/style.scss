@@ -1,0 +1,58 @@
+.typing {
+    background-color: $background-hover-color;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+
+    .description {
+        background-color: transparent;
+        border: none;
+        display: block;
+        font-size: 18px;
+        height: $row-height;
+        line-height: 24px;
+        outline: none;
+        overflow-y: auto;
+        padding: 13px 10px;
+        position: relative;
+        resize: none;
+        width: 270px;
+        word-wrap:break-word;
+        z-index: 1;
+
+        &.two-lines {
+            height: $row-height + 24px;
+        }
+    }
+
+    .privacy {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        display: block;
+        height: 50px;
+        outline: none;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50px;
+        z-index: 2;
+
+        svg {
+            fill: $black-color;
+            fill-opacity: 0.4;
+            height: 13px;
+            width: 36px;
+        }
+
+        &:hover, &.checked {
+            background-color: $background-hover-color;
+        }
+
+        &.checked svg {
+            fill: $brand-color;
+            fill-opacity: 1;
+        }
+    }
+}

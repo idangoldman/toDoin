@@ -7,25 +7,36 @@ const defaultState = {
 
 
 export default function TodosReducer( state = stub || defaultState, action ) {
+
     switch ( action.type ) {
         case 'TODO_COMPLETE':
-            let { id, complete } = action.payload;
+            let todo_complete_id = action.payload.id;
+            let { complete } = action.payload;
 
             return {
                 ...state,
                 byId: {
                     ...state.byId,
-                    [ id ]: { ...state.byId[ id ], complete }
+                    [ todo_complete_id ]: { ...state.byId[ todo_complete_id ], complete }
                 }
             };
         break;
-        case 'TODO_ADD':
-            // let { id } = action.payload;
-            // return {
-            //     ...state,
-            //     byId[ id ]: action.payload,
-            //     allIds: state.allIds.concat([ id ]);
-            // }
+        case 'TODO_UPDATE':
+            let todo_update_id = action.payload.id;
+            let allIds = state.allIds.concat([]);
+
+            if ( ! state.byId[ todo_update_id ] ) {
+                allIds = state.allIds.concat([ todo_update_id ]);
+            }
+
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [ todo_update_id ]: { ...state.byId[ todo_update_id ], ...action.payload }
+                },
+                allIds: allIds
+            }
         break;
         case 'CLEAR_COMPLETE':
             return {

@@ -19,7 +19,7 @@ body, #page {
     right: 0;
     top: 0;
 
-    & > * {
+    & > div > * {
         position: absolute;
         width: 100%;
     }
@@ -27,5 +27,5 @@ body, #page {
     @import "header/style";
     @import "todos/style";
     @import "hello-button/style";
-    // @import "typing/style";
+    @import "typing/style";
 }
