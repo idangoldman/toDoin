@@ -33,13 +33,12 @@ export default class Todo extends React.Component {
 
     onComplete( event ) {
         event.preventDefault();
-        console.log('toDo: toggle complete');
 
-        // let { id, complete, onComplete } this.props;
-        //
-        // onComplete({
-        //     id, complete: ! complete
-        // });
+        let { id, complete, onComplete } = this.props;
+
+        onComplete({
+            id, complete: ! complete
+        });
     }
 
     onOpen( event ) {
@@ -72,7 +71,7 @@ export default class Todo extends React.Component {
 
     renderDescription() {
         let { description, privacy } = this.props;
-        let classNames = cx('checkbox', {
+        let classNames = cx('description', {
             'privacy': this.props.privacy,
         });
 

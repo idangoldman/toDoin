@@ -1,20 +1,23 @@
+import stub from 'src/todos/stub';
+
 const defaultState = {
     byId: {},
     allIds: []
 };
 
 
-export default function TodosReducer( state = defaultState, action ) {
+export default function TodosReducer( state = stub || defaultState, action ) {
     switch ( action.type ) {
         case 'TODO_COMPLETE':
-            // let { id, complete } = action.payload;
-            // return {
-            //     ...state,
-            //     byId: {
-            //         ...state.byId,
-            //         [ id ]: { ...state.byId[ id ], complete }
-            //     }
-            // }
+            let { id, complete } = action.payload;
+            
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [ id ]: { ...state.byId[ id ], complete }
+                }
+            };
         break;
         case 'TODO_ADD':
             // let { id } = action.payload;

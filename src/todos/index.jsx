@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { todoCompleteAction } from 'src/todos/actions';
+
 import Todo from 'src/todos/todo';
 
 
@@ -19,7 +21,7 @@ export default class Todos extends React.Component {
     }
 
     onTodoComplete({ id, complete }) {
-        // this.props.dispatch( todoUpdateAction({ id, complete }) )
+        this.props.dispatch( todoCompleteAction({ id, complete }) );
     }
 
     onTodoOpen( id ) {
@@ -28,9 +30,11 @@ export default class Todos extends React.Component {
 
     render() {
         return (
-            <ul className="todos">
-                { this.renderTodos() }
-            </ul>
+            <section className="todos">
+                <ul className="list">
+                    { this.renderTodos() }
+                </ul>
+            </section>
         );
     }
 

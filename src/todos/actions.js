@@ -1,16 +1,16 @@
 import shortid from 'shortid';
 
 
-// export const function todoCompleteAction({}) {
-//     return {
-//         type: 'TODO_COMPLETE',
-//         payload: {
+export function todoCompleteAction({ id, complete }) {
+    return {
+        type: 'TODO_COMPLETE',
+        payload: {
+            id, complete
+        }
+    }
+}
 //
-//         }
-//     }
-// }
-//
-// export const function todoAddAction({}) {
+// export function todoAddAction({}) {
 //     return {
 //         type: 'TODO_ADD',
 //         payload: {
@@ -19,7 +19,7 @@ import shortid from 'shortid';
 //     }
 // }
 //
-// export const function todoDeleteAction({}) {
+// export function todoDeleteAction({}) {
 //     return {
 //         type: 'TODO_DELETE',
 //         payload: {
