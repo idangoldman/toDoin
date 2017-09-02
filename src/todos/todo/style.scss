@@ -24,8 +24,15 @@
         width: 40px;
 
         svg {
+            fill: #212121;
+            fill-opacity: 0.4;
             height: 15px;
             width: 21px;
+        }
+
+        &.checked svg {
+            fill: $brand-color;
+            fill-opacity: 1;
         }
     }
 

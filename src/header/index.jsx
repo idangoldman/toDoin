@@ -1,7 +1,7 @@
 import React from 'react';
 
 import INFO from 'root/info';
-import LogoSVG from 'common/images/logo.svg';
+import LogoSVG from 'src/header/logo.svg';
 
 
 export default class Header extends React.Component {

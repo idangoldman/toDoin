@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg viewBox="0 0 40 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(-10.000000, -15.000000)" fill="#FFFFFF">
+    <g transform="translate(-10.000000, -15.000000)">
         <g transform="translate(10.000000, 15.000000)">
             <path d="M7.91040541,18.178625 L0.106216216,12.738 L2.54608108,9.7445 L8.73202703,14.0565 L20.1536486,0.039125 L23.3902703,2.295 L10.7483784,17.809875 C10.0751351,18.6365 8.80486486,18.80175 7.91040541,18.178625 Z"></path>
             <g transform="translate(15.945946, 3.000000)">
