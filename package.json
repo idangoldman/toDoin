@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/.bin/webpack --progress -p --colors --display-error-details"
+    "start": "node ./node_modules/.bin/webpack --colors --display-error-details",
+    "rm-dist": "rm -fr dist",
+    "prod": "node ./node_modules/.bin/webpack -p --colors --display-error-details"
   },
   "author": "idan.goldman",
   "license": "ISC",

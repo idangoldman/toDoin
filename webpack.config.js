@@ -16,7 +16,7 @@ module.exports = {
     output: {
         path: path.resolve( __dirname, 'dist' ),
         filename: '[name].js',
-        publicPath: path.resolve( __dirname, 'dist' )
+        publicPath: '/'
     },
 
     resolve: {
@@ -77,10 +77,10 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            filename: 'index.html',
+            filename: path.resolve( __dirname + '/dist/index.html' ),
             hash: true,
             showErrors: true,
-            template: './index.html',
+            template: path.resolve( __dirname + '/src/index.html' ),
             xhtml: true
         })
     ]
