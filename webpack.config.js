@@ -64,7 +64,7 @@ module.exports = {
     },
 
     plugins: [
-        // new ChromeExtensionReloader(),
+        new ChromeExtensionReloader(),
 
         new CopyWebpackPlugin([{
             from: path.resolve( __dirname + '/chrome/' ),
@@ -77,10 +77,10 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            filename: path.resolve( __dirname + '/dist/index.html' ),
+            filename: path.resolve( __dirname + '/dist/popup.html' ),
             hash: true,
             showErrors: true,
-            template: path.resolve( __dirname + '/src/index.html' ),
+            template: path.resolve( __dirname + '/src/popup.html' ),
             xhtml: true
         })
     ]
