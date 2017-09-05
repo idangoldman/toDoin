@@ -12,7 +12,7 @@ import 'src/style.scss';
 // Components
 import Header from 'src/header';
 import Todos from 'src/todos';
-import HelloButton from 'src/hello-button';
+import CleanButton from 'src/clean-button';
 import Typing from 'src/typing';
 
 // App Render
@@ -22,7 +22,7 @@ ReactDOM.render(
             <div>
                 <Route path="/" component={ Header } />
                 <Route path="/" component={ Todos } />
-                <Route path="/" component={ HelloButton } />
+                <Route path="/" component={ CleanButton } />
                 <Route path="/" component={ Typing } />
             </div>
         </BrowserRouter>

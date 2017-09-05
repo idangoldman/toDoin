@@ -9,7 +9,7 @@ import { clearCompleteAction } from 'src/todos/actions';
         todos: store.todos
     };
 })
-export default class HelloButton extends React.Component {
+export default class CleanButton extends React.Component {
     constructor( props ) {
         super( props );
 
@@ -23,8 +23,8 @@ export default class HelloButton extends React.Component {
     }
 
     render() {
-        return ! HelloButton.show( this.props.todos ) ? null : (
-            <button className="hello-button" onClick={ this.onClick }>
+        return ! CleanButton.show( this.props.todos ) ? null : (
+            <button className="clean-button" onClick={ this.onClick }>
                 Clear Complete
             </button>
         );

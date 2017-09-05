@@ -10,7 +10,6 @@ export function todoCompleteAction({ id, complete }) {
     }
 }
 
-
 export function todoUpdateAction({ id = '', description = '', privacy = false }) {
     if ( ! id.length ) {
         id = shortid.generate();
@@ -23,7 +22,6 @@ export function todoUpdateAction({ id = '', description = '', privacy = false })
         }
     }
 }
-
 
 export function clearCompleteAction() {
     return {
