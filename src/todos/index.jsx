@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { todoCompleteAction } from 'src/todos/actions';
-
+import { todoEditAction, todoCompleteAction } from 'src/todos/actions';
 import Todo from 'src/todos/todo';
 
 
@@ -17,15 +16,15 @@ export default class Todos extends React.Component {
         super( props );
 
         this.onTodoComplete = this.onTodoComplete.bind( this );
-        this.onTodoOpen = this.onTodoOpen.bind( this );
+        this.onTodoEdit = this.onTodoEdit.bind( this );
     }
 
     onTodoComplete({ id, complete }) {
         this.props.dispatch( todoCompleteAction({ id, complete }) );
     }
 
-    onTodoOpen( id ) {
-        // this.props.dispatch( todoOpenAction( id ) );
+    onTodoEdit({ id, description, privacy }) {
+        this.props.dispatch( todoEditAction({ id, description, privacy }) );
     }
 
     render() {
@@ -46,7 +45,7 @@ export default class Todos extends React.Component {
                 key={ index }
                 { ...byId[ id ] }
                 onComplete={ this.onTodoComplete }
-                onOpen={ this.onTodoOpen }
+                onEdit={ this.onTodoEdit }
             />
         ));
     }

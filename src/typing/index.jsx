@@ -2,22 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { isEqual } from 'lodash';
 
 import { todoUpdateAction } from 'src/todos/actions';
+import { typingEscAction } from 'src/typing/actions';
 import { which as whichKeystroke } from 'src/typing/helpers/key-stroke';
 
 
 @connect(( store ) => {
     return {
+        id: store.typing.id,
+        description: store.typing.description,
+        privacy: store.typing.privacy
     };
 })
 export default class Typing extends React.Component {
     static propTypes = {
         id: PropTypes.string,
         description: PropTypes.string,
+        privacy: PropTypes.bool,
+
         placeholder: PropTypes.string,
-        privacyDescription: PropTypes.string,
-        privacy: PropTypes.bool
+        privacyDescription: PropTypes.string
     }
 
     static defaultProps = {
@@ -40,13 +46,23 @@ export default class Typing extends React.Component {
         this.onSubmit = this.onSubmit.bind( this );
     }
 
+    componentWillReceiveProps( nextProps ) {
+        if ( ! isEqual( this.props.description, nextProps.description ) ) {
+            this.setState({ description: nextProps.description });
+        }
+    }
+
+    componentDidUpdate() {
+        this.textareaNode.focus();
+    }
+
     onChange( event ) {
         this.setState({ description: event.target.value });
     }
 
     onTyping( event ) {
         let { description } = this.state;
-        let { id, dispatch, privacy } = this.props;
+        let { id, dispatch } = this.props;
 
         switch( whichKeystroke( event ) ) {
             case 'enter':
@@ -56,6 +72,7 @@ export default class Typing extends React.Component {
                 }
             break;
             case 'esc':
+                dispatch( typingEscAction() );
                 this.onReset( event );
             break;
         }
@@ -77,6 +94,8 @@ export default class Typing extends React.Component {
         return (
             <form className="typing" onSubmit={ this.onSubmit }>
                 <textarea
+                    ref={ ( element ) => { this.textareaNode = element }}
+                    autoFocus
                     className="description"
                     placeholder={ placeholder }
                     onKeyDown={ this.onTyping }

@@ -23,6 +23,15 @@ export function todoUpdateAction({ id = '', description = '', privacy = false })
     }
 }
 
+export function todoEditAction({ id, description, privacy }) {
+    return {
+        type: 'TODO_EDIT',
+        payload: {
+            id, description, privacy
+        }
+    }
+}
+
 export function clearCompleteAction() {
     return {
         type: 'CLEAR_COMPLETE'

@@ -9,7 +9,7 @@ export default class Todo extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         onComplete: PropTypes.func.isRequired,
-        onOpen: PropTypes.func.isRequired,
+        onEdit: PropTypes.func.isRequired,
 
         complete: PropTypes.bool,
         privacy: PropTypes.bool,
@@ -27,7 +27,7 @@ export default class Todo extends React.Component {
         super( props );
 
         this.onComplete = this.onComplete.bind( this );
-        this.onOpen = this.onOpen.bind( this );
+        this.onEdit = this.onEdit.bind( this );
     }
 
     onComplete( event ) {
@@ -40,14 +40,25 @@ export default class Todo extends React.Component {
         });
     }
 
-    onOpen( event ) {
+    onEdit( event ) {
         event.preventDefault();
-        console.log('toDo: open in typing component');
+
+        let { id, description, privacy, complete, onEdit } = this.props;
+
+        if ( ! complete ) {
+            onEdit({ id, description, privacy });
+        }
     }
 
     render() {
+        let { complete, privacy } = this.props;
+        let classNames = cx('todo', {
+            'complete': complete,
+            'privacy': privacy
+        });
+
         return (
-            <li className="todo">
+            <li className={ classNames }>
                 { this.renderCheckbox() }
                 { this.renderDescription() }
             </li>
@@ -55,27 +66,17 @@ export default class Todo extends React.Component {
     }
 
     renderCheckbox() {
-        let { complete } = this.props;
-        let classNames = cx('checkbox', {
-            'checked': complete
-        });
-
         return (
-            <i className={ classNames } onClick={ this.onComplete }>
+            <i className="checkbox" onClick={ this.onComplete }>
                 <svg><use xlinkHref={ CheckboxSVG } /></svg>
             </i>
         )
     }
 
     renderDescription() {
-        let { description, privacy } = this.props;
-        let classNames = cx('description', {
-            'privacy': this.props.privacy,
-        });
-
         return (
-            <p className={ classNames } onClick={ this.onOpen }>
-                { description }
+            <p className="description" onDoubleClick={ this.onEdit }>
+                { this.props.description }
             </p>
         );
     }
