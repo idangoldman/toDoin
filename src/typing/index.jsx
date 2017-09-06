@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { isEqual } from 'lodash';
 
+import { textDirection } from 'common/scripts/direction';
+import { which as whichKeystroke } from 'common/scripts/key-stroke';
 import { todoUpdateAction } from 'src/todos/actions';
 import { typingEscAction } from 'src/typing/actions';
-import { which as whichKeystroke } from 'src/typing/helpers/key-stroke';
 
 
 @connect(( store ) => {
@@ -38,7 +39,8 @@ export default class Typing extends React.Component {
         super( props );
 
         this.state = {
-            description: props.description
+            description: props.description,
+            direction: textDirection( props.description )
         };
 
         this.onTyping = this.onTyping.bind( this );
@@ -48,7 +50,10 @@ export default class Typing extends React.Component {
 
     componentWillReceiveProps( nextProps ) {
         if ( ! isEqual( this.props.description, nextProps.description ) ) {
-            this.setState({ description: nextProps.description });
+            this.setState({
+                description: nextProps.description,
+                direction: textDirection( nextProps.description )
+            });
         }
     }
 
@@ -57,7 +62,11 @@ export default class Typing extends React.Component {
     }
 
     onChange( event ) {
-        this.setState({ description: event.target.value });
+        let value = event.target.value;
+        this.setState({
+            description: value,
+            direction: textDirection( value )
+        });
     }
 
     onTyping( event ) {
@@ -89,10 +98,11 @@ export default class Typing extends React.Component {
 
     render() {
         let { placeholder } = this.props;
-        let { description } = this.state;
+        let { description, direction } = this.state;
+        let classNames = cx('typing', direction);
 
         return (
-            <form className="typing" onSubmit={ this.onSubmit }>
+            <form className={ classNames } onSubmit={ this.onSubmit }>
                 <textarea
                     ref={ ( element ) => { this.textareaNode = element }}
                     autoFocus

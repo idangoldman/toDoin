@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import { textDirection } from 'common/scripts/direction';
 import CheckboxSVG from 'src/todos/todo/checkbox.svg';
 
 
@@ -51,8 +52,8 @@ export default class Todo extends React.Component {
     }
 
     render() {
-        let { complete, privacy } = this.props;
-        let classNames = cx('todo', {
+        let { description, complete, privacy } = this.props;
+        let classNames = cx('todo', textDirection( description ), {
             'complete': complete,
             'privacy': privacy
         });
