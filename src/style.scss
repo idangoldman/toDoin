@@ -24,6 +24,10 @@ body, #page {
         width: 100%;
     }
 
+    .clean-button + .todos .list {
+        padding-bottom: 90px;
+    }
+
     @import "header/style";
     @import "todos/style";
     @import "clean-button/style";

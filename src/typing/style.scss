@@ -19,9 +19,5 @@
         width: 100%;
         word-wrap:break-word;
         z-index: 1;
-
-        &.two-lines {
-            height: $row-height + 24px;
-        }
     }
 }

@@ -7,10 +7,6 @@
     top: $row-height;
     z-index: 1;
 
-    &.two-lines {
-        bottom: $row-height + 24px;
-    }
-
     .list {
         height: 100%;
         list-style-type: none;
@@ -21,9 +17,5 @@
         z-index: 1;
 
         @import 'todo/style';
-    }
-
-    &.bottom-padding .list {
-        padding-bottom: 90px;
     }
 }

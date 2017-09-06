@@ -21,8 +21,8 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Route path="/" component={ Header } />
-                <Route path="/" component={ Todos } />
                 <Route path="/" component={ CleanButton } />
+                <Route path="/" component={ Todos } />
                 <Route path="/" component={ Typing } />
             </div>
         </BrowserRouter>
