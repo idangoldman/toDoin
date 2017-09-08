@@ -8,6 +8,8 @@ import { textDirection } from 'common/scripts/direction';
 import { which as whichKeystroke } from 'common/scripts/key-stroke';
 import { todoUpdateAction } from 'src/todos/actions';
 import { typingEscAction } from 'src/typing/actions';
+import WatchClickOutside from 'common/components/watch-click-outside';
+import Menu from 'src/menu';
 
 
 @connect(( store ) => {
@@ -40,12 +42,16 @@ export default class Typing extends React.Component {
 
         this.state = {
             description: props.description,
-            direction: textDirection( props.description )
+            direction: textDirection( props.description ),
+            showMenu: false
         };
 
         this.onTyping = this.onTyping.bind( this );
         this.onChange = this.onChange.bind( this );
         this.onSubmit = this.onSubmit.bind( this );
+        this.onFocus = this.onFocus.bind( this );
+        this.onBlur = this.onBlur.bind( this );
+        this.onMenuClick = this.onMenuClick.bind( this );
     }
 
     componentWillReceiveProps( nextProps ) {
@@ -57,7 +63,7 @@ export default class Typing extends React.Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         this.textareaNode.focus();
     }
 
@@ -67,6 +73,14 @@ export default class Typing extends React.Component {
             description: value,
             direction: textDirection( value )
         });
+    }
+
+    onFocus() {
+        this.setState({ showMenu: true });
+    }
+
+    onBlur() {
+        this.setState({ showMenu: false });
     }
 
     onTyping( event ) {
@@ -96,23 +110,65 @@ export default class Typing extends React.Component {
         this.setState({ description: '' });
     }
 
+    onMenuClick({ name, value }) {
+        let { id, dispatch } = this.props;
+        console.log('menu click', name, value);
+
+        switch ( name ) {
+            case 'privacy':
+                dispatch( todoUpdateAction({ id, privacy: value }) );
+            break;
+        }
+    }
+
     render() {
-        let { placeholder } = this.props;
-        let { description, direction } = this.state;
-        let classNames = cx('typing', direction);
+        let classNames = cx(
+            'typing', this.state.direction
+        );
 
         return (
-            <form className={ classNames } onSubmit={ this.onSubmit }>
-                <textarea
-                    ref={ ( element ) => { this.textareaNode = element }}
-                    autoFocus
-                    className="description"
-                    placeholder={ placeholder }
-                    onKeyDown={ this.onTyping }
-                    onChange={ this.onChange }
-                    value={ description }
-                />
-            </form>
+            <WatchClickOutside onClickOutside={ this.onBlur }>
+                <form
+                    className={ classNames }
+                    onFocus={ this.onFocus }
+                    onSubmit={ this.onSubmit }>
+                    { this.renderMenu() }
+                    { this.renderDescription() }
+                </form>
+            </WatchClickOutside>
         );
+    }
+
+    renderDescription() {
+        let { placeholder } = this.props;
+        let { description, direction } = this.state;
+
+        return (
+            <textarea
+                ref={ ( element ) => { this.textareaNode = element }}
+                className="description"
+                placeholder={ placeholder }
+                onKeyDown={ this.onTyping }
+                onChange={ this.onChange }
+                value={ description }
+            />
+        );
+    }
+
+    renderMenu() {
+        let Component = null;
+        let { privacy } = this.props;
+        let { showMenu } = this.state;
+
+        if ( showMenu ) {
+            Component = (
+                <Menu
+                    privacy={ privacy }
+                    onMenuClick={ this.onMenuClick }
+                />
+            );
+        }
+
+        return Component;
     }
 }

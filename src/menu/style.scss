@@ -1,0 +1,16 @@
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+    .button {
+        color: rgba( $black-color, 0.5 );
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        height: $row-height;
+        letter-spacing: 1.5px;
+        line-height: $row-height;
+        padding: 0 10px;
+    }
+}

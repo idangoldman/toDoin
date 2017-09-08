@@ -9,6 +9,7 @@ export default function TypingReducer( state = defaultState, action ) {
 
     switch ( action.type ) {
         case 'TODO_NEW':
+        case 'TODO_UPDATE':
         case 'TODO_COMPLETE':
         case 'TYPING_ESC':
             return {

@@ -2,6 +2,8 @@
     background-color: $background-hover-color;
     bottom: 0;
     left: 0;
+    position: absolute;
+    width: 100%;
     z-index: 3;
 
     .description {
@@ -20,4 +22,8 @@
         word-wrap:break-word;
         z-index: 1;
     }
+}
+
+.click-outside-wrap {
+    position: inherit;
 }
