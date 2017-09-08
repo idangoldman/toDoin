@@ -24,6 +24,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 2;
 
         svg {
             fill: $black-color;
@@ -63,8 +64,7 @@
 
     &.privacy .description {
         filter: blur( 3px );
-        transition: 0.1s 0.4s filter ease-in;
-        transition: 0.1s 0.4s -webkit-filter ease-in;
+        transition: filter 0.1s 0.1s ease-in;
 
         &:hover {
             filter: blur( 0 );

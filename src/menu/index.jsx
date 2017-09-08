@@ -21,11 +21,10 @@ export default class Menu extends React.Component {
 
     onPrivate() {
         let { privacy, onMenuClick } = this.props;
-console.log(!privacy);
-        // onMenuClick({
-        //     'name': 'privacy',
-        //     'value': ! privacy,
-        // });
+        onMenuClick({
+            'name': 'privacy',
+            'value': ! privacy,
+        });
     }
 
     render() {
@@ -36,13 +35,17 @@ console.log(!privacy);
         );
     }
 
-    // renderFolder() {}
+    // renderGroup() {}
     // renderColor() {}
     // renderSort() {}
     // renderSmile() {}
     renderPrivate() {
+        let classNames = cx('button', {
+            'on': this.props.privacy
+        });
+
         return (
-            <button className="button" onClick={ this.onPrivate }>Private</button>
+            <button className={ classNames } onClick={ this.onPrivate }>Private</button>
         );
     }
 }

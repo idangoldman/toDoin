@@ -43,6 +43,7 @@ export default class Typing extends React.Component {
         this.state = {
             description: props.description,
             direction: textDirection( props.description ),
+            privacy: props.privacy,
             showMenu: false
         };
 
@@ -55,9 +56,10 @@ export default class Typing extends React.Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-        if ( ! isEqual( this.props.description, nextProps.description ) ) {
+        if ( ! isEqual( this.props, nextProps ) ) {
             this.setState({
                 description: nextProps.description,
+                privacy: nextProps.privacy,
                 direction: textDirection( nextProps.description )
             });
         }
@@ -84,13 +86,13 @@ export default class Typing extends React.Component {
     }
 
     onTyping( event ) {
-        let { description } = this.state;
+        let { description, privacy } = this.state;
         let { id, dispatch } = this.props;
 
         switch( whichKeystroke( event ) ) {
             case 'enter':
                 if ( description.trim().length ) {
-                    dispatch( todoUpdateAction({ id, description }) );
+                    dispatch( todoUpdateAction({ id, description, privacy }) );
                     this.onReset( event );
                 }
             break;
@@ -107,16 +109,15 @@ export default class Typing extends React.Component {
 
     onReset( event ) {
         event.preventDefault();
-        this.setState({ description: '' });
+        this.setState({ description: '', privacy: false });
     }
 
     onMenuClick({ name, value }) {
         let { id, dispatch } = this.props;
-        console.log('menu click', name, value);
 
         switch ( name ) {
             case 'privacy':
-                dispatch( todoUpdateAction({ id, privacy: value }) );
+                this.setState({ privacy: value });
             break;
         }
     }
@@ -157,8 +158,7 @@ export default class Typing extends React.Component {
 
     renderMenu() {
         let Component = null;
-        let { privacy } = this.props;
-        let { showMenu } = this.state;
+        let { privacy, showMenu } = this.state;
 
         if ( showMenu ) {
             Component = (
