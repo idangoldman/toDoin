@@ -19,11 +19,15 @@
         text-align: left;
 
         svg {
-            margin-right: 10px;
+            fill: rgba( $black-color, 0.5 );
+            margin-right: 5px;
+            margin-bottom: 1px;
         }
-        
+
         &.on {
             color: $black-color;
+
+            svg { fill: $black-color }
         }
 
         &.privacy {
