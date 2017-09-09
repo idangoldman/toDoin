@@ -44,7 +44,8 @@ export default class Typing extends React.Component {
             description: props.description,
             direction: textDirection( props.description ),
             privacy: props.privacy,
-            showMenu: false
+            showMenu: false,
+            isFocus: false
         };
 
         this.onTyping = this.onTyping.bind( this );
@@ -53,6 +54,8 @@ export default class Typing extends React.Component {
         this.onFocus = this.onFocus.bind( this );
         this.onBlur = this.onBlur.bind( this );
         this.onMenuClick = this.onMenuClick.bind( this );
+        this.setNodeRef = this.setNodeRef.bind( this );
+        this.setTextareaNodeRef = this.setTextareaNodeRef.bind( this );
     }
 
     componentWillReceiveProps( nextProps ) {
@@ -60,13 +63,24 @@ export default class Typing extends React.Component {
             this.setState({
                 description: nextProps.description,
                 privacy: nextProps.privacy,
-                direction: textDirection( nextProps.description )
+                direction: textDirection( nextProps.description ),
+                isFocus: true
             });
         }
     }
 
+    shouldComponentUpdate( nextProps, nextState ) {
+        return ! isEqual( this.props, nextProps ) || ! isEqual( this.state, nextState );
+    }
+
     componentDidMount() {
-        this.textareaNode.focus();
+        this.onFocus();
+    }
+
+    componentDidUpdate() {
+        if ( this.state.isFocus ) {
+            this.onFocus();
+        }
     }
 
     onChange( event ) {
@@ -78,10 +92,15 @@ export default class Typing extends React.Component {
     }
 
     onFocus() {
-        this.setState({ showMenu: true });
+        this.textareaNode.focus();
+        this.setState({
+            showMenu: true,
+            isFocus: false
+        });
     }
 
-    onBlur() {
+    onBlur( event ) {
+        event.preventDefault();
         this.setState({ showMenu: false });
     }
 
@@ -120,6 +139,12 @@ export default class Typing extends React.Component {
                 this.setState({ privacy: value });
             break;
         }
+
+        this.textareaNode.focus();
+    }
+
+    setNodeRef( node ) {
+        this.node = node;
     }
 
     render() {
@@ -128,31 +153,13 @@ export default class Typing extends React.Component {
         );
 
         return (
-            <WatchClickOutside onClickOutside={ this.onBlur }>
-                <form
-                    className={ classNames }
-                    onFocus={ this.onFocus }
-                    onSubmit={ this.onSubmit }>
-                    { this.renderMenu() }
-                    { this.renderDescription() }
-                </form>
-            </WatchClickOutside>
-        );
-    }
-
-    renderDescription() {
-        let { placeholder } = this.props;
-        let { description, direction } = this.state;
-
-        return (
-            <textarea
-                ref={ ( element ) => { this.textareaNode = element }}
-                className="description"
-                placeholder={ placeholder }
-                onKeyDown={ this.onTyping }
-                onChange={ this.onChange }
-                value={ description }
-            />
+            <form
+                ref={ this.setNodeRef }
+                className={ classNames }
+                onSubmit={ this.onSubmit }>
+                { this.renderMenu() }
+                { this.renderDescription() }
+            </form>
         );
     }
 
@@ -162,13 +169,38 @@ export default class Typing extends React.Component {
 
         if ( showMenu ) {
             Component = (
-                <Menu
-                    privacy={ privacy }
-                    onMenuClick={ this.onMenuClick }
-                />
+                <WatchClickOutside
+                    onClickOutside={ this.onBlur }
+                    parentNode={ this.node }>
+                    <Menu
+                        privacy={ privacy }
+                        onMenuClick={ this.onMenuClick }
+                    />
+                </WatchClickOutside>
             );
         }
 
         return Component;
+    }
+
+    setTextareaNodeRef( node ) {
+        this.textareaNode = node;
+    }
+
+    renderDescription() {
+        let { placeholder } = this.props;
+        let { description, direction } = this.state;
+
+        return (
+            <textarea
+                ref={ this.setTextareaNodeRef }
+                className="description"
+                placeholder={ placeholder }
+                onFocus={ this.onFocus }
+                onKeyDown={ this.onTyping }
+                onChange={ this.onChange }
+                value={ description }
+            />
+        );
     }
 }

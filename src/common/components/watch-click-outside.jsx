@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 export default class WatchClickOutside extends React.Component {
     static propTypes = {
         children: PropTypes.element.isRequired,
-        onClickOutside: PropTypes.func
+        onClickOutside: PropTypes.func,
+        parentNode: PropTypes.object
     }
 
     constructor( props ) {
         super( props );
 
-        this.setWrapperRef = this.setWrapperRef.bind( this );
+        this.setNodeRef = this.setNodeRef.bind( this );
         this.handleClickOutside = this.handleClickOutside.bind( this );
     }
 
@@ -23,19 +24,22 @@ export default class WatchClickOutside extends React.Component {
         document.removeEventListener( 'click', this.handleClickOutside );
     }
 
-    setWrapperRef( node ) {
-        this.wrapperRef = node;
+    setNodeRef( node ) {
+        this.node = node;
     }
 
     handleClickOutside( event ) {
-        if ( this.wrapperRef && ! this.wrapperRef.contains( event.target ) ) {
+        if (
+            this.node && ! this.node.contains( event.target ) &&
+            this.props.parentNode && ! this.props.parentNode.contains( event.target.parentNode )
+        ) {
             this.props.onClickOutside( event );
         }
     }
 
     render() {
         return (
-            <div ref={ this.setWrapperRef } className="click-outside-wrap">
+            <div ref={ this.setNodeRef } className="click-outside-wrap">
                 { this.props.children }
             </div>
         );
