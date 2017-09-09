@@ -1,10 +1,10 @@
-$bottom-space: 20px;
+$bottom-space: 25px;
 
 .clean-button {
     background-color: $brand-color;
     border-radius: 5px;
     border: none;
-    bottom: 75px;
+    bottom: $row-height + $bottom-space;
     color: $white-color;
     cursor: pointer;
     display: inline-block;
@@ -28,7 +28,7 @@ $bottom-space: 20px;
         color: $white-color;
     }
 
-    &.bottom-double-space {
-        bottom: $row-height + 24px + $bottom-space;
+    &.typing-focused {
+        bottom: $row-height * 2 + $bottom-space;
     }
 }

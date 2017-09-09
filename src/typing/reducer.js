@@ -1,7 +1,9 @@
 const defaultState = {
     id: '',
     description: '',
-    privacy: false
+    privacy: false,
+
+    isFocused: false
 };
 
 
@@ -24,9 +26,22 @@ export default function TypingReducer( state = defaultState, action ) {
             };
         break;
 
+        case 'TYPING_FOCUS':
+            return {
+                ...state,
+                isFocused: true
+            };
+        break;
+
+        case 'TYPING_BLUR':
+            return {
+                ...state,
+                isFocused: false
+            };
+        break;
+
         default:
             return state;
         break;
-
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 
 import { todoEditAction, todoCompleteAction } from 'src/todos/actions';
 import Todo from 'src/todos/todo';
@@ -8,7 +9,8 @@ import Todo from 'src/todos/todo';
 @connect(( store ) => {
     return {
         byId: store.todos.byId,
-        allIds: store.todos.allIds
+        allIds: store.todos.allIds,
+        isTypingFocused: store.typing.isFocused
     };
 })
 export default class Todos extends React.Component {
@@ -28,8 +30,13 @@ export default class Todos extends React.Component {
     }
 
     render() {
+        let { isTypingFocused } = this.props;
+        let classNames = cx('todos', {
+            'typing-focused': isTypingFocused
+        });
+
         return (
-            <section className="todos">
+            <section className={ classNames }>
                 <ul className="list">
                     { this.renderTodos() }
                 </ul>

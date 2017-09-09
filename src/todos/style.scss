@@ -18,4 +18,8 @@
 
         @import 'todo/style';
     }
+
+    &.typing-focused {
+        bottom: $row-height * 2;
+    }
 }

@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { isEqual } from 'lodash';
 
+import { todoUpdateAction } from 'src/todos/actions';
+import { typingEscAction, typingFocusAction, typingBlurAction } from 'src/typing/actions';
+
 import { textDirection } from 'common/scripts/direction';
 import { which as whichKeystroke } from 'common/scripts/key-stroke';
-import { todoUpdateAction } from 'src/todos/actions';
-import { typingEscAction } from 'src/typing/actions';
+
 import WatchClickOutside from 'common/components/watch-click-outside';
 import Menu from 'src/menu';
 
@@ -97,11 +99,12 @@ export default class Typing extends React.Component {
             showMenu: true,
             isFocus: false
         });
+        this.props.dispatch( typingFocusAction() );
     }
 
     onBlur( event ) {
-        event.preventDefault();
         this.setState({ showMenu: false });
+        this.props.dispatch( typingBlurAction() );
     }
 
     onTyping( event ) {

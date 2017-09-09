@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 
 import { clearCompleteAction } from 'src/todos/actions';
 
 
 @connect(( store ) => {
     return {
-        todos: store.todos
+        todos: store.todos,
+        isTypingFocused: store.typing.isFocused
     };
 })
 export default class CleanButton extends React.Component {
@@ -23,14 +25,24 @@ export default class CleanButton extends React.Component {
     }
 
     render() {
-        return ! CleanButton.show( this.props.todos ) ? null : (
-            <button className="clean-button" onClick={ this.onClick }>
-                Clear Complete
-            </button>
-        );
+        let Component = null;
+        let { todos, isTypingFocused } = this.props;
+        let classNames = cx('clean-button', {
+            'typing-focused': isTypingFocused
+        });
+
+        if ( CleanButton.haveCompleteTodos( todos ) ) {
+            Component = (
+                <button className={ classNames } onClick={ this.onClick }>
+                    Clear Complete
+                </button>
+            );
+        }
+
+        return Component;
     }
 
-    static show( todos ) {
+    static haveCompleteTodos( todos ) {
         return todos.allIds.filter( id => todos.byId[ id ].complete ).length > 0;
     }
 }
