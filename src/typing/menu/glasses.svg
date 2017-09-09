@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1">
+   <defs>
+      <style>.cls-1,.cls-2{fill:none;stroke:#4d4d4d;stroke-miterlimit:10;}.cls-1{stroke-width:0.68px;}.cls-2{stroke-width:0.72px;}.cls-3{fill:#4d4d4d;}</style>
+   </defs>
+   <title>g</title>
+   <ellipse class="cls-1" cx="9.26" cy="6.49" rx="6.19" ry="6.11" />
+   <ellipse class="cls-1" cx="26.74" cy="6.49" rx="6.19" ry="6.11" />
+   <path class="cls-2" d="M15.44,6.24s2.56-5.45,5.12,0" />
+   <path class="cls-3" d="M33,3.48h1.64a0,0,0,0,1,0,0V4.71a0,0,0,0,1,0,0H33a.48.48,0,0,1-.48-.48V4A.48.48,0,0,1,33,3.48Z" transform="translate(67.13 8.19) rotate(180)" />
+   <path class="cls-3" d="M1.86,3.48H3.5a0,0,0,0,1,0,0V4.71a0,0,0,0,1,0,0H1.86a.48.48,0,0,1-.48-.48V4A.48.48,0,0,1,1.86,3.48Z" />
+</svg>

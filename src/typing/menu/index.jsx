@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import GlassesSVG from 'src/typing/menu/glasses.svg';
+
 
 export default class Menu extends React.Component {
     static propTypes = {
@@ -40,12 +42,15 @@ export default class Menu extends React.Component {
     // renderSort() {}
     // renderSmile() {}
     renderPrivate() {
-        let classNames = cx('button', {
+        let classNames = cx('button', 'privacy', {
             'on': this.props.privacy
         });
 
         return (
-            <button className={ classNames } onClick={ this.onPrivate }>Private</button>
+            <button className={ classNames } onClick={ this.onPrivate }>
+                <svg><use xlinkHref={ GlassesSVG } /></svg>
+                Private
+            </button>
         );
     }
 }

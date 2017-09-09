@@ -11,7 +11,7 @@ import { textDirection } from 'common/scripts/direction';
 import { which as whichKeystroke } from 'common/scripts/key-stroke';
 
 import WatchClickOutside from 'common/components/watch-click-outside';
-import Menu from 'src/menu';
+import Menu from 'src/typing/menu';
 
 
 @connect(( store ) => {
