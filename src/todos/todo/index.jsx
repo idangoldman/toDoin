@@ -59,10 +59,10 @@ export default class Todo extends React.Component {
         });
 
         return (
-            <li className={ classNames }>
+            <article className={ classNames }>
                 { this.renderCheckbox() }
                 { this.renderDescription() }
-            </li>
+            </article>
         );
     }
 

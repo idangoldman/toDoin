@@ -19,6 +19,7 @@ export default function TodosReducer( state = defaultState, action ) {
                 }
             };
         break;
+
         case 'TODO_UPDATE':
             let todo_update_id = action.payload.id;
             let allIds = state.allIds.concat([]);
@@ -36,12 +37,27 @@ export default function TodosReducer( state = defaultState, action ) {
                 allIds: allIds
             }
         break;
+
         case 'CLEAR_COMPLETE':
             return {
                 ...state,
                 allIds: state.allIds.filter( id => ! state.byId[ id ].complete )
             };
         break;
+
+        case 'TODOS_REORDER':
+            let reorderAllIds = state.allIds.concat([]);
+            let { from, to } = action.payload;
+
+            reorderAllIds[ to ] = reorderAllIds.splice( from, 1, reorderAllIds[ to ])[0]
+
+            return {
+                ...state,
+                allIds: reorderAllIds
+
+            }
+        break;
+
         default:
             return state;
         break;

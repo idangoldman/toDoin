@@ -33,7 +33,8 @@ export const saveToLocalStorage = ( store ) => ( next ) => ( action ) => {
         'TODO_NEW',
         'TODO_UPDATE',
         'TODO_COMPLETE',
-        'CLEAR_COMPLETE'
+        'CLEAR_COMPLETE',
+        'TODOS_REORDER'
     ];
 
     if ( -1 !== saveOn.indexOf( action.type ) ) {

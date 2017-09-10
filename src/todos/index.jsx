@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { todoEditAction, todoCompleteAction } from 'src/todos/actions';
+import { todoEditAction, todoCompleteAction, todosReOrderAction } from 'src/todos/actions';
+
+import DragableList from 'common/components/dragable-list';
 import Todo from 'src/todos/todo';
 
 
@@ -19,6 +21,7 @@ export default class Todos extends React.Component {
 
         this.onTodoComplete = this.onTodoComplete.bind( this );
         this.onTodoEdit = this.onTodoEdit.bind( this );
+        this.onTodosReOrder = this.onTodosReOrder.bind( this );
     }
 
     onTodoComplete({ id, complete }) {
@@ -29,6 +32,10 @@ export default class Todos extends React.Component {
         this.props.dispatch( todoEditAction({ id, description, privacy }) );
     }
 
+    onTodosReOrder({ from, to }) {
+        this.props.dispatch( todosReOrderAction({ from, to }) );
+    }
+
     render() {
         let { isTypingFocused } = this.props;
         let classNames = cx('todos', {
@@ -37,9 +44,9 @@ export default class Todos extends React.Component {
 
         return (
             <section className={ classNames }>
-                <ul className="list">
+                <DragableList className="list" onReOrder={ this.onTodosReOrder }>
                     { this.renderTodos() }
-                </ul>
+                </DragableList>
             </section>
         );
     }

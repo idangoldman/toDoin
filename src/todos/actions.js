@@ -32,6 +32,15 @@ export function todoEditAction({ id, description, privacy }) {
     }
 }
 
+export function todosReOrderAction({ from, to }) {
+    return {
+        type: 'TODOS_REORDER',
+        payload: {
+            from, to
+        }
+    }
+}
+
 export function clearCompleteAction() {
     return {
         type: 'CLEAR_COMPLETE'
