@@ -6,8 +6,6 @@ import { isEqual } from 'lodash';
 
 import { todoUpdateAction } from 'src/todos/actions';
 import { typingEscAction, typingFocusAction, typingBlurAction } from 'src/typing/actions';
-
-import { textDirection } from 'common/scripts/direction';
 import { which as whichKeystroke } from 'common/scripts/key-stroke';
 
 import WatchClickOutside from 'common/components/watch-click-outside';
@@ -34,8 +32,8 @@ export default class Typing extends React.Component {
     static defaultProps = {
         id: '',
         description: '',
-        placeholder: 'What\'s Next?',
-        privacyDescription: 'Keep your actions private.',
+        placeholder: 'What\'s Next'.paraphrase(),
+        privacyDescription: 'Keep your actions private'.paraphrase(),
         privacy: false
     }
 
@@ -44,7 +42,7 @@ export default class Typing extends React.Component {
 
         this.state = {
             description: props.description,
-            direction: textDirection( props.description ),
+            direction: props.description.textDirection(),
             privacy: props.privacy,
             showMenu: false,
             isFocus: false
@@ -65,7 +63,7 @@ export default class Typing extends React.Component {
             this.setState({
                 description: nextProps.description,
                 privacy: nextProps.privacy,
-                direction: textDirection( nextProps.description ),
+                direction: nextProps.description.textDirection(),
                 isFocus: true
             });
         }
@@ -89,7 +87,7 @@ export default class Typing extends React.Component {
         let value = event.target.value;
         this.setState({
             description: value,
-            direction: textDirection( value )
+            direction: value.textDirection()
         });
     }
 

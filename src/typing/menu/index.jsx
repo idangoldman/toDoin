@@ -49,7 +49,7 @@ export default class Menu extends React.Component {
         return (
             <button className={ classNames } onClick={ this.onPrivate }>
                 <svg><use xlinkHref={ GlassesSVG } /></svg>
-                Private
+                { 'Private'.paraphrase() }
             </button>
         );
     }

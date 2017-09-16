@@ -34,7 +34,7 @@ export default class CleanButton extends React.Component {
         if ( CleanButton.haveCompleteTodos( todos ) ) {
             Component = (
                 <button className={ classNames } onClick={ this.onClick }>
-                    Clear Complete
+                    { 'Clear Complete'.paraphrase() }
                 </button>
             );
         }

@@ -1,6 +1,14 @@
 {
-    "l10nExample": {
-        "message":"Localization",
-        "description":"example"
+    "Clear_Complete": {
+        "message": "Clear Complete"
+    },
+    "Private": {
+        "message": "Private"
+    },
+    "Whats_Next": {
+        "message": "What's Next?"
+    },
+    "Keep_your_actions_private": {
+        "message": "Keep your actions private."
     }
 }

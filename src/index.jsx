@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Store
+import 'common/scripts/language';
 import store from 'src/store';
 
 // Main Style
