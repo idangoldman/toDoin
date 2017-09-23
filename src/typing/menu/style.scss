@@ -30,11 +30,14 @@
             svg { fill: $black-color }
         }
 
-        &.privacy {
-            svg {
-                height: 13px;
-                width: 36px;
-            }
+        &.privacy svg {
+            height: 13px;
+            width: 36px;
+        }
+
+        &.sort svg {
+            height: 14px;
+            width: 18px;
         }
     }
 }

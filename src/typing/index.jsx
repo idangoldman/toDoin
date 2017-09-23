@@ -138,10 +138,12 @@ export default class Typing extends React.Component {
         switch ( name ) {
             case 'privacy':
                 this.setState({ privacy: value });
+                this.textareaNode.focus();
+            break;
+            case 'sort':
+                console.log('sort is in the house !!!');
             break;
         }
-
-        this.textareaNode.focus();
     }
 
     setNodeRef( node ) {
