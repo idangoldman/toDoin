@@ -5,6 +5,7 @@ const EMAIL_REGEX = /(([a-zA-Z\d_\-\+\.]+)@([a-zA-Z\d_\-\.]+)\.([a-zA-Z]{2,5}){1
 const DATE_REGEX = /[0-9]{1,4}[\/]{1}[0-9]{1,2}[\/]{1}[0-9]{1,4}/gm;
 // const NUMBER_REGEX = /\d/gm;
 
+export const REGEX_TYPES = [ 'email', 'url', 'date' ];
 
 String.prototype.phrase = function() {
     let say = {
@@ -13,11 +14,12 @@ String.prototype.phrase = function() {
         'params': {}
     };
 
-    ['email', 'url', 'date'].map( item => {
-        if ( say.copy[ 'have' + item.capitalize() ]() ) {
+    REGEX_TYPES.map( type => {
+        if ( say.copy[ 'have' + type.capitalize() ]() ) {
             let regex = new RegExp();
+            let replaceIndex = 0;
 
-            switch( item ) {
+            switch( type ) {
                 case 'email':
                     regex = EMAIL_REGEX;
                 break;
@@ -31,9 +33,11 @@ String.prototype.phrase = function() {
                 break;
             }
 
-            say['copy'] = say.copy.replace( regex, match =>{
-                say['params'][ item ] = match;
-                return `{ ${item} }`;
+            say['copy'] = say.copy.replace( regex, match => {
+                let typeIndex = type + '_' + replaceIndex;
+                say['params'][ typeIndex ] = match;
+                replaceIndex = replaceIndex.counter();
+                return `{ ${typeIndex} }`;
             });
         }
     });
@@ -86,4 +90,8 @@ String.prototype.clean = function() {
 
 String.prototype.textDirection = function() {
     return textDirection( this );
+}
+
+Number.prototype.counter = function( number = 1 ) {
+    return this + number;
 }

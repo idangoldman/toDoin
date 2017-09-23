@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { textDirection } from 'common/scripts/direction';
 import CheckboxSVG from 'src/todos/todo/checkbox.svg';
-
+import Phrase from 'common/components/phrase';
 
 export default class Todo extends React.Component {
     static propTypes = {
@@ -75,9 +75,11 @@ export default class Todo extends React.Component {
     }
 
     renderDescription() {
+        let { description } = this.props;
+
         return (
             <p className="description" onDoubleClick={ this.onEdit }>
-                { this.props.description }
+                <Phrase>{ description }</Phrase>
             </p>
         );
     }

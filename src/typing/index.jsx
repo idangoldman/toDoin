@@ -32,7 +32,7 @@ export default class Typing extends React.Component {
     static defaultProps = {
         id: '',
         description: '',
-        placeholder: 'What\'s Next'.paraphrase(),
+        placeholder: 'Whats Next'.paraphrase(),
         privacyDescription: 'Keep your actions private'.paraphrase(),
         privacy: false
     }
