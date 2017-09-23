@@ -10,8 +10,6 @@ export default class Phrase extends React.Component {
         children: PropTypes.string.isRequired
     }
 
-    // static defaultProps = {}
-
     constructor( props ) {
         super( props );
 
@@ -36,24 +34,31 @@ export default class Phrase extends React.Component {
 
         let components = ReactReplace( phrase.copy.clean(), REGEX_REPLACE, ( match, index ) => {
             let component = null;
+            let value = phrase.params[ match ];
             let formatter = match.split('_')[ 0 ];
 
             switch ( formatter ) {
                 case 'email':
                     component = (
-                        <a key={ match + index } href={ 'mailto:' + phrase.params[ match ] } target="_blank">{ '@' + phrase.params[ match ].split('@')[0] }</a>
+                        <a key={ match + index } href={ 'mailto:' + value } target="_blank">{ '@' + value.split('@')[0] }</a>
                     );
                 break;
 
                 case 'url':
                     component = (
-                        <a key={ match + index } href={ phrase.params[ match ] } target="_blank">{ phrase.params[ match ].split(/https?:\/\//).join('') }</a>
+                        <a key={ match + index } href={ value } target="_blank">{ value.split(/https?:\/\//).join('') }</a>
                     );
                 break;
 
                 case 'date':
                     component = (
-                        <strong key={ match + index }>{ phrase.params[ match ] }</strong>
+                        <strong key={ match + index }>{ value }</strong>
+                    );
+                break;
+
+                case 'color':
+                    component = (
+                        <strong key={ match + index } style={{ backgroundColor: value }}>{ value }</strong>
                     );
                 break;
 

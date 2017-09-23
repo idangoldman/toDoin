@@ -3,9 +3,10 @@ import { textDirection } from 'common/helpers/direction';
 const URL_REGEX = /https?:\/\/w{0,3}\w*?\.(\w*?\.)?\w{2,3}\S*|www\.(\w*?\.)?\w*?\.\w{2,3}\S*|(\w*?\.)?\w*?\.\w{2,3}[\/\?]\S*/gm;
 const EMAIL_REGEX = /(([a-zA-Z\d_\-\+\.]+)@([a-zA-Z\d_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z\d_\-\.]+)@([a-zA-Z\d_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*/gm;
 const DATE_REGEX = /[0-9]{1,4}[\/]{1}[0-9]{1,2}[\/]{1}[0-9]{1,4}/gm;
+const COLOR_REGEX = /#([0-9a-f]{3}){1,2}/igm
 // const NUMBER_REGEX = /\d/gm;
 
-export const REGEX_TYPES = [ 'email', 'url', 'date' ];
+export const REGEX_TYPES = [ 'email', 'url', 'date', 'color' ];
 
 String.prototype.phrase = function() {
     let say = {
@@ -30,6 +31,10 @@ String.prototype.phrase = function() {
 
                 case 'date':
                     regex = DATE_REGEX;
+                break;
+
+                case 'color':
+                    regex = COLOR_REGEX;
                 break;
             }
 
@@ -66,6 +71,10 @@ String.prototype.haveUrl = function() {
 
 String.prototype.haveDate = function () {
     return DATE_REGEX.test( this );
+};
+
+String.prototype.haveColor = function () {
+    return COLOR_REGEX.test( this );
 };
 
 String.prototype.capitalize = function() {

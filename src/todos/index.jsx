@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
+import { setBadgeAction } from 'common/actions/chrome';
 import { todoEditAction, todoCompleteAction, todosReOrderAction } from 'src/todos/actions';
 
 import DragableList from 'common/components/dragable-list';
@@ -22,6 +23,21 @@ export default class Todos extends React.Component {
         this.onTodoComplete = this.onTodoComplete.bind( this );
         this.onTodoEdit = this.onTodoEdit.bind( this );
         this.onTodosReOrder = this.onTodosReOrder.bind( this );
+    }
+
+    componentWillMount() {
+        let { allIds, byId } = this.props;
+        this.setTodosCount({ allIds, byId, color: '#9E9E9E' });
+    }
+
+    componentWillReceiveProps( nextProps ) {
+        let { allIds, byId } = nextProps;
+        this.setTodosCount({ allIds, byId });
+    }
+
+    setTodosCount({ color, allIds, byId }) {
+        let todosCount = allIds.filter( id => ! byId[ id ].complete ).length || '';
+        this.props.dispatch( setBadgeAction({ color, text: todosCount }) );
     }
 
     onTodoComplete({ id, complete }) {

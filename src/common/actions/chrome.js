@@ -1,12 +1,11 @@
 export const setBadgeAction = ({ color, text }) => {
 
-    if ( 'undefined' !== typeof color ) {
-        // color: #9E9E9E
+    if ( 'undefined' !== typeof color && color.haveColor() ) {
         chrome.browserAction.setBadgeBackgroundColor({ color });
     }
 
     if ( 'undefined' !== typeof text ) {
-        chrome.browserAction.setBadgeText({ text });
+        chrome.browserAction.setBadgeText({ text: text.toString() });
     }
 
     return {
