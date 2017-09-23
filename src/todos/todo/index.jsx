@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { textDirection } from 'common/scripts/direction';
+import { textDirection } from 'common/helpers/direction';
 import CheckboxSVG from 'src/todos/todo/checkbox.svg';
 import Phrase from 'common/components/phrase';
 

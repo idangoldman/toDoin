@@ -1,4 +1,4 @@
-import { textDirection } from 'common/scripts/direction';
+import { textDirection } from 'common/helpers/direction';
 
 const URL_REGEX = /https?:\/\/w{0,3}\w*?\.(\w*?\.)?\w{2,3}\S*|www\.(\w*?\.)?\w*?\.\w{2,3}\S*|(\w*?\.)?\w*?\.\w{2,3}[\/\?]\S*/gm;
 const EMAIL_REGEX = /(([a-zA-Z\d_\-\+\.]+)@([a-zA-Z\d_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z\d_\-\.]+)@([a-zA-Z\d_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*/gm;

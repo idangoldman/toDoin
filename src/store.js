@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 
-import { loadState, saveToLocalStorage } from 'common/scripts/local-storage';
+import { loadState, saveToLocalStorage } from 'common/helpers/local-storage';
 import reducers from 'src/reducers';
 
 const logger = createLogger();

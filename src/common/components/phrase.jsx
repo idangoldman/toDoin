@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ReactReplace from 'react-string-replace';
-import { REGEX_TYPES } from 'common/scripts/language';
+import { REGEX_TYPES } from 'common/helpers/language';
 
 
 export default class Phrase extends React.Component {

@@ -6,7 +6,7 @@ import { isEqual } from 'lodash';
 
 import { todoUpdateAction } from 'src/todos/actions';
 import { typingEscAction, typingFocusAction, typingBlurAction } from 'src/typing/actions';
-import { which as whichKeystroke } from 'common/scripts/key-stroke';
+import { which as whichKeystroke } from 'common/helpers/key-stroke';
 
 import WatchClickOutside from 'common/components/watch-click-outside';
 import Menu from 'src/typing/menu';
