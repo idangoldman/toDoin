@@ -1,6 +1,7 @@
 const defaultState = {
     byId: {},
-    allIds: []
+    allIds: [],
+    sort: ''
 };
 
 
@@ -8,31 +9,31 @@ export default function TodosReducer( state = defaultState, action ) {
 
     switch ( action.type ) {
         case 'TODO_COMPLETE':
-            let todo_complete_id = action.payload.id;
-            let { complete } = action.payload;
+            let todoCompleteId = action.payload.id;
+            let { completedAt } = action.payload;
 
             return {
                 ...state,
                 byId: {
                     ...state.byId,
-                    [ todo_complete_id ]: { ...state.byId[ todo_complete_id ], complete }
+                    [ todoCompleteId ]: { ...state.byId[ todoCompleteId ], completedAt }
                 }
             };
         break;
 
         case 'TODO_UPDATE':
-            let todo_update_id = action.payload.id;
+            let todoUpdateId = action.payload.id;
             let allIds = state.allIds.concat([]);
 
-            if ( ! state.byId[ todo_update_id ] ) {
-                allIds = state.allIds.concat([ todo_update_id ]);
+            if ( ! state.byId[ todoUpdateId ] ) {
+                allIds = state.allIds.concat([ todoUpdateId ]);
             }
 
             return {
                 ...state,
                 byId: {
                     ...state.byId,
-                    [ todo_update_id ]: { ...state.byId[ todo_update_id ], ...action.payload }
+                    [ todoUpdateId ]: { ...state.byId[ todoUpdateId ], ...action.payload }
                 },
                 allIds: allIds
             }
@@ -41,7 +42,7 @@ export default function TodosReducer( state = defaultState, action ) {
         case 'CLEAR_COMPLETE':
             return {
                 ...state,
-                allIds: state.allIds.filter( id => ! state.byId[ id ].complete )
+                allIds: state.allIds.filter( id => ! state.byId[ id ].completedAt )
             };
         break;
 
@@ -49,13 +50,20 @@ export default function TodosReducer( state = defaultState, action ) {
             let reorderAllIds = state.allIds.concat([]);
             let { from, to } = action.payload;
 
-            reorderAllIds[ to ] = reorderAllIds.splice( from, 1, reorderAllIds[ to ])[0]
+            reorderAllIds[ to ] = reorderAllIds.splice( from, 1, reorderAllIds[ to ] )[0]
 
             return {
                 ...state,
-                allIds: reorderAllIds
-
+                allIds: reorderAllIds,
+                sort: ''
             }
+        break;
+
+        case 'TODOS_SORT':
+            return {
+                ...state,
+                sort: action.payload.sort
+            };
         break;
 
         default:

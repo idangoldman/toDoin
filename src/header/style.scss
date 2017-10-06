@@ -1,14 +1,19 @@
 header {
     align-items: center;
+    justify-content: space-between;
     background-color: $brand-color;
     display: flex;
-    height: 50px;
+    height: $row-height;
     left: 0;
     top: 0;
     z-index: 2;
 
     & > * {
         @extend %no-select;
+    }
+
+    svg {
+        fill: $white-color;
     }
 
     .logo {
@@ -18,9 +23,7 @@ header {
         height: 20px;
         padding: 15px 10px;
         width: 40px;
-
-        svg {
-            fill: $white-color;
-        }
     }
+
+    @import "header/sort/style";
 }

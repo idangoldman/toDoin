@@ -12,13 +12,15 @@ export default class Todo extends React.Component {
         onComplete: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
 
-        complete: PropTypes.bool,
+        createdAt: PropTypes.number,
+        completedAt: PropTypes.number,
         privacy: PropTypes.bool,
         description: PropTypes.string
     }
 
     static defaultProps = {
-        complete: false,
+        createdAt: Date.now(),
+        completedAt: 0,
         description: '',
         id: null,
         privacy: false
@@ -34,27 +36,27 @@ export default class Todo extends React.Component {
     onComplete( event ) {
         event.preventDefault();
 
-        let { id, complete, onComplete } = this.props;
+        let { id, completedAt, onComplete } = this.props;
 
         onComplete({
-            id, complete: ! complete
+            id, completedAt: ! completedAt ? Date.now() : 0
         });
     }
 
     onEdit( event ) {
         event.preventDefault();
 
-        let { id, description, privacy, complete, onEdit } = this.props;
+        let { id, description, privacy, completedAt, createdAt, onEdit } = this.props;
 
-        if ( ! complete ) {
-            onEdit({ id, description, privacy });
+        if ( ! completedAt ) {
+            onEdit({ id, description, privacy, createdAt });
         }
     }
 
     render() {
-        let { description, complete, privacy } = this.props;
+        let { description, completedAt, privacy } = this.props;
         let classNames = cx('todo', textDirection( description ), {
-            'complete': complete,
+            'complete': completedAt,
             'privacy': privacy
         });
 

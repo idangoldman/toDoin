@@ -36,12 +36,12 @@ export default class Todos extends React.Component {
     }
 
     setTodosCount({ color, allIds, byId }) {
-        let todosCount = allIds.filter( id => ! byId[ id ].complete ).length || '';
+        let todosCount = allIds.filter( id => ! byId[ id ].completedAt ).length || '';
         this.props.dispatch( setBadgeAction({ color, text: todosCount }) );
     }
 
-    onTodoComplete({ id, complete }) {
-        this.props.dispatch( todoCompleteAction({ id, complete }) );
+    onTodoComplete({ id, completedAt }) {
+        this.props.dispatch( todoCompleteAction({ id, completedAt }) );
     }
 
     onTodoEdit({ id, description, privacy }) {

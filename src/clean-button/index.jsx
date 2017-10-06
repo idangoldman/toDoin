@@ -43,6 +43,6 @@ export default class CleanButton extends React.Component {
     }
 
     static haveCompleteTodos( todos ) {
-        return todos.allIds.filter( id => todos.byId[ id ].complete ).length > 0;
+        return todos.allIds.filter( id => todos.byId[ id ].completedAt ).length > 0;
     }
 }

@@ -1,16 +1,16 @@
 import shortid from 'shortid';
 
 
-export function todoCompleteAction({ id, complete }) {
+export function todoCompleteAction({ id, completedAt }) {
     return {
         type: 'TODO_COMPLETE',
         payload: {
-            id, complete
+            id, completedAt
         }
     }
 }
 
-export function todoUpdateAction({ id = '', description = '', privacy = false }) {
+export function todoUpdateAction({ id = '', description = '', privacy = false, createdAt = Date.now() }) {
     if ( ! id.length ) {
         id = shortid.generate();
     }
@@ -18,7 +18,7 @@ export function todoUpdateAction({ id = '', description = '', privacy = false })
     return {
         type: 'TODO_UPDATE',
         payload: {
-            id, description, privacy
+            id, description, privacy, createdAt
         }
     }
 }
