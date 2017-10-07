@@ -37,7 +37,9 @@ export default class Header extends React.Component {
     }
 
     onMenuItemPick = ( item ) => ( event ) => {
-        this.props.onPick({ sort: item });
+        this.props.onPick({
+            sort: this.props.current !== item ? item : ''
+        });
         this.setState({ open: false });
     }
 

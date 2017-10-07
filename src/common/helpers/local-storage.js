@@ -34,7 +34,8 @@ export const saveToLocalStorage = ( store ) => ( next ) => ( action ) => {
         'TODO_UPDATE',
         'TODO_COMPLETE',
         'CLEAR_COMPLETE',
-        'TODOS_REORDER'
+        'TODOS_REORDER',
+        'TODOS_SORT'
     ];
 
     if ( -1 !== saveOn.indexOf( action.type ) ) {
