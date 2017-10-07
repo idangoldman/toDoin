@@ -4,6 +4,8 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const path = require('path');
 
+import INFO from './info';
+
 
 module.exports = {
     devtool: 'source-map',
@@ -79,6 +81,7 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
+            title: INFO.name + ' ' + INFO.version,
             filename: path.resolve( __dirname + '/dist/popup.html' ),
             hash: true,
             showErrors: true,
