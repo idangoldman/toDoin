@@ -9,10 +9,6 @@
         min-height: $row-height;
     }
 
-    &:hover {
-        background-color: rgba( $black-color, 0.1 );
-    }
-
     .checkbox {
         align-items: flex-start;
         cursor: pointer !important;

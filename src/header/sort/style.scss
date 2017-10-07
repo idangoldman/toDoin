@@ -11,15 +11,11 @@
         margin-left: auto;
         padding: 20px 15px 16px;
         width: 18px;
-
-        &:hover {
-            background-color: $background-hover-color;
-        }
     }
 
     .menu {
         align-items: center;
-        background-color: #e8e8e8;
+        background-color: $brand-color;
         box-shadow: inset 0 -2px 0 0 rgba( $black-color, 0.1 );
         display: none;
         height: $row-height;
@@ -31,11 +27,11 @@
         // display: flex;
 
         .item {
-            color: $black-color;
+            color: $white-color;
             display: inline-block;
             flex-grow: 1;
             font-size: 15px;
-            font-style: italic;
+            font-weight: 600;
             letter-spacing: 1px;
             line-height: $row-height;
             padding: 0 15px;
@@ -44,7 +40,7 @@
 
             &.current,
             &:hover {
-                background-color: rgba( $black-color, 0.1 );
+                text-decoration: underline;
             }
 
             &:last-child {
@@ -54,7 +50,6 @@
     }
 
     &.open {
-        .button { background-color: $background-hover-color; }
         .menu { display: flex; }
     }
 }

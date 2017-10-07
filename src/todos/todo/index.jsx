@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 import cx from 'classnames';
 
 import { textDirection } from 'common/helpers/direction';
@@ -8,10 +9,10 @@ import Phrase from 'common/components/phrase';
 
 export default class Todo extends React.Component {
     static propTypes = {
-        id: PropTypes.string.isRequired,
         onComplete: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
 
+        id: PropTypes.string,
         createdAt: PropTypes.number,
         completedAt: PropTypes.number,
         privacy: PropTypes.bool,
@@ -19,10 +20,10 @@ export default class Todo extends React.Component {
     }
 
     static defaultProps = {
+        id: shortid.generate(),
         createdAt: Date.now(),
         completedAt: 0,
         description: '',
-        id: null,
         privacy: false
     }
 

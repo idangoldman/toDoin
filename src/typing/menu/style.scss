@@ -25,9 +25,9 @@
         }
 
         &.on {
-            color: $black-color;
+            color: $brand-color;
 
-            svg { fill: $black-color }
+            svg { fill: $brand-color }
         }
 
         &.privacy svg {

@@ -10,11 +10,12 @@ export function todoCompleteAction({ id, completedAt }) {
     }
 }
 
-export function todoUpdateAction({ id = '', description = '', privacy = false, createdAt = Date.now() }) {
-    if ( ! id.length ) {
-        id = shortid.generate();
-    }
-
+export function todoUpdateAction({
+    id = shortid.generate(),
+    description = '',
+    privacy = false,
+    createdAt = Date.now()
+}) {
     return {
         type: 'TODO_UPDATE',
         payload: {
@@ -45,4 +46,13 @@ export function clearCompleteAction() {
     return {
         type: 'CLEAR_COMPLETE'
     }
+}
+
+export function todosSortAction({ sort }) {
+    return {
+        type: 'TODOS_SORT',
+        payload: {
+            sort
+        }
+    };
 }

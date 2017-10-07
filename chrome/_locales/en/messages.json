@@ -13,5 +13,14 @@
     },
     "Keep_your_actions_private": {
         "message": "Keep your actions private."
+    },
+    "Sort_Alphabet": {
+        "message": "alphabet"
+    },
+    "Sort_Creation": {
+        "message": "creation"
+    },
+    "Sort_Completion": {
+        "message": "completion"
     }
 }

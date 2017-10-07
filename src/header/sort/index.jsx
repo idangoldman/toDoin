@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import WatchClickOutside from 'common/components/watch-click-outside';
@@ -6,9 +7,19 @@ import SortSVG from 'src/header/sort/sort.svg';
 
 
 export default class Header extends React.Component {
+    static propTypes = {
+        onPick: PropTypes.func.isRequired,
+
+        current: PropTypes.string,
+        list: PropTypes.array
+    }
+
     static defaultProps = {
+        current: '',
         list: [
-            'alphabet', 'creation', 'completion'
+            'Sort_Alphabet'.paraphrase(),
+            'Sort_Creation'.paraphrase(),
+            'Sort_Completion'.paraphrase()
         ]
     }
 
@@ -25,8 +36,9 @@ export default class Header extends React.Component {
         this.setState({ open: ! this.state.open });
     }
 
-    onMenuItem = ( item ) => ( event ) => {
-        console.log('onMenuItem', item);
+    onMenuItemPick = ( item ) => ( event ) => {
+        this.props.onPick({ sort: item });
+        this.setState({ open: false });
     }
 
     render() {
@@ -46,9 +58,15 @@ export default class Header extends React.Component {
     }
 
     renderMenu() {
-        let Components = this.props.list.map(( item, index ) => (
-            <a key={ item + index } href="#" className="item" onClick={ this.onMenuItem( item ) }>{ item }</a>
-        ));
+        let Components = this.props.list.map(( item, index ) => {
+            let classNames = cx('item', {
+                'current': item === this.props.current
+            });
+
+            return (
+                <a key={ item + index } href="#" className={ classNames } onClick={ this.onMenuItemPick( item ) }>{ item }</a>
+            );
+        });
 
         return (
             <nav className="menu">
