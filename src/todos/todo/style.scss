@@ -61,10 +61,10 @@
 
     &.privacy .description {
         filter: blur( 3px );
-        transition: filter 0.1s 0.1s ease-in;
 
         &:hover {
             filter: blur( 0 );
+            transition: filter 0.1s 0.1s ease-in;
         }
     }
 }
