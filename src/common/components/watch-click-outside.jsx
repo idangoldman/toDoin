@@ -9,11 +9,8 @@ export default class WatchClickOutside extends React.Component {
         parentNode: PropTypes.object
     }
 
-    constructor( props ) {
-        super( props );
-
-        this.setNodeRef = this.setNodeRef.bind( this );
-        this.handleClickOutside = this.handleClickOutside.bind( this );
+    static defaultProps = {
+        parentNode: document.createTextNode('')
     }
 
     componentDidMount() {
@@ -24,14 +21,14 @@ export default class WatchClickOutside extends React.Component {
         document.removeEventListener( 'click', this.handleClickOutside );
     }
 
-    setNodeRef( node ) {
+    setNodeRef = ( node ) => {
         this.node = node;
     }
 
-    handleClickOutside( event ) {
+    handleClickOutside = ( event ) => {
         if (
-            this.node && ! this.node.contains( event.target ) &&
-            this.props.parentNode && ! this.props.parentNode.contains( event.target.parentNode )
+            ! this.node.contains( event.target ) &&
+            ! this.props.parentNode.contains( event.target.parentNode )
         ) {
             this.props.onClickOutside( event );
         }

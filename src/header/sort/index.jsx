@@ -68,10 +68,13 @@ export default class Header extends React.Component {
             );
         });
 
-        return (
-            <nav className="menu">
-                { Components }
-            </nav>
+        return ! this.state.open ? null : (
+            <WatchClickOutside
+                onClickOutside={ this.onToggle }>
+                <nav className="menu">
+                    { Components }
+                </nav>
+            </WatchClickOutside>
         );
     }
 }

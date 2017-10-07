@@ -24,7 +24,6 @@
         right: 0;
         top: $row-height;
         width: 100%;
-        // display: flex;
 
         .item {
             color: $white-color;
@@ -35,7 +34,9 @@
             letter-spacing: 1px;
             line-height: $row-height;
             padding: 0 15px;
+            position: relative;
             text-decoration: none;
+            text-shadow: 2px 2px 0 rgba( $black-color, 0.1 );
             text-transform: capitalize;
 
             &.current,
@@ -43,9 +44,19 @@
                 text-decoration: underline;
             }
 
-            &:last-child {
-                border: 0;
+            &:after {
+                background-color: rgba( $black-color, 0.1 );
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 80%;
+                position: absolute;
+                right: 0;
+                width: 2px;
+                
+                &:last-child { display: none; }
             }
+
         }
     }
 
