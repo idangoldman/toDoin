@@ -60,9 +60,42 @@ export default function TodosReducer( state = defaultState, action ) {
         break;
 
         case 'TODOS_SORT':
+            let sortAllIds = state.allIds.concat([]);
+            let { sort } = action.payload;
+
+            switch ( action.payload.sort ) {
+                case 'alphabet':
+                    sortAllIds.sort(( a, b ) => {
+                        a = state.byId[ a ].description.toLowerCase();
+                        b = state.byId[ b ].description.toLowerCase();
+
+                        return a < b ? -1 : a > b ? 1 : 0;
+                    });
+                break;
+
+                case 'creation':
+                    sortAllIds.sort(( a, b ) => {
+                        a = state.byId[ a ].createdAt || 0;
+                        b = state.byId[ b ].createdAt || 0;
+
+                        return a - b;
+                    });
+                break;
+
+                case 'completion':
+                    console.log('before', sortAllIds);
+                    sortAllIds.sort(( a, b ) => {
+                        a = state.byId[ a ].completedAt || 0;
+                        b = state.byId[ b ].completedAt || 0;
+
+                        return b - a;
+                    });
+                    console.log('after', sortAllIds);
+                break;
+            }
+
             return {
-                ...state,
-                sort: action.payload.sort
+                ...state, sort, allIds: sortAllIds
             };
         break;
 
