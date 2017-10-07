@@ -10,12 +10,15 @@ export function todoCompleteAction({ id, completedAt }) {
     }
 }
 
-export function todoUpdateAction({
-    id = shortid.generate(),
-    description = '',
-    privacy = false,
-    createdAt = Date.now()
-}) {
+export function todoUpdateAction({ id = '', description = '', privacy = false, createdAt = 0 }) {
+    if ( ! id.length ) {
+        id = shortid.generate();
+    }
+
+    if ( ! createdAt ) {
+        createdAt = Date.now();
+    }
+
     return {
         type: 'TODO_UPDATE',
         payload: {
