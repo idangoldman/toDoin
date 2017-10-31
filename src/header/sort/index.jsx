@@ -17,9 +17,9 @@ export default class Header extends React.Component {
     static defaultProps = {
         current: '',
         list: [
-            'Sort_Alphabet'.paraphrase(),
-            'Sort_Creation'.paraphrase(),
-            'Sort_Completion'.paraphrase()
+            'Sort Alphabet'.paraphrase(),
+            'Sort Creation'.paraphrase(),
+            'Sort Completion'.paraphrase()
         ]
     }
 
@@ -36,7 +36,7 @@ export default class Header extends React.Component {
         this.setState({ open: ! this.state.open });
     }
 
-    onMenuItemPick = ( item ) => ( event ) => {
+    onMenuItemClick = ( item ) => ( event ) => {
         this.props.onPick({
             sort: this.props.current !== item ? item : ''
         });
@@ -66,7 +66,7 @@ export default class Header extends React.Component {
             });
 
             return (
-                <a key={ item + index } href="#" className={ classNames } onClick={ this.onMenuItemPick( item ) }>{ item }</a>
+                <a key={ item + index } href="#" className={ classNames } onClick={ this.onMenuItemClick( item ) }>{ item }</a>
             );
         });
 

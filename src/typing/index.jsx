@@ -47,15 +47,6 @@ export default class Typing extends React.Component {
             showMenu: false,
             isFocus: false
         };
-
-        this.onTyping = this.onTyping.bind( this );
-        this.onChange = this.onChange.bind( this );
-        this.onSubmit = this.onSubmit.bind( this );
-        this.onFocus = this.onFocus.bind( this );
-        this.onBlur = this.onBlur.bind( this );
-        this.onMenuClick = this.onMenuClick.bind( this );
-        this.setNodeRef = this.setNodeRef.bind( this );
-        this.setTextareaNodeRef = this.setTextareaNodeRef.bind( this );
     }
 
     componentWillReceiveProps( nextProps ) {
@@ -83,7 +74,7 @@ export default class Typing extends React.Component {
         }
     }
 
-    onChange( event ) {
+    onChange = ( event ) => {
         let value = event.target.value;
         this.setState({
             description: value,
@@ -91,7 +82,7 @@ export default class Typing extends React.Component {
         });
     }
 
-    onFocus() {
+    onFocus = () => {
         this.textareaNode.focus();
         this.setState({
             showMenu: true,
@@ -100,12 +91,12 @@ export default class Typing extends React.Component {
         this.props.dispatch( typingFocusAction() );
     }
 
-    onBlur( event ) {
+    onBlur = ( event ) => {
         this.setState({ showMenu: false });
         this.props.dispatch( typingBlurAction() );
     }
 
-    onTyping( event ) {
+    onTyping = ( event ) => {
         let { description, privacy } = this.state;
         let { id, dispatch } = this.props;
 
@@ -123,16 +114,16 @@ export default class Typing extends React.Component {
         }
     }
 
-    onSubmit( event ) {
+    onSubmit = ( event ) => {
         event.preventDefault();
     }
 
-    onReset( event ) {
+    onReset = ( event ) => {
         event.preventDefault();
         this.setState({ description: '', privacy: false });
     }
 
-    onMenuClick({ name, value }) {
+    onMenuClick = ({ name, value }) => {
         let { id, dispatch } = this.props;
 
         switch ( name ) {
@@ -146,7 +137,7 @@ export default class Typing extends React.Component {
         }
     }
 
-    setNodeRef( node ) {
+    setNodeRef = ( node ) => {
         this.node = node;
     }
 
@@ -186,7 +177,7 @@ export default class Typing extends React.Component {
         return Component;
     }
 
-    setTextareaNodeRef( node ) {
+    setTextareaNodeRef = ( node ) => {
         this.textareaNode = node;
     }
 

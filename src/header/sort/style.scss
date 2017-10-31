@@ -36,7 +36,6 @@
             padding: 0 15px;
             position: relative;
             text-decoration: none;
-            text-shadow: 2px 2px 0 rgba( $black-color, 0.1 );
             text-transform: capitalize;
 
             &.current,
@@ -53,7 +52,7 @@
                 position: absolute;
                 right: 0;
                 width: 2px;
-                
+
                 &:last-child { display: none; }
             }
 

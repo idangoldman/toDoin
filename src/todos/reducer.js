@@ -121,6 +121,7 @@ export const sortBy = ({ by, list, items }) => {
                 b = items[ b ].completedAt || 0;
 
                 return b - a;
+                // return a < b ? 1 : a > b ? -1 : 0;
             });
         break;
     }

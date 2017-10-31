@@ -12,17 +12,11 @@ import { todosSortAction } from 'src/todos/actions';
     };
 })
 export default class Header extends React.Component {
-    // constructor( props ) {
-    //     super( props );
-    //
-    //     this.onLogoClick = this.onLogoClick.bind( this );
-    // }
-
     onLogoClick = ( event ) => {
         event.preventDefault();
     }
 
-    onSortPick = ({ sort }) => {
+    onSortClick = ({ sort }) => {
         this.props.dispatch( todosSortAction({ sort }) );
     }
 
@@ -33,7 +27,7 @@ export default class Header extends React.Component {
                     <svg><use xlinkHref={ LogoSVG } /></svg>
                 </button>
 
-                <Sort current={ this.props.sort } onPick={ this.onSortPick } />
+                <Sort current={ this.props.sort } onPick={ this.onSortClick } />
             </header>
         );
     }
