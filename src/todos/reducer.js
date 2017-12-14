@@ -63,7 +63,7 @@ export default function TodosReducer( state = defaultState, action ) {
             let reorderAllIds = state.allIds.concat([]);
             let { from, to } = action.payload;
 
-            reorderAllIds[ to ] = reorderAllIds.splice( from, 1, reorderAllIds[ to ] )[0]
+            reorderAllIds.splice( to, 0, reorderAllIds.splice( from, 1 )[0] )
 
             return {
                 ...state,

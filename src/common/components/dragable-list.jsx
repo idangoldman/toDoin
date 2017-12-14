@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { throttle } from 'lodash';
+// import { throttle } from 'lodash';
 
 
 export default class DragableList extends React.Component {
@@ -22,58 +22,72 @@ export default class DragableList extends React.Component {
 
         this.state = {
             dragIndex: -1,
-            overIndex: -1
+            dropIndex: -1,
+            overIndex: 0
         };
-
-        this.onDragStart = this.onDragStart.bind( this );
-        this.onDragEnter = this.onDragEnter.bind( this );
-        this.onDragOver = this.onDragOver.bind( this );
-        this.onDragLeave = this.onDragLeave.bind( this );
-        this.onDrop = this.onDrop.bind( this );
-        this.onDragEnd = this.onDragEnd.bind( this );
     }
 
-    onDragStart( event ) {
-        let itemIndex = DragableList.getItemIndex( event.target );
-
+    onDragStart = ( event ) => {
         event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData( 'text/plain', itemIndex );
 
         this.setState({
-            dragIndex: itemIndex
+            dragIndex: DragableList.getItemIndex( event.currentTarget )
         });
     }
 
-    onDragEnter( event ) {
+    onDragEnter = ( event ) => {
         this.setState({
-            overIndex: DragableList.getItemIndex( event.target )
+            dropIndex: DragableList.getItemIndex( event.currentTarget )
         });
     }
 
-    onDragOver( event ) {
+    onDragOver = ( event ) => {
+        let rect = event.currentTarget.getBoundingClientRect();
         event.dataTransfer.dropEffect = 'move';
+
+        let overIndex = Math.ceil(
+            ( event.clientY - rect.y ) - ( rect.height / 2 )
+        ) <= 0 ? -1 : 1;
+
+        this.setState({ overIndex });
         event.preventDefault();
     }
 
-    onDragLeave( event ) {}
+    onDragLeave = ( event ) => {
+        event.preventDefault();
+    }
 
-    onDrop( event ) {
+    onDrop = ( event ) => {
+        let { dragIndex, dropIndex, overIndex } = this.state;
+        let toIndex = dropIndex;
+
         if ( event.stopPropagation ) {
             event.stopPropagation();
         }
 
-        this.props.onReOrder({
-            'from': parseInt( event.dataTransfer.getData('text') ),
-            'to': DragableList.getItemIndex( event.target )
-        });
+        if ( dropIndex < dragIndex ) {
+            toIndex = toIndex + 1;
+        }
+
+        if ( overIndex < 0 ) {
+            toIndex = toIndex - 1;
+        }
+console.log(dragIndex, toIndex);
+        if ( dragIndex !== dropIndex ) {
+            this.props.onReOrder({
+                'from': dragIndex,
+                'to': toIndex
+            });
+        }
     }
 
-    onDragEnd( event ) {
+    onDragEnd = ( event ) => {
         event.dataTransfer.clearData();
 
         this.setState({
             dragIndex: -1,
-            overIndex: -1
+            dropIndex: -1,
+            overIndex: 0
         });
     }
 
@@ -90,14 +104,9 @@ export default class DragableList extends React.Component {
     renderItems() {
         let Components = [];
         let { children } = this.props;
-        let { dragIndex } = this.state;
 
         if ( children.length ) {
             React.Children.forEach( children, ( child, index ) => {
-                // if ( index === dragIndex ) {
-                //     Components.push( this.renderPlaceholder( index ) );
-                // }
-
                 Components.push( this.renderItem( child, index ) );
             });
         }
@@ -106,10 +115,10 @@ export default class DragableList extends React.Component {
     }
 
     renderItem( item, index ) {
-        let { dragIndex, overIndex } = this.state;
+        let { overIndex, dropIndex } = this.state;
         let classNames = cx('item', {
-            'drag': index === dragIndex,
-            'over': index === overIndex
+            'before': index === dropIndex && overIndex < 0,
+            'after': index === dropIndex && overIndex > 0
         });
 
         return (
@@ -129,17 +138,7 @@ export default class DragableList extends React.Component {
         );
     }
 
-    renderPlaceholder( index ) {
-        return (
-            <li key={ index } className="item placeholder"></li>
-        );
-    }
-
     static getItemIndex( target ) {
-        if ( ! target.hasAttribute('data-index') ) {
-            target = target.closest('.item');
-        }
-
         return parseInt( target.getAttribute('data-index') );
     }
 }
