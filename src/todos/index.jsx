@@ -35,7 +35,7 @@ export default class Todos extends React.Component {
         this.setTodosCount({ allIds, byId });
     }
 
-    setTodosCount({ color, allIds, byId }) {
+    setTodosCount({ allIds, byId, color }) {
         let todosCount = allIds.filter( id => ! byId[ id ].completedAt ).length || '';
         this.props.dispatch( setBadgeAction({ color, text: todosCount }) );
     }

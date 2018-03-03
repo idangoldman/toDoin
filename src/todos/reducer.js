@@ -53,8 +53,11 @@ export default function TodosReducer( state = defaultState, action ) {
         break;
 
         case 'CLEAR_COMPLETE':
+            let clearCompletedById = Object.assign( {}, this.state.byId );
+            delete clearCompletedById[ id ];
             return {
                 ...state,
+                byId: clearCompletedById,
                 allIds: state.allIds.filter( id => ! state.byId[ id ].completedAt )
             };
         break;
